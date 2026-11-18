@@ -1,4 +1,4 @@
-const VERSION = "0.25"
+const VERSION = "0.26"
 
 const gameTitleElement = document.getElementById("game-title")
 gameTitleElement.textContent = `Arkivia v${VERSION}`
@@ -39,6 +39,7 @@ let combatStatus = {
     "enemyEffects": {}
 }
 let checks = {}
+let dailyChecks = {}
 let logAutoScroll = true
 let skills = {}
 let inventory = {}
@@ -278,6 +279,9 @@ const enemyData = {
         "dex": [25, 30],
         "xp": [10, 13]
     },
+    "wildAnimal": {
+        "name": "Wild Animal"
+    }
 }
 const skillData = {
     "walking": {
@@ -362,6 +366,11 @@ const skillData = {
     "sleeping": {
         "name": "Sleeping",
         "desc": "Increases energy regeneration while sleeping",
+        "scaling": 1.3
+    },
+    "hunting": {
+        "name": "Hunting",
+        "desc": "Increases speed of hunting",
         "scaling": 1.3
     }
 }
@@ -650,6 +659,7 @@ const itemData = {
         "stackable": false,
         "equipment": {
             "class": "tool",
+            "efficiency": 1,
             "equipExecute": function() {
                 if (currentScene === "forestMine") {
                     const actionText = document.getElementById("action-text")
@@ -674,7 +684,11 @@ const itemData = {
         "name": "Stone",
         "desc": "Slightly heavy, can be used to craft stronger gear",
         "class": "misc",
-        "weight": 300
+        "weight": 300,
+        "obtainExecute": function() {
+            discoverRecipe("stonePickaxe")
+            discoverRecipe("stoneAxe")
+        }
     },
     "woodenAxe": {
         "name": "Wooden Axe",
@@ -700,7 +714,71 @@ const itemData = {
         "name": "Supply Box",
         "desc": "Supplies for the Hunters' Guild",
         "class": "misc",
-        "weight": 10000
+        "weight": 10000,
+        "undeletable": true
+    },
+    "strangeTrainingCharm": {
+        "name": "Strange Training Charm",
+        "desc": "Increases training gains when worn but decreases your health while training",
+        "class": "gear",
+        "weight": 1000,
+        "stackable": false,
+        "undeletable": true,
+        "equipment": {
+            "class": "accessory",
+        }
+    },
+    "stonePickaxe": {
+        "name": "Stone Pickaxe",
+        "desc": "A pickaxe made out of the same thing you're mining. More durable and faster",
+        "class": "gear",
+        "subclass": "pickaxe",
+        "weight": 1500,
+        "durability": [300, 400],
+        "stackable": false,
+        "equipment": {
+            "class": "tool",
+            "efficiency": 1.2,
+            "equipExecute": function() {
+                if (currentScene === "forestMine") {
+                    const actionText = document.getElementById("action-text")
+                    actionText.innerHTML = `You are mining for stone and other materials with your pickaxe${processingGen()}`
+                }
+            },
+            "unequipExecute": function() {
+                if (currentScene === "forestMine") {
+                    const actionText = document.getElementById("action-text")
+                    actionText.textContent = "You will need a pickaxe equipped to mine."
+                }
+            }
+        },
+        "crafting": {
+            "complexity": 120,
+            "materials": {
+                "stone": 5
+            }
+        }
+    },
+    "stoneAxe": {
+        "name": "Stone Axe",
+        "desc": "Allows you to cut wood using stone",
+        "class": "gear",
+        "subclass": "axe",
+        "weight": 1500,
+        "durability": [300, 400],
+        "stackable": false,
+        "equipment": {
+            "class": "tool",
+            "efficiency": 1.2,
+            "equipExecute": generateActions,
+            "unequipExecute": generateActions
+        },
+        "crafting": {
+            "complexity": 120,
+            "materials": {
+                "stone": 5
+            }
+        }
     }
 }
 const effectData = {
@@ -873,7 +951,18 @@ const questData = {
                 "stone": {"amount": 10}
             }
         }
-    }
+    },
+    "els5": {
+        "name": "Hunters' Guild Supplies 3",
+        "desc": "Els has requested you to obtain 20 pieces of wood",
+        "repeatable": false,
+        "manualComplete": true,
+        "goals": {
+            "items": {
+                "wood": {"amount": 20}
+            }
+        }
+    },
 }
 const shopData = {
     "merchant": [
@@ -899,6 +988,18 @@ const gyms = {
         "def": 0.02,
         "spd": 0.02,
         "dex": 0.02
+    },
+    "forestGymBasic": {
+        "str": 0.03,
+        "def": 0.03,
+        "spd": 0.03,
+        "dex": 0.03
+    },
+    "forestGymAdvanced": {
+        "str": 0.05,
+        "def": 0.05,
+        "spd": 0.05,
+        "dex": 0.05
     }
 }
 const titleData = {
@@ -1023,8 +1124,8 @@ const ranks = [
     {"rank": "B+", "max": Infinity},
 ]
 
-function getRank() {
-    return ranks.find(r => getTotalBattlestats() < r['max'])['rank']
+function getRank(total) {
+    return ranks.find(r => (total ?? getTotalBattlestats()) < r['max'])['rank']
 }
 
 let achievements = []
@@ -1069,9 +1170,17 @@ const achievementData = {
         "check": function() {return stats['discoveredItems']?.length ?? 0},
         "goal": 10
     }),
+    "hoarder": {
+        "name": "Hoarder",
+        "desc": "Carry 200 or more of a single item at once"
+    },
     "flatline": {
         "name": "Flatline",
         "desc": "Defeat an enemy in one hit",
+    },
+    "overkill": {
+        "name": "Overkill",
+        "desc": "Deal 3x or more damage than an enemy's max health"
     },
     "discovery": {
         "name": "Discovery",
@@ -1128,6 +1237,30 @@ const achievementData = {
         "desc": "Discard 10 items",
         "check": function() {return stats['itemsDeleted'] ?? 0},
         "goal": 10
+    }),
+    "firstSteps": statAchievement({
+        "name": "First Steps",
+        "desc": "Travel 5 kilometers",
+        "check": function() {return stats['distanceTravelled'] ?? 0},
+        "goal": 5000
+    }),
+    "walker": statAchievement({
+        "name": "Walker",
+        "desc": "Travel 10 kilometers",
+        "check": function() {return stats['distanceTravelled'] ?? 0},
+        "goal": 10_000
+    }),
+    "marathon": statAchievement({
+        "name": "Marathon",
+        "desc": "Travel 25 kilometers",
+        "check": function() {return stats['distanceTravelled'] ?? 0},
+        "goal": 25_000
+    }),
+    "deforestation": statAchievement({
+        "name": "Deforestation",
+        "desc": "Cut down 100 trees",
+        "check": function() {return stats['treesCut'] ?? 0},
+        "goal": 100
     })
 }
 
@@ -1231,31 +1364,41 @@ function updateLevelText(currentXp=xp) {
     document.getElementById("level").textContent = `Level ${xpToLevel(currentXp)} ${getRank()}`
 }
 
+const healthbarTextElement = document.getElementById("healthbar-text")
+const healthbarFillElement = document.getElementById("healthbar-fill")
+const healthbarFillDamageElement = document.getElementById("healthbar-fill-damage")
+const energyBarTextElement = document.getElementById("energy-bar-text")
+const energyBarFillElement = document.getElementById("energy-bar-fill")
+const xpBarTextElement = document.getElementById("xp-bar-text")
+const xpBarFillElement = document.getElementById("xp-bar-fill")
+const enemyHealthbarTextElement = document.getElementById("enemy-healthbar-text")
+const enemyHealthbarFillElement = document.getElementById("enemy-healthbar-fill")
+const enemyHealthbarFillDamageElement = document.getElementById("enemy-healthbar-fill-damage")
 function updateBar(bar, change=null) {
     if (bar === "health") {
-        document.getElementById("healthbar-text").textContent = `HP: ${formatNumber(health, "round")}/${formatNumber(calcMaxHp(), "round")}`
-        document.getElementById("healthbar-fill").style.width = `${health / calcMaxHp() * 100}%`
+        healthbarTextElement.textContent = `HP: ${formatNumber(health, "round")}/${formatNumber(calcMaxHp(), "round")}`
+        healthbarFillElement.style.width = `${health / calcMaxHp() * 100}%`
         if (change !== null) {
-            document.getElementById("healthbar-fill-damage").style.left = `${health / calcMaxHp() * 100}%`
-            document.getElementById("healthbar-fill-damage").style.width = `${-change / calcMaxHp() * 100}%`
+            healthbarFillDamageElement.style.left = `${health / calcMaxHp() * 100}%`
+            healthbarFillDamageElement.style.width = `${-change / calcMaxHp() * 100}%`
         } else {
-            document.getElementById("healthbar-fill-damage").style.width = "0"
+            healthbarFillDamageElement.style.width = "0"
         }
     } else if (bar === "energy") {
-        document.getElementById("energy-bar-text").textContent = `Energy: ${Math.round(energy)}/100`
-        document.getElementById("energy-bar-fill").style.width = `${energy / 100 * 100}%`
+        energyBarTextElement.textContent = `Energy: ${Math.round(energy)}/100`
+        energyBarFillElement.style.width = `${energy / 100 * 100}%`
     } else if (bar === "xp") {
-        document.getElementById("xp-bar-text").textContent = `XP: ${formatNumber(xpIntoLevel(xp), "round")}/${formatNumber(xpForLevel(xpToLevel(xp)), "round")}`
-        document.getElementById("xp-bar-fill").style.width = `${xpIntoLevel(xp) / xpForLevel(xpToLevel(xp)) * 100}%`
+        xpBarTextElement.textContent = `XP: ${formatNumber(xpIntoLevel(xp), "round")}/${formatNumber(xpForLevel(xpToLevel(xp)), "round")}`
+        xpBarFillElement.style.width = `${xpIntoLevel(xp) / xpForLevel(xpToLevel(xp)) * 100}%`
         updateLevelText(xp)
     } else if (bar === "enemyHealth") {
-        document.getElementById("enemy-healthbar-text").textContent = `HP: ${formatNumber(combatStatus['enemyHealth'], "round")}/${formatNumber(combatStatus['enemyMaxHealth'], "round")}`
-        document.getElementById("enemy-healthbar-fill").style.width = `${combatStatus['enemyHealth'] / combatStatus['enemyMaxHealth'] * 100}%`
+        enemyHealthbarTextElement.textContent = `HP: ${formatNumber(combatStatus['enemyHealth'], "round")}/${formatNumber(combatStatus['enemyMaxHealth'], "round")}`
+        enemyHealthbarFillElement.style.width = `${combatStatus['enemyHealth'] / combatStatus['enemyMaxHealth'] * 100}%`
         if (change !== null) {
-            document.getElementById("enemy-healthbar-fill-damage").style.left = `${combatStatus['enemyHealth'] / combatStatus['enemyMaxHealth'] * 100}%`
-            document.getElementById("enemy-healthbar-fill-damage").style.width = `${-change / combatStatus['enemyMaxHealth'] * 100}%`
+            enemyHealthbarFillDamageElement.style.left = `${combatStatus['enemyHealth'] / combatStatus['enemyMaxHealth'] * 100}%`
+            enemyHealthbarFillDamageElement.style.width = `${-change / combatStatus['enemyMaxHealth'] * 100}%`
         } else {
-            document.getElementById("enemy-healthbar-fill-damage").style.width = "0"
+            enemyHealthbarFillDamageElement.style.width = "0"
         }
     }
 }
@@ -1356,15 +1499,6 @@ function insertLog(content, tooltip=null, id=null, type=null) {
     return logIncrement - 1
 }
 
-// function getFuture(time, day, increase) {
-//     const totalMinutes = time + increase
-
-//     const newTime = ((totalMinutes % 1440) + 1440) % 1440
-//     const newDay = day + Math.floor(totalMinutes / 1440)
-
-//     return [newTime, newDay]
-// }
-
 function playTransition() {
     if (settings['sceneTransitions'] === false) {return}
     let transition = document.getElementById("main-transition")
@@ -1388,12 +1522,18 @@ function generateEnemy(enemyName, stats=null) {
     combatStatus['enemy'] = enemyName
     const enemy = stats || enemyData[enemyName]
     combatStatus['enemyProperties'] = enemy['properties']
+    let healthRoll = enemy['health'] ?? 0
     if (Array.isArray(enemy['health'])) {
-        combatStatus['enemyMaxHealth'] = randomRange(enemy['health'][0], enemy['health'][1], 0)
+        healthRoll = randomRange(enemy['health'][0], enemy['health'][1], 0)
+        combatStatus['enemyMaxHealth'] = healthRoll
     } else {
-        combatStatus['enemyMaxHealth'] = enemy['health']
+        if (!enemy['maxHealth']) {
+            combatStatus['enemyMaxHealth'] = enemy['health']
+        } else {
+            combatStatus['enemyMaxHealth'] = enemy['maxHealth']
+        }
     }
-    combatStatus['enemyHealth'] = combatStatus['enemyMaxHealth']
+    combatStatus['enemyHealth'] = healthRoll
 
     for (const stat of statTypes) {
         if (Array.isArray(enemy[stat])) {
@@ -1703,6 +1843,7 @@ function genItemLogText(item, amount) {
 }
 
 let itemLogStackData = {"id": null, "item": null, "amount": null, "type": null}
+const inventoryWeightElement = document.getElementById("inventory-weight")
 function changeInventory(item, amount, announceReduction=false, itemId=null, newItemData=null) {
     if (!itemData[item]) {
         insertLog(colorGen("#ff0000", `Attempted to create invalid item "${item}"`))
@@ -1733,7 +1874,10 @@ function changeInventory(item, amount, announceReduction=false, itemId=null, new
                 document.getElementById(`item-${item}`).getElementsByClassName("item-quantity")[0].textContent = `x${inventory[item]}`
             }
         }
-        changeQuestProgress("items", item, inventory[item])
+        changeQuestProgress("items", item, inventory[item] ?? 0)
+        if ((inventory[item] ?? 0) >= 200) {
+            giveAchievement("hoarder")
+        }
     } else {
         if (amount === 1) {
             if (newItemData === null) {
@@ -1796,15 +1940,15 @@ function changeInventory(item, amount, announceReduction=false, itemId=null, new
     if (itemData[item]['weight']) {
         const maxWeight = getMaxWeight()
         inventoryWeight += itemData[item]['weight'] * amount
-        document.getElementById("inventory-weight").textContent = `${formatNumber(inventoryWeight)}g / ${formatNumber(maxWeight)}g`
+        inventoryWeightElement.textContent = `${formatNumber(inventoryWeight)}g / ${formatNumber(maxWeight)}g`
         if (inventoryWeight > maxWeight * 4) {
-            document.getElementById("inventory-weight").style.color = "#ff0000"
+            inventoryWeightElement.style.color = "#ff0000"
         } else if (inventoryWeight > maxWeight * 2) {
-            document.getElementById("inventory-weight").style.color = "#ff8800"
+            inventoryWeightElement.style.color = "#ff8800"
         } else if (inventoryWeight > maxWeight) {
-            document.getElementById("inventory-weight").style.color = "#ffff00"
+            inventoryWeightElement.style.color = "#ffff00"
         } else {
-            document.getElementById("inventory-weight").style.color = ""
+            inventoryWeightElement.style.color = ""
         }
     }
 
@@ -1834,14 +1978,12 @@ function discoverRecipe(recipe) {
 function generateStorageMenu() {
     const storageTable = document.createElement("div")
     storageTable.id = "storage-table"
-    document.getElementById("main").appendChild(storageTable)
+    mainElement.appendChild(storageTable)
     for (const [item, amount] of Object.entries(storage)) {
-        // changeStorage(item, amount)
         createItemDiv(item, "storage")
     }
     for (const [id, data] of Object.entries(storageNonStackable)) {
         const item = data['name']
-        // changeStorage(item, 1, id, data)
         createItemDiv(item, "storage", false, id)
     }
 }
@@ -2121,8 +2263,14 @@ function updateWeather(multi=1) {
     }
 }
 
+const timeElement = document.getElementById("time")
 function changeTime(amount) {
+    const oldTime = time
     time += amount
+    if (Math.floor(time / 1440) > Math.floor(oldTime / 1440)) {
+        dailyChecks = {}
+    }
+
     stats['gametime'] += amount
     if (currentScene !== "sleep") {
         noSleepTime += amount
@@ -2155,7 +2303,7 @@ function changeTime(amount) {
         if (handler) {handler(amount)}
     }
     updateWeather(amount)
-    document.getElementById("time").textContent = formatTime(time)
+    timeElement.textContent = formatTime(time)
 }
 
 function getTimeName() {
@@ -2354,9 +2502,7 @@ function getStatModifierBreakdown(stat) {
     for (const effect of data['positive']) {
         output.push(`${colorGen("#00ff00", `+${formatNumber(effect['change'] * 100, false, true)}%`)} ${effect['source']}`)
     }
-    // if (data['positive'].length > 0 && data['negative'].length > 0) {
-    //     output.push("")
-    // }
+
     for (const effect of data['negative']) {
         output.push(`${colorGen("#ff0000", `-${formatNumber((1 - effect['change']) * 100, false, true)}%`)} ${effect['source']}`)
     }
@@ -2616,8 +2762,8 @@ function changeQuestProgress(type, stat, value=undefined) {
             const goalElem = document.getElementById(`quest-${quest}-${stat}`)
             goalElem.textContent = `${formatNumber(newValue, "floor")}/${questStatData['amount']}`
             if (newValue >= questStatData['amount']) {
-                goalElem.style.color = "#00ff00"
                 checkCompletion(quest)
+                goalElem.style.color = "#00ff00"
             } else if (newValue < questStatData['amount']) {
                 goalElem.style.color = "#ff0000"
                 if (metQuests[quest]) {
@@ -2649,6 +2795,10 @@ function trainingAreaHandler(stat, gymName="none") {
     if (document.visibilityState === "hidden") {
         document.title = `Arkivia | ${capitaliseFirst(stat)} +${formatNumber(trainingSession['gain'], false, true)} (+${formatNumber(gain, false, true)}/s)`
     }
+
+    if (hasEquipment('strangeTrainingCharm')) {
+        changeHealth(-4)
+    }
 }
 
 function calcTrainingModifier(stat=null) {
@@ -2659,7 +2809,13 @@ function calcTrainingModifier(stat=null) {
     // Booster Multi
     let boosterMulti = 1
     if (effects['exercisePill']) {boosterMulti += 0.5}
+
     multi *= boosterMulti
+
+    let equipmentMulti = 1
+    if (hasEquipment("strangeTrainingCharm")) {equipmentMulti += 0.2}
+    
+    multi *= equipmentMulti
 
     // Negative
     if (energy < 35) {
@@ -2680,6 +2836,8 @@ function getTrainingModifierInfo(stat=null) {
 
     if (effects['exercisePill']) {data['positive'].push({"source": "Exercise Pill", "change": 0.5, "multi": true})}
 
+    if (hasEquipment("strangeTrainingCharm")) {data['positive'].push({"source": "Strange Training Charm", "change": 0.2, "multi": true})}
+
     if (energy < 35) {
         data['negative'].push({"source": "Energy", "change": energy / 70 + 0.5})
     }
@@ -2691,11 +2849,13 @@ function getTrainingModifierBreakdown(stat) {
     const data = getTrainingModifierInfo(stat)
     output = []
     for (const effect of data['positive']) {
-        output.push(`${colorGen("#00ff00", `${effect['multi'] ? "x+" : "+"}${formatNumber(effect['change'] * 100, false, true)}%`)} ${effect['source']}`)
+        if (!effect['multi']) {
+            output.push(`${colorGen("#00ff00", `+${formatNumber(effect['change'] * 100, false, true)}%`)} ${effect['source']}`)
+        } else {
+            output.push(`${colorGen("#00ff00", `x${formatNumber(effect['change'] + 1, false, true)}`)} ${effect['source']}`)
+        }
     }
-    // if (data['positive'].length > 0 && data['negative'].length > 0) {
-    //     output.push("")
-    // }
+
     for (const effect of data['negative']) {
         output.push(`${colorGen("#ff0000", `-${formatNumber((1 - effect['change']) * 100, false, true)}%`)} ${effect['source']}`)
     }
@@ -2740,7 +2900,7 @@ function generateShop(shopName) {
 
     const shopHolder = document.createElement("div")
     shopHolder.className = "shop-holder"
-    document.getElementById("main").appendChild(shopHolder)
+    mainElement.appendChild(shopHolder)
 
     for (const [item, data] of Object.entries(shopItems)) {
         const itemParent = document.createElement("div")
@@ -2846,7 +3006,7 @@ function beginCrafting(item) {
 function generateCraftingMenu() {
     const craftingHolder = document.createElement("div")
     craftingHolder.className = "crafting-holder"
-    document.getElementById("main").appendChild(craftingHolder)
+    mainElement.appendChild(craftingHolder)
 
     let nonstackableCounts = {}
     for (const item of Object.values(inventoryNonStackable)) {
@@ -2950,11 +3110,27 @@ function getExploreSpeed() {
 }
 
 function getMiningSpeed() {
-    return (1 + (0.05 * getSkillLevel("mining"))) * calcEnergyDebuff()
+    let multi = 1
+    if (equipment['tool'] !== null && itemData[equipment['tool'][0]]['subclass'] === "pickaxe") {
+        if (itemData[equipment['tool'][0]]['equipment']['efficiency']) {
+            multi = itemData[equipment['tool'][0]]['equipment']['efficiency']
+        }
+    }
+    return (1 + (0.05 * getSkillLevel("mining"))) * multi * calcEnergyDebuff()
 }
 
 function getChoppingSpeed() {
-    return (1 + (0.05 * getSkillLevel("felling"))) * calcEnergyDebuff()
+    let multi = 1
+    if (equipment['tool'] !== null && itemData[equipment['tool'][0]]['subclass'] === "axe") {
+        if (itemData[equipment['tool'][0]]['equipment']['efficiency']) {
+            multi = itemData[equipment['tool'][0]]['equipment']['efficiency']
+        }
+    }
+    return (1 + (0.05 * getSkillLevel("felling"))) * multi * calcEnergyDebuff()
+}
+
+function getHuntingSpeed() {
+    return 1 + (0.05 * getSkillLevel("hunting")) * calcEnergyDebuff()
 }
 
 function getEquipmentStats(type) {
@@ -3038,6 +3214,11 @@ const onDeathFunctions = new Map([
             sceneManager("forestLayer1")
         }
         changeQuestProgress("checks", "forestLayer1EnemiesRemaining")
+    }],
+    ["huntingEnemyDeath", function() {
+        checks['huntersGuildMission']['complete'] = true
+        playTransition()
+        sceneManager("forestLayer1")
     }]
 ])
 
@@ -3149,6 +3330,40 @@ const sceneTicks = new Map([
                 changeInventory("stone", randomRange(1, 2, 0))
             }
         }
+    }],
+    ["forestGymBasic_str", function() {
+        trainingAreaHandler("str", "forestGymBasic")
+    }],
+    ["forestGymBasic_def", function() {
+        trainingAreaHandler("def", "forestGymBasic")
+    }],
+    ["forestGymBasic_spd", function() {
+        trainingAreaHandler("spd", "forestGymBasic")
+    }],
+    ["forestGymBasic_dex", function() {
+        trainingAreaHandler("dex", "forestGymBasic")
+    }],
+    ["forestGymAdvanced_str", function() {
+        trainingAreaHandler("str", "forestGymAdvanced")
+    }],
+    ["forestGymAdvanced_def", function() {
+        trainingAreaHandler("def", "forestGymAdvanced")
+    }],
+    ["forestGymAdvanced_spd", function() {
+        trainingAreaHandler("spd", "forestGymAdvanced")
+    }],
+    ["forestGymAdvanced_dex", function() {
+        trainingAreaHandler("dex", "forestGymAdvanced")
+    }],
+    ["forestHunt", function() {
+        if (!combatStatus['enemy']) {
+            startProcess("hunt", randomRange(20, 30, 0))
+            processStatus['completed'] += getHuntingSpeed()
+            if (processStatus['completed'] >= processStatus['goal']) {
+                generateEnemy(checks['huntersGuildMission']['enemy'], checks['huntersGuildMission']['stats'])
+                combatStatus['onDeath'] = "huntingEnemyDeath"
+            }
+        }
     }]
 ])
 
@@ -3160,6 +3375,9 @@ const effectFunctions = new Map([
         effects['poison']['properties']['dmg'] *= effects['poison']['properties']['change']
         insertLog(`You -> ${colorGen("#ff3333", formatNumber(effects['poison']['properties']['dmg'], "round"))} ${colorGen(effectData['poison']['color'], "(Poison)")}`)
         changeHealth(-effects['poison']['properties']['dmg'])
+        if (effects['poison']['properties']['dmg'] < 0.5) {
+            changeEffect("poision", null)
+        }
     }]
 ])
 
@@ -3180,19 +3398,146 @@ const explorePools = {
     }
 }
 
+function processPlayerTurn() {
+    changeEnergy(-0.05)
+    const effectiveStats = {}
+    for (const [stat, value] of Object.entries(battleStats)) {
+        effectiveStats[stat] = value * calcStatModifier(stat)
+    }
+    const enemyEffectiveStats = {}
+    for (const [stat, value] of Object.entries(combatStatus['enemyStats'])) {
+        enemyEffectiveStats[stat] = value * calcEnemyStatDebuff(stat)
+    }
+
+    let turnDmg = getBaseDamage(effectiveStats['str']) * (Math.random() * 0.4 + 0.8) * (getEquipmentStats("weapon") !== null ? getEquipmentStats("weapon")['damage'] : 1)
+    let turnDmgMulti = 1
+    turnDmgMulti += getSkillLevel("fighting") * 0.05
+    if (equipment['weapon']) {
+        turnDmgMulti += getSkillLevel(`${itemData[equipment['weapon'][0]]['subclass']}Mastery`) * 0.03
+    } else {
+        turnDmgMulti += getSkillLevel("unarmedMastery") * 0.03
+    }
+    turnDmg = turnDmg * turnDmgMulti
+
+    const turnDmgMitigation = calcDamageMitigation(effectiveStats['str'], enemyEffectiveStats['def'])
+    const turnHitChance = calcHitChance(effectiveStats['spd'], enemyEffectiveStats['dex'])
+    
+    const turnActualDmg = Math.round(turnDmg * (1 - turnDmgMitigation))
+    const oldEnemyHealth = combatStatus['enemyHealth']
+    if (turnHitChance / 100 > Math.random()) {
+        insertLog(`You -> ${colorGen("#ff3333", turnActualDmg)}`)
+        combatStatus['enemyHealth'] -= turnActualDmg
+        if (equipment['weapon']) {
+            const item = equipment['weapon'][0]
+            const itemId = equipment['weapon'][1]
+            getEquipmentStats("weapon")['durability'] -= 1
+            document.getElementById("equipment-weapon").querySelector(".bar-fill").style.width = `${getEquipmentStats("weapon")['durability'] / getEquipmentStats("weapon")['maxDurability'] * 100}%`
+            if (getEquipmentStats("weapon")['durability'] <= 0) {
+                insertLog(`${genItemLogText(item, null)} broke`, [itemData[item]['name'], itemData[item]['desc']])
+                changeEquipment(itemId)
+                changeInventory(item, -1, false, itemId)
+            }
+
+            if (itemData[item]['equipment']['execute']) {
+                itemData[item]['equipment']['execute'](turnActualDmg)
+            }
+
+            if (skillData[`${itemData[item]['subclass']}Mastery`]) {
+                changeSkill(`${itemData[item]['subclass']}Mastery`, 1)
+            }
+        } else {
+            changeSkill("unarmedMastery", 1)
+        }
+        if (turnActualDmg >= combatStatus['enemyMaxHealth'] * 3) {
+            giveAchievement("overkill")
+        }
+    } else {
+        insertLog(colorGen("#aaaaaa", "You missed"))
+    }
+    changeSkill("fighting", 1)
+    if (combatStatus['enemy'] === "strawDummy") {
+        changeTitleXp("disciple", 1)
+    } else {
+        changeTitleXp("fighter", 1)
+    }
+    updateBar("enemyHealth", combatStatus['enemyHealth'] - oldEnemyHealth)
+
+    if (combatStatus['enemyHealth'] <= 0) {
+        if (oldEnemyHealth >= combatStatus['enemyMaxHealth']) {
+            giveAchievement("flatline")
+        }
+        if (combatStatus['enemyStats']['str'] > 0 && combatStatus['enemyStats']['spd'] > 0) {
+            if (combatStatus.tags?.['hits'] === undefined) {
+                giveAchievement("untouchable")
+            }
+            if (health / calcMaxHp() <= 0.05) {
+                giveAchievement("survivor")
+            }
+        }
+    }
+}
+
+function processEnemyTurn() {
+    const effectiveStats = {}
+    for (const [stat, value] of Object.entries(battleStats)) {
+        effectiveStats[stat] = value * calcStatModifier(stat)
+    }
+    const enemyEffectiveStats = {}
+    for (const [stat, value] of Object.entries(combatStatus['enemyStats'])) {
+        enemyEffectiveStats[stat] = value * calcEnemyStatDebuff(stat)
+    }
+
+    if (enemyEffectiveStats['str'] > 0 && enemyEffectiveStats['spd'] > 0 && combatStatus['enemyEffects']['stun'] === undefined) {
+        let turnDmg = getBaseDamage(enemyEffectiveStats['str']) * (Math.random() * 0.4 + 0.8)
+
+        const turnDmgMitigation = calcDamageMitigation(enemyEffectiveStats['str'], effectiveStats['def'])
+        const turnHitChance = calcHitChance(enemyEffectiveStats['spd'], effectiveStats['dex'])
+        const hitPart = getRandomItem({
+            "head": 2,
+            "chest": 3,
+            "arms": 2,
+            "legs": 1
+        })
+        const hitArmor = getEquipmentStats(hitPart)
+        const turnArmorMitigation = hitArmor !== null ? calcArmorMitigation(turnDmg, hitArmor['armor']) : 0
+        const turnActualDmg = Math.round(turnDmg * (1 - turnDmgMitigation) * (1 - turnArmorMitigation))
+
+        if (turnHitChance / 100 > Math.random()) {
+            insertLog(`${enemyData[combatStatus['enemy']]['name']} -> ${colorGen("#ff3333", turnActualDmg)}`)
+            const tags = (combatStatus['tags'] ??= {})
+            tags['hits'] = (tags['hits'] ?? 0) + 1
+
+            if (enemyData[combatStatus['enemy']]['attackExecute']) {
+                enemyData[combatStatus['enemy']]['attackExecute'](turnActualDmg)
+            }
+            changeHealth(-turnActualDmg)
+            if (equipment[hitPart]) {
+                const item = equipment[hitPart][0]
+                const itemId = equipment[hitPart][1]
+                getEquipmentStats(hitPart)['durability'] -= 1
+                document.getElementById(`equipment-${hitPart}`).querySelector(".bar-fill").style.width = `${getEquipmentStats(hitPart)['durability'] / getEquipmentStats(hitPart)['maxDurability'] * 100}%`
+                if (getEquipmentStats(hitPart)['durability'] <= 0) {
+                    insertLog(`${genItemLogText(item, null)} broke`, [itemData[item]['name'], itemData[item]['desc']])
+                    changeEquipment(itemId)
+                    changeInventory(item, -1, false, itemId)
+                }
+            }
+        } else {
+            insertLog(colorGen("#aaaaaa", `${enemyData[combatStatus['enemy']]['name']} missed`))
+        }
+    }
+}
+
 function tick() {
     stats['playtime'] += 1
+    const oldTime = time
     changeTime(currentScene !== "sleep" ? 1 : 10)
     updateBar("health")
 
     if (travelStatus['destination'] !== null) {
-        // if ((travelInfo['arrival'][0] <= time && travelInfo['arrival'][1] <= day) || travelInfo['arrival'][1] < day) {
-        //     sceneManager(travelInfo['destination'])
-        //     playTransition()
-        //     travelInfo['destination'] = null
-        //     travelInfo['arrival'] = [0, 0]
-        // }
         travelStatus['completed'] += getMovementSpeed()
+        stats['distanceTravelled'] = (stats['distanceTravelled'] ?? 0) + getMovementSpeed()
+        checkAchievements(["firstSteps", "walker", "marathon"])
         changeSkill("walking", 1)
         changeTitleXp("walker", 2)
         if (travelStatus['completed'] >= travelStatus['distance']) {
@@ -3279,120 +3624,33 @@ function tick() {
             }
         }
 
+        const effectiveStats = {}
+        for (const [stat, value] of Object.entries(battleStats)) {
+            effectiveStats[stat] = value * calcStatModifier(stat)
+        }
+        const enemyEffectiveStats = {}
+        for (const [stat, value] of Object.entries(combatStatus['enemyStats'])) {
+            enemyEffectiveStats[stat] = value * calcEnemyStatDebuff(stat)
+        }
+        const playerFirst = effectiveStats['spd'] >= enemyEffectiveStats['spd']
+
         if (combatStatus['enemyHealth'] > 0) {
-            changeEnergy(-0.05)
-            const effectiveStats = {}
-            for (const [stat, value] of Object.entries(battleStats)) {
-                effectiveStats[stat] = value * calcStatModifier(stat)
-            }
-            const enemyStats = {}
-            for (const [stat, value] of Object.entries(combatStatus['enemyStats'])) {
-                enemyStats[stat] = value * calcEnemyStatDebuff(stat)
-            }
+            if (playerFirst) {
+                processPlayerTurn()
 
-            let turnDmg = getBaseDamage(effectiveStats['str']) * (Math.random() * 0.4 + 0.8) * (getEquipmentStats("weapon") !== null ? getEquipmentStats("weapon")['damage'] : 1)
-            let turnDmgMulti = 1
-            turnDmgMulti += getSkillLevel("fighting") * 0.05
-            if (equipment['weapon']) {
-                turnDmgMulti += getSkillLevel(`${itemData[equipment['weapon'][0]]['subclass']}Mastery`) * 0.03
-            } else {
-                turnDmgMulti += getSkillLevel("unarmedMastery") * 0.03
-            }
-            turnDmg = turnDmg * turnDmgMulti
-
-            const turnDmgMitigation = calcDamageMitigation(effectiveStats['str'], enemyStats['def'])
-            const turnHitChance = calcHitChance(effectiveStats['spd'], enemyStats['dex'])
-            
-            const turnActualDmg = Math.round(turnDmg * (1 - turnDmgMitigation))
-            const oldEnemyHealth = combatStatus['enemyHealth']
-            if (turnHitChance / 100 > Math.random()) {
-                insertLog(`You -> ${colorGen("#ff3333", turnActualDmg)}`)
-                combatStatus['enemyHealth'] -= turnActualDmg
-                if (equipment['weapon']) {
-                    const item = equipment['weapon'][0]
-                    const itemId = equipment['weapon'][1]
-                    getEquipmentStats("weapon")['durability'] -= 1
-                    document.getElementById("equipment-weapon").querySelector(".bar-fill").style.width = `${getEquipmentStats("weapon")['durability'] / getEquipmentStats("weapon")['maxDurability'] * 100}%`
-                    if (getEquipmentStats("weapon")['durability'] <= 0) {
-                        insertLog(`${genItemLogText(item, null)} broke`, [itemData[item]['name'], itemData[item]['desc']])
-                        changeEquipment(itemId)
-                        changeInventory(item, -1, false, itemId)
-                    }
-
-                    if (itemData[item]['equipment']['execute']) {
-                        itemData[item]['equipment']['execute'](turnActualDmg)
-                    }
-
-                    if (skillData[`${itemData[item]['subclass']}Mastery`]) {
-                        changeSkill(`${itemData[item]['subclass']}Mastery`, 1)
-                    }
+                if (combatStatus['enemyHealth'] <= 0) {
+                    killEnemy()
                 } else {
-                    changeSkill("unarmedMastery", 1)
+                    processEnemyTurn()
                 }
             } else {
-                insertLog(colorGen("#aaaaaa", "You missed"))
-            }
-            changeSkill("fighting", 1)
-            if (combatStatus['enemy'] === "strawDummy") {
-                changeTitleXp("disciple", 1)
-            } else {
-                changeTitleXp("fighter", 1)
-            }
-
-            if (combatStatus['enemyHealth'] <= 0) {
-                if (oldEnemyHealth >= combatStatus['enemyMaxHealth']) {
-                    giveAchievement("flatline")
-                }
-                if (enemyStats['str'] > 0 && enemyStats['spd'] > 0) {
-                    if (combatStatus.tags?.['hits'] === undefined) {
-                        giveAchievement("untouchable")
-                    }
-                    if (health / calcMaxHp() <= 0.05) {
-                        giveAchievement("survivor")
+                processEnemyTurn()
+                if (combatStatus['enemy']) {
+                    processPlayerTurn()
+                    if (combatStatus['enemyHealth'] <= 0) {
+                        killEnemy()
                     }
                 }
-                killEnemy()
-            } else {
-                if (enemyStats['str'] > 0 && enemyStats['spd'] > 0 && combatStatus['enemyEffects']['stun'] === undefined) {
-                    let turnDmg = getBaseDamage(enemyStats['str']) * (Math.random() * 0.4 + 0.8)
-
-                    const turnDmgMitigation = calcDamageMitigation(enemyStats['str'], effectiveStats['def'])
-                    const turnHitChance = calcHitChance(enemyStats['spd'], effectiveStats['dex'])
-                    const hitPart = getRandomItem({
-                        "head": 2,
-                        "chest": 3,
-                        "arms": 2,
-                        "legs": 1
-                    })
-                    const hitArmor = getEquipmentStats(hitPart)
-                    const turnArmorMitigation = hitArmor !== null ? calcArmorMitigation(turnDmg, hitArmor['armor']) : 0
-                    const turnActualDmg = Math.round(turnDmg * (1 - turnDmgMitigation) * (1 - turnArmorMitigation))
-
-                    if (turnHitChance / 100 > Math.random()) {
-                        insertLog(`${enemyData[combatStatus['enemy']]['name']} -> ${colorGen("#ff3333", turnActualDmg)}`)
-                        const tags = (combatStatus['tags'] ??= {})
-                        tags['hits'] = (tags['hits'] ?? 0) + 1
-
-                        if (enemyData[combatStatus['enemy']]['attackExecute']) {
-                            enemyData[combatStatus['enemy']]['attackExecute'](turnActualDmg)
-                        }
-                        changeHealth(-turnActualDmg)
-                        if (equipment[hitPart]) {
-                            const item = equipment[hitPart][0]
-                            const itemId = equipment[hitPart][1]
-                            getEquipmentStats(hitPart)['durability'] -= 1
-                            document.getElementById(`equipment-${hitPart}`).querySelector(".bar-fill").style.width = `${getEquipmentStats(hitPart)['durability'] / getEquipmentStats(hitPart)['maxDurability'] * 100}%`
-                            if (getEquipmentStats(hitPart)['durability'] <= 0) {
-                                insertLog(`${genItemLogText(item, null)} broke`, [itemData[item]['name'], itemData[item]['desc']])
-                                changeEquipment(itemId)
-                                changeInventory(item, -1, false, itemId)
-                            }
-                        }
-                    } else {
-                        insertLog(colorGen("#aaaaaa", `${enemyData[combatStatus['enemy']]['name']} missed`))
-                    }
-                }
-                updateBar("enemyHealth", combatStatus['enemyHealth'] - oldEnemyHealth)
             }
         } else {
             killEnemy()
@@ -3422,8 +3680,6 @@ function tick() {
     const handler = sceneTicks.get(currentScene)
     if (handler) {handler()}
 
-    // updateBar("energy") No longer needed as changeenergy function updates it
-    // updateBar("xp") No longer needed as changexp function updates it
     updateBattlestats()
     if (combatStatus['enemy'] !== null) {updateEnemyBattlestats()}
 
@@ -3536,6 +3792,7 @@ function updateTooltip() {
     }
 }
 
+const tooltipElement = document.getElementById("tooltip")
 document.addEventListener("mouseover", function(e) {
     const elem = e.target.closest("[data-tooltip-title]")
     if (!elem) return
@@ -3543,11 +3800,10 @@ document.addEventListener("mouseover", function(e) {
     activeTarget = elem
     updateTooltip()
 
-    const tooltip = document.getElementById("tooltip")
     const offset = 14
 
-    const tooltipWidth = tooltip.offsetWidth
-    const tooltipHeight = tooltip.offsetHeight
+    const tooltipWidth = tooltipElement.offsetWidth
+    const tooltipHeight = tooltipElement.offsetHeight
 
     let left = e.clientX + offset
     let top = e.clientY + offset
@@ -3560,26 +3816,25 @@ document.addEventListener("mouseover", function(e) {
         top = e.clientY - tooltipHeight - offset
     }
 
-    tooltip.style.left = `${left}px`
-    tooltip.style.top = `${top}px`
-    tooltip.style.opacity = "1"
+    tooltipElement.style.left = `${left}px`
+    tooltipElement.style.top = `${top}px`
+    tooltipElement.style.opacity = "1"
 })
 
 document.addEventListener("mouseout", function(e) {
     if (activeTarget !== undefined) {
         activeTarget = null
-        document.getElementById("tooltip").style.opacity = "0"
+        tooltipElement.style.opacity = "0"
     }
 })
 
 document.addEventListener("mousemove", function(e) {
     if (!activeTarget) return
 
-    const tooltip = document.getElementById("tooltip")
     const offset = 14
 
-    const tooltipWidth = tooltip.offsetWidth
-    const tooltipHeight = tooltip.offsetHeight
+    const tooltipWidth = tooltipElement.offsetWidth
+    const tooltipHeight = tooltipElement.offsetHeight
 
     let left = e.clientX + offset
     let top = e.clientY + offset
@@ -3592,8 +3847,8 @@ document.addEventListener("mousemove", function(e) {
         top = e.clientY - tooltipHeight - offset
     }
 
-    tooltip.style.left = `${left}px`
-    tooltip.style.top = `${top}px`
+    tooltipElement.style.left = `${left}px`
+    tooltipElement.style.top = `${top}px`
 })
 
 // Font size calc
@@ -3651,6 +3906,22 @@ function changeEquipment(itemId) {
     }
 }
 
+function hasEquipment(item) {
+    const itemClass = itemData[item]?.['equipment']?.['class']
+    if (!itemClass) {return false}
+    if (itemClass === "accessory") {
+        if (equipment['accessory1']?.[0] === item || equipment['accessory2']?.[0] === item) {
+            return true
+        }
+    } else {
+        if (equipment[itemClass]?.[0] === item) {
+            return true
+        }
+    }
+
+    return false
+}
+
 let multi = 1
 
 function setMulti(newMulti) {
@@ -3690,6 +3961,10 @@ document.getElementById("inventory-table").addEventListener("click", function(e)
 
     if (discardMode === true) {
         if (item !== null) {
+            if (itemData[item]['undeletable']) {
+                insertLog("You probably shouldn't throw this away")
+                return
+            }
             const deleteCount = itemId !== undefined ? 1 : Math.min(inventory[item], multi)
             changeInventory(item, -deleteCount, false, itemId)
             if (itemLogStackData['type'] !== "discard" || itemLogStackData['item'] !== item) {
@@ -3865,7 +4140,7 @@ function changePrependText(text) {
         prependTextElement = document.createElement("div")
         prependTextElement.id = "prepend-text"
         prependTextElement.className = "main-text"
-        document.getElementById("main").prepend(prependTextElement)
+        mainElement.prepend(prependTextElement)
     }
     if (currentPrependText !== text) {
         currentPrependText = text
@@ -3900,6 +4175,8 @@ const actionData = {
                     if (processStatus['completed'] >= processStatus['goal']) {
                         startProcess("chop", randomRange(20, 30, 0))
                         changeInventory("wood", randomRange(1, 2, 0))
+                        stats['treesCut'] = (stats['treesCut'] ?? 0) + 1
+                        checkAchievement("deforestation")
                     }
                 } else {
                     changePrependText(`You need an axe to chop trees.\n\n`)
@@ -3949,7 +4226,7 @@ const sceneProperties = {
     "noticeBoard": ["outdoors"],
     "trainingGrounds": ["outdoors"],
     "trainingGroundsInstructor": ["outdoors"],
-    "trainingGroundsInstructorAskStats": ["outdoors"],
+    "trainingGroundsInstructor_askStats": ["outdoors"],
     "trainingGrounds_str": ["outdoors"],
     "trainingGrounds_def": ["outdoors"],
     "trainingGrounds_spd": ["outdoors"],
@@ -3967,6 +4244,7 @@ const sceneProperties = {
     "grassPlains": ["outdoors"],
     "forestLayer1": ["outdoors"],
     "forestLayer1Explore": ["outdoors"],
+    "forestHunt": ["outdoors"],
     "forestLayer1Clear": ["outdoors"],
     "forestLayer2": ["outdoors"],
     "forestMineEntrance": ["outdoors"]
@@ -3999,6 +4277,7 @@ const sceneRegions = {
     "huntersGuildHeal": "forest",
     "forestLayer2": "forest",
     "forestMine": "forest",
+    "forestGym": "forest"
 }
 
 class scenes {
@@ -4074,7 +4353,6 @@ class scenes {
     }
 
     static storage() {
-        // toggleStorageAccess(true)
         return `You can store items here for future use.\n\n{![leave.png]Leave|home|0|leaveStorage}`
     }
 
@@ -4422,6 +4700,7 @@ class scenes {
         if (checks['forestLayer1EnemiesRemaining'] !== 0) {r += ` Some monsters are blocking the path to the deeper layers.`}
         r += `\n\n{![search.png]Explore|forestLayer1Explore}`
         if (checks['forestLayer1EnemiesRemaining'] !== 0) {r += `\n{![sword.png]Clear path|forestLayer1Clear}`}
+        if (checks['huntersGuildMission'] && !checks['huntersGuildMission']['complete']) {r += `\n{![sword.png]Hunt|forestHunt}`}
         r += `\n\n{![sword_shield.png]Hunters' Guild|huntersGuild}\n\n`
         if (checks['forestLayer1EnemiesRemaining'] === 0) {r += `{![arrow_right.png]Walk towards the center|forestLayer2|300(Forest Center)}\n`}
         r += `{![park.png]Grass Plains|grassPlains|1000}`
@@ -4438,9 +4717,12 @@ class scenes {
 
     static huntersGuild() {
         if (!checks['huntersGuildIntro']) {
-            return `You slowly walk into the hunters' guild, the occupants appear to be having a discussion about enemies in the forest. You stand around for a minute until one of them invites you to listen.\n\nYou couldn't understand anything.\n\n{Next|huntersGuildIntro}`
+            return `You slowly walk into the Hunters' guild, the occupants appear to be having a discussion about enemies in the forest. You stand around for a minute until one of them invites you to listen.\n\nYou couldn't understand anything.\n\n{Next|huntersGuildIntro}`
         } else {
-            return `You are in the hunters' guild. A group of hunters gather around the fireplace.\n\n{![fire.png]Fireplace|huntersGuildFireplace}\n\n{![leave.png]Leave|forestLayer1}`
+            let r = `You are in the Hunters' guild. A group of hunters gather around the fireplace.\n\n{![fire.png]Fireplace|huntersGuildFireplace}`
+            if (completedQuests.includes("els5")) {r += `\n{![poster.png]Hunting Missions|huntersGuildMissions}`} 
+            r += `\n\n{![leave.png]Leave|forestLayer1}`
+            return r
         }
     }
 
@@ -4450,13 +4732,13 @@ class scenes {
     }
 
     static huntersGuildFireplace() {
-        return `You are sitting on a chair near the fireplace in the hunters' guild.\n\n{![chat.png]Talk to Els|huntersGuildEls}\n\n{![leave.png]Leave|huntersGuild}`
+        return `You are sitting on a chair near the fireplace in the Hunters' guild.\n\n{![chat.png]Talk to Els|huntersGuildEls}\n\n{![leave.png]Leave|huntersGuild}`
     }
 
     static huntersGuildEls() {
         let r = `"Hello, what do you need today?"`
         if (checks['huntersGuildAskQuest']) {
-            if (!["els1", "els2", "els3", "els4"].some(key => quests[key])) {
+            if (!["els1", "els2", "els3", "els4", "els5"].some(key => quests[key])) {
                 r += `\n\n{![poster.png]Receive Quest|huntersGuildElsQuest}`
             } else {
                 r += `\n\n{![poster.png]Quest Completion|huntersGuildElsQuest}`
@@ -4506,14 +4788,23 @@ class scenes {
                 "requirements": [
                     {"check": function() {return time >= checks['elsQuestlineCooldown']}, "message": `"We're not quite ready yet, come back on ${formatTime(checks['elsQuestlineCooldown'] ?? 0, false, "${dayName} ${hours}:${minutes}")}."\n\n{![leave.png]Return|huntersGuildEls}`}
                 ],
-                "introMessage": `"We're going to need some stone for our project. Go to the mine deeper in the forst and collect 10 stones. Come back when you're done."\n\n{![leave.png]Return|huntersGuildEls}`,
+                "introMessage": `"We're going to need some stone for our project. Go to the mine deeper in the forest and collect 10 stones. Come back when you're done."\n\n{![leave.png]Return|huntersGuildEls}`,
                 "message": `"Thanks for the stone, we're closer to finishing our project."\n\n{![leave.png]Return|huntersGuildEls}`
+            },
+            {
+                "quest": "els5",
+                "money": 20,
+                "consumed": {
+                    "wood": 20
+                },
+                "introMessage": `"This should be the final requirement for our project. We need quite a bit of wood, around 20 to be precise. I suggest using an axe to chop down a few trees."\n\n{![leave.png]Return|huntersGuildEls}`,
+                "message": `"That should be all, give me a few moments."\n\nYou patiently wait while he gives the wood you just delivered to a few guild members.\n\nHe jogs back to you.\n\n"Yep, that's all we needed. I'm proud to announce that we now have a dedicated area for hunting missions. All members of the guild will now be able to take on small missions to hunt down creatures for pay. We should have our first few missions up shortly."\n\n{![leave.png]Return|huntersGuildEls}`
             }
         ])
     }
 
     static huntersGuildEls_askGuild() {
-        return `"The hunters' guild was founded years ago by a small group of people who wished to research the forest. I was appointed as the leader a short while after the guild was founded."\n\n"The forest is quite vast making exploration difficult. We still aren't aware of all the creatures in the forest."\n\n{![leave.png]Return|huntersGuildEls}`
+        return `"The Hunters' guild was founded years ago by a small group of people who wished to research the forest. I was appointed as the leader a short while after the guild was founded."\n\n"The forest is quite vast making exploration difficult. We still aren't aware of all the creatures in the forest."\n\n{![leave.png]Return|huntersGuildEls}`
     }
 
     static huntersGuildEls_askForest() {
@@ -4526,14 +4817,60 @@ class scenes {
     }
 
     static huntersGuildHeal() {
-        let r = `You are in a room located in the hunters' guild.\n\n"Our resources are a bit limited here so we're unable to heal you completely. Head back to the hospital in town when you're ready."\n\n`
+        let r = `You are in a room located in the Hunters' guild.\n\n"Our resources are a bit limited here so we're unable to heal you completely. Head back to the hospital in town when you're ready."\n\n`
         if (getTimeName() === "night") {r += `Right before Els walks out of the room, he says, "Reminder that the forest is more dangerous at night"\n\n`}
         r += `{![leave.png]Return|huntersGuild}`
         return r
     }
 
+    static huntersGuildMissions() {
+        let r = `You look at the mission board in the Hunters' Guild.`
+        
+        let missions = dailyChecks['huntersGuildMissions'] ?? []
+        if (!dailyChecks['huntersGuildMissions']) {
+            for (let i = 0; i < randomRange(1, 2, 0); i++) {
+                let minStats = randomRange(30, 100, 0)
+                let maxStats = minStats + randomRange(25, 50, 0)
+                missions.push({
+                    "enemy": "wildAnimal",
+                    "stats": [minStats, maxStats],
+                    "reward": randomRange(10, 15, 0),
+                    "health": randomRange(300, 600, 0)
+                })
+            }
+            dailyChecks['huntersGuildMissions'] = missions
+        }
+
+        let missionTexts = []
+        for (let i = 0; i < missions.length; i++) {
+            let mission = missions[i]
+            let rankText = colorGen("#88bb00", getRank(mission['stats'][0] * 4))
+            if (getRank(mission['stats'][0] * 4) !== getRank(mission['stats'][1] * 4)) {
+                rankText = `${colorGen("#88bb00", getRank(mission['stats'][0] * 4))} to ${colorGen("#88bb00", getRank(mission['stats'][1] * 4))}`
+            }
+            missionTexts.push(`{Claim|huntersGuild|0|huntersGuildClaimMission(${i})} - ${enemyData[mission['enemy']]['name']} ${colorGen("#cccc55", `$${mission['reward']}`)} ${rankText}`)
+        }
+        r += missionTexts.length > 0 ? "\n\n" : "\n\nThere are no available missions today."
+        r += missionTexts.join("\n")
+        
+        if (checks['huntersGuildMission']) {
+            if (checks['huntersGuildMission']['complete']) {
+                r += "\n\n{![dollar.png]Claim Reward|huntersGuild|0|huntersGuildClaimMission(-1)}"
+            } else {
+                r += "\n\n{![cross.png]Abandon Mission|huntersGuild|0|huntersGuildClaimMission(-1)}"
+            }
+        }
+
+        r += "\n\n{![leave.png]Leave|huntersGuild}"
+        return r
+    }
+
+    static forestHunt() {
+        return `You are hunting for the target${processingGen()}\n\n{![stop.png]Stop|forestLayer1|0|endHunt}`
+    }
+
     static forestLayer2() {
-        return `You can see the entrance of the forest in the distance.\n\n{![alley.png]Mine|forestMineEntrance}\n\n{![arrow_left.png]Walk towards the exit|forestLayer1|300(Forest Entrance)}`
+        return `You can see the entrance of the forest in the distance.\n\n{![alley.png]Mine|forestMineEntrance}\n{![dumbbells.png]Forest Gym|forestGym}\n\n{![arrow_left.png]Walk towards the exit|forestLayer1|300(Forest Entrance)}`
     }
 
     static forestMineEntrance() {
@@ -4546,6 +4883,68 @@ class scenes {
         r += equipment['tool'] !== null && itemData[equipment['tool'][0]]['subclass'] === "pickaxe" ? `<span id=action-text>You are mining for stone and other materials with your pickaxe${processingGen()}</span>` : `<span id=action-text>You will need a pickaxe equipped to mine.</span>`
         r += `\n\n{![leave.png]Leave|forestMineEntrance}`
         return r
+    }
+
+    static forestGym() {
+        return `You are in the forest gym. It appears to be a membership only gym.${checks['forestGymMembership2'] ? `\n\nYou have an advanced membership.\n\n${genTrainingAreaText("forestGymAdvanced")}` : checks['forestGymMembership1'] ? `\n\nYou have a basic membership.\n\n${genTrainingAreaText("forestGymBasic")}` : ""}\n\n{![chat.png]Trainer|forestGymTrainer}\n\n{![leave.png]Leave|forestLayer2}`
+    }
+
+    static forestGymTrainer() {
+        let r = `"Welcome to the forest gym, I built this facility by hand in order to fully optimise training. It was originally made for my own use but I've decided to start selling memberships."`
+        if (!checks['forestGymMembership1'] || !checks['forestGymMembership2']) {r += `\n\n{![chat.png]Ask about membership|forestGymTrainerMembershipAsk}`}
+        if (checks['forestGymMembership2'] && !checks['forestGymCharmPurchase']) {r += `\n\n{![chat.png]Ask about the charm he's wearing|forestGymTrainerCharmAsk}`}
+        r += `\n\n{![leave.png]Leave|forestGym}`
+        return r
+    }
+
+    static forestGymTrainerMembershipAsk() {
+        let r = `"I offer 2 levels of membership. The basic membership costs $100, which gives you access to the basic equipment. The advanced membership costs $400, which includes the perks of the basic membership and gives you access to experimental equipment that I use myself. The price is a bit steep but it's really good value for money."`
+        if (!checks['forestGymMembership1'] && !checks['forestGymMembership2']) {r += `\n\n{Basic Membership ($100)|forestGym|0|forestGymMembershipPurchase(basic)}`}
+        if (!checks['forestGymMembership2']) {r += `${checks['forestGymMembership1'] ? "\n\n" : "\n"}{Advanced Membership ($400)|forestGym|0|forestGymMembershipPurchase(advanced)}`}
+        r += `\n\n{![leave.png]Leave|forestGym}`
+        return r
+    }
+
+    static forestGymTrainerCharmAsk() {
+        return `"I occasionally wear this charm while training. I can't use it very often though as it physically hurts when I use it. But it does make my training slightly more effective. If you want I could sell it to you for $200."\n\n{Buy Charm ($200)|forestGym|0|forestGymCharmPurchase}\n\n{![leave.png]Leave|forestGym}`
+    }
+
+    static forestGymBasic_str() {
+        return `You are lifting weights in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
+    }
+
+    static forestGymBasic_def() {
+        return `You are practicing blocking in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
+    }
+
+    static forestGymBasic_spd() {
+        return `You are running on a track in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
+    }
+
+    static forestGymBasic_dex() {
+        return `You are practicing movement in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
+    }
+
+    static forestGymAdvanced_str() {
+        return `You are lifting rocks in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
+    }
+
+    static forestGymAdvanced_def() {
+        let r = ""
+        if (!checks['forestGymAdvancedDefFirst']) {
+            r += `You question the trainer about this training technique.\n\n"It worked for me so it should work for everyone else too."\n\n`
+            checks['forestGymAdvancedDefFirst'] = true
+        }
+        r += `You are practicing running in to a wall in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
+        return r
+    }
+
+    static forestGymAdvanced_spd() {
+        return `You are running up slopes in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
+    }
+
+    static forestGymAdvanced_dex() {
+        return `You are practicing jumping over rods in the forest gym${processingGen()}\n\n{![stop.png]Stop|forestGym}`
     }
 }
 
@@ -4617,6 +5016,79 @@ class sceneFunctions {
         endFight()
         checks['spawnDelay'] = time + 5
     }
+
+    static forestGymMembershipPurchase(tier) {
+        if (tier === "basic") {
+            if (money >= 100) {
+                changeMoney(-100)
+                checks['forestGymMembership1'] = true
+                prependText = `You purchased a basic membership for ${colorGen("#cccc55", "$100")}.\n\n`
+            } else {
+                prependText = "You do not have enough money to purchase this.\n\n"
+            }
+        } else if (tier === "advanced") {
+            if (money >= 400) {
+                changeMoney(-400)
+                checks['forestGymMembership2'] = true
+                prependText = `You purchased an advanced membership for ${colorGen("#cccc55", "$400")}.\n\n`
+            } else {
+                prependText = "You do not have enough money to purchase this.\n\n"
+            }
+        }
+    }
+
+    static forestGymCharmPurchase() {
+        if (money >= 200) {
+            changeMoney(-200)
+            changeInventory("strangeTrainingCharm", 1)
+            checks['forestGymCharmPurchase'] = true
+            prependText = `You purchased a training charm for ${colorGen("#cccc55", "$200")}.\n\n`
+        } else {
+            prependText = "You do not have enough money to purchase this.\n\n"
+        }
+    }
+
+    static huntersGuildClaimMission(arg) {
+        let i = Number(arg)
+        if (i === -1) {
+            if (checks['huntersGuildMission']['complete']) {
+                prependText = `You received ${colorGen("#cccc55", `$${checks['huntersGuildMission']['reward']}`)} for completing the mission.\n\n`
+                changeMoney(checks['huntersGuildMission']['reward'])
+            } else {
+                prependText = "You abandoned your mission.\n\n"
+            }
+            delete checks['huntersGuildMission']
+            return
+        }
+
+        if (!checks['huntersGuildMission']) {
+            if (!dailyChecks['huntersGuildMissions']) {
+                prependText = "This mission has expired.\n\n"
+                return
+            }
+            const mission = dailyChecks['huntersGuildMissions'][i]
+            checks['huntersGuildMission'] = {
+                "enemy": mission['enemy'],
+                "stats": {
+                    "maxHealth": mission['health'],
+                    "health": mission['health'],
+                    "str": randomRange(mission['stats'][0], mission['stats'][1], 0),
+                    "def": randomRange(mission['stats'][0], mission['stats'][1], 0),
+                    "spd": randomRange(mission['stats'][0], mission['stats'][1], 0),
+                    "dex": randomRange(mission['stats'][0], mission['stats'][1], 0),
+                },
+                "reward": mission['reward']
+            }
+            delete dailyChecks['huntersGuildMissions'].splice(i, 1)
+        } else {
+            prependText = "You already have a mission active.\n\n"
+        }
+    }
+
+    static endHunt() {
+        checks['huntersGuildMission']['stats']['health'] = combatStatus['enemyHealth']
+        endFight()
+    }
 }
 
 class sceneEndFunctions {
@@ -4638,10 +5110,12 @@ class sceneEndFunctions {
     }
 }
 
+const mainElement = document.getElementById("main")
+
 function processText(text) {
     sceneText = text
-    while (document.getElementById("main").lastChild) {
-        document.getElementById("main").removeChild(document.getElementById("main").lastChild)
+    while (mainElement.lastChild) {
+        mainElement.removeChild(mainElement.lastChild)
     }
     const splitText = text.split(textSplitter)
     const splitLinks = [...text.matchAll(linkRegex)]
@@ -4668,7 +5142,7 @@ function processText(text) {
             }
         })
         
-        document.getElementById("main").appendChild(div)
+        mainElement.appendChild(div)
         
         if (num < splitLinks.length) {
             let button = document.createElement("button")
@@ -4726,7 +5200,7 @@ function processText(text) {
                 }
                 playTransition()
             })
-            document.getElementById("main").appendChild(button)
+            mainElement.appendChild(button)
         }
     })
 }
@@ -5061,6 +5535,12 @@ const settingsCategories = {
                 }
             }
         }
+    },
+    "info": {
+        "name": "Links & Info",
+        "execute": function(settingsOptionsElement) {
+            settingsOptionsElement.innerHTML = "Solo developed by Pointless\n\nDiscord Server: <a href=https://discord.gg/R3DV8ZX5NE target=\"_blank\" rel=\"noopener\">https://discord.gg/R3DV8ZX5NE</a>"
+        }
     }
 }
 
@@ -5335,7 +5815,7 @@ function makeSave() { // Optimisation at all costs
         inventory, inventoryNonStackable, inventoryNonStackableIncrement, storage, storageNonStackable, storageAccess, shopStorage, // Inventory
         combatStatus, equipment, team, arenaData, // Combat
         oldScene, currentScene, sceneText, region, currentPrependText, // Scenes
-        quests, completedQuests, checks, questProgression, // Quests
+        quests, completedQuests, checks, dailyChecks, questProgression, // Quests
         stats, // Stats
         knownRecipes, craftStatus, craftingSelection, // Crafting
         exploreStatus, travelStatus, // Exploration
@@ -5381,6 +5861,7 @@ function makeSave() { // Optimisation at all costs
     removeEmpty("quests", base)
     removeEmpty("completedQuests", base)
     removeEmpty("checks", base)
+    removeEmpty("dailyChecks", base)
     removeEmpty("questProgression", base)
 
     // Crafting
@@ -5542,7 +6023,7 @@ function loadSave(dict) {
         health = dict['health']
         updateBar("health")
         updateBar("energy")
-        document.getElementById("time").textContent = formatTime(time)
+        timeElement.textContent = formatTime(time)
 
         if (dict['skills']) {
             for (const [skill, xp] of Object.entries(dict['skills'])) {
@@ -5584,8 +6065,6 @@ function loadSave(dict) {
                 changeEquipment(data[1])
             }
         }
-
-        // if (dict['storageAccess'] === true) {toggleStorageAccess(true)}
         
         // Combat
         combatStatus = dict['combatStatus'] ?? combatStatus
@@ -5625,6 +6104,7 @@ function loadSave(dict) {
         quests = dict['quests'] ?? quests
         completedQuests = dict['completedQuests'] ?? completedQuests
         checks = dict['checks'] ?? checks
+        dailyChecks = dict['dailyChecks'] ?? dailyChecks
         questProgression = dict['questProgression'] ?? questProgression
 
         if (dict['quests']) {
@@ -5716,6 +6196,9 @@ document.getElementById("import").addEventListener("click", function() {
         window.location.reload()
     })
 })
+
+let firstDebugEnable = true // Putting this here so it doesn't break
+
 if (localStorage.getItem("arkivia-savetemp") === null) {
     if (localStorage.getItem("arkivia-save1") === null && localStorage.getItem("save1") === null) {
         sceneManager("intro1")
@@ -5740,6 +6223,20 @@ function toggleDebug(value) {
     if (value === true) {
         document.getElementById("debug-button").style.display = ""
         debugEnabled = true
+        if (firstDebugEnable) {
+            document.addEventListener("keydown", function(e) {
+                if (e.key === "Shift" && !e.repeat) {
+                    tickDelay = 100
+                }
+            })
+
+            document.addEventListener("keyup", function(e) {
+                if (e.key === "Shift") {
+                    tickDelay = document.getElementById("debug-settings-tickDelay").value
+                }
+            })
+        }
+        firstDebugEnable = false
     } else {
         document.getElementById("debug-button").style.display = "none"
         if (document.getElementById("sidebar-menu-debug").style.display !== "none") {
@@ -5777,7 +6274,6 @@ sceneJumpInput.addEventListener("input", function(e) {
     }
 
     selectedIndex = -1
-    // if (query) {
     const filteredData = allScenes.filter(item => item.toLowerCase().includes(query))
     let i = 0
     for (const item of filteredData) {
@@ -5796,7 +6292,6 @@ sceneJumpInput.addEventListener("input", function(e) {
             break
         }
     }
-    // }
 })
 
 function updateSelection(suggestions) {
