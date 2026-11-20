@@ -1,4 +1,4 @@
-const VERSION = "0.26"
+const VERSION = "0.26.1"
 
 const gameTitleElement = document.getElementById("game-title")
 gameTitleElement.textContent = `Arkivia v${VERSION}`
@@ -477,7 +477,7 @@ const itemData = {
     },
     "strawPendant": {
         "name": "Straw Pendant",
-        "desc": "Small pendant made out of straw",
+        "desc": "Small pendant made out of straw. Increases all stats by 10%",
         "class": "gear",
         "weight": 25,
         "stackable": false,
@@ -2881,7 +2881,7 @@ function changeBattlestat(stat, amount, absolute=false) {
 
 function generateShop(shopName) {
     let shopItems = {}
-    if (shopStorage[shopName] === null || shopStorage[shopName]['day'] < getDay(time)) {
+    if (!shopStorage[shopName] || shopStorage[shopName]['day'] < getDay(time)) {
         for (const item of shopData[shopName]) {
             if (Math.random() < item['chance'] / 100) {
                 shopItems[item['name']] = {
@@ -3359,6 +3359,7 @@ const sceneTicks = new Map([
         if (!combatStatus['enemy']) {
             startProcess("hunt", randomRange(20, 30, 0))
             processStatus['completed'] += getHuntingSpeed()
+            changeSkill("hunting", 1)
             if (processStatus['completed'] >= processStatus['goal']) {
                 generateEnemy(checks['huntersGuildMission']['enemy'], checks['huntersGuildMission']['stats'])
                 combatStatus['onDeath'] = "huntingEnemyDeath"
@@ -3723,6 +3724,13 @@ setInterval(function() {
         document.getElementById("last-save").textContent = `Last Save: ${new Date().toLocaleTimeString()}`
     }
 }, 10000)
+
+document.getElementById("manual-save").addEventListener("click", function() {
+    if (saveEnabled === true) {
+        saveToLocal(makeSave())
+        document.getElementById("last-save").textContent = `Last Save: ${new Date().toLocaleTimeString()}`
+    }
+})
 
 for (const elem of document.getElementById("menu-buttons-holder").children) {
     elem.addEventListener("click", function() {
@@ -4618,7 +4626,7 @@ class scenes {
 
     static theArenaSignup() {
         let r = `You join the signup queue and patiently wait for your turn.\n\n`
-        r += getTotalBattlestats() >= 20 ? `"Hello, would you like to participate in the matches?"\n\n{![tick.png]Yes|theArenaSignupIntro1}\n{![cross.png]No|theArenaEntrance}` : `"Unfortunately you do not meet the minimum requirements. Come back when you have a rank of ${colorGen("#88bb00", "G-")} or higher."\n\n{![leave.png]Leave|theArenaEntrance}`
+        r += getTotalBattlestats() >= 20 ? `"Hello, would you like to participate in the matches?"\n\n{![tick.png]Yes|theArenaSignupIntro1}\n{![cross.png]No|theArenaEntrance}` : `"Unfortunately you do not meet the minimum requirements. Come back when you have a rank of ${colorGen("#88bb00", "G+")} or higher."\n\n{![leave.png]Leave|theArenaEntrance}`
         return r
     }
 
@@ -5194,9 +5202,17 @@ function processText(text) {
                     let walkTextOverride
                     if (splitLinks[num][3].includes("(")) {walkTextOverride = splitLinks[num][3].split("(")[1].slice(0, -1)}
                     let arrival = Math.ceil(time + Number(distance) / getMovementSpeed())
-                    processText(`You are walking towards the ${colorGen("#99bbee", walkTextOverride || splitLinks[num][1].replace(imageRegex, ""))}. You'll arrive at ${colorGen("#ccccff", formatTime(arrival, true), "text-arrival")}${processingGen()}`)
-                    travelStatus['destination'] = splitLinks[num][2]
-                    travelStatus['distance'] = Number(distance)
+                    if (settings['skipTravel'] >= arrival - time) {
+                        insertLog(`Timeskipped ${colorGen("#99bbee", arrival - time)} minutes`)
+                        changeSkill("walking", arrival - time)
+                        stats['distanceTravelled'] = (stats['distanceTravelled'] ?? 0) + distance
+                        changeTime(arrival - time)
+                        sceneManager(splitLinks[num][2])
+                    } else {
+                        processText(`You are walking towards the ${colorGen("#99bbee", walkTextOverride || splitLinks[num][1].replace(imageRegex, ""))}. You'll arrive at ${colorGen("#ccccff", formatTime(arrival, true), "text-arrival")}${processingGen()}`)
+                        travelStatus['destination'] = splitLinks[num][2]
+                        travelStatus['distance'] = Number(distance)
+                    }
                 }
                 playTransition()
             })
@@ -5292,9 +5308,16 @@ const settingsData = {
         "text": "Auto Repeat Crafting",
         "default": false
     },
+    "skipTravel": {
+        "type": "number",
+        "text": "Skip Travel Under",
+        "tooltip": "Travel that takes shorter than the specified minutes will be skipped",
+        "default": "0"
+    },
     "dateFormat": {
         "type": "text",
         "text": "Date Format",
+        "tooltip": "Allows for configuration of the date format. Placeholders are specified using ${name}.\n\nAvailable placeholders: dayName, shortDayName, timeName, year, month, day, hours, minutes.\n\ne.g. ${hours}:${minutes} -> 12:34",
         "default": "${dayName} ${timeName} ${year}-${month}-${day} ${hours}:${minutes}"
     },
     // Theme stuff
@@ -5448,7 +5471,8 @@ const settingsCategories = {
     "gameplay": {
         "name": "Gameplay",
         "settings": [
-            "autoRepeatCrafting"
+            "autoRepeatCrafting",
+            "skipTravel"
         ]
     },
     "theme": {
@@ -5628,20 +5652,27 @@ document.getElementById("settings-button").addEventListener("click", function() 
                             text.textContent = values['text']
                             if (checkModified(option)) {text.style.color = "#ffeeaa"}
                             holder.appendChild(text)
-                        } else if (values['type'] === "text") {
+                        } else if (values['type'] === "text" || values['type'] === "number") {
                             const text = document.createElement("span")
                             text.textContent = values['text']
                             if (checkModified(option)) {text.style.color = "#ffeeaa"}
+                            if (values['tooltip']) {
+                                text.setAttribute("data-tooltip-title", values['text'])
+                                text.setAttribute("data-tooltip-text", values['tooltip'])
+                            }
                             holder.appendChild(text)
                             
                             const textInput = document.createElement("input")
                             textInput.type = "text"
-                            textInput.className = "settings-option-text-input"
+                            textInput.className = values['type'] === "number" ? "settings-option-number-input" : "settings-option-text-input"
                             textInput.value = getSettingValue(option)
+                            if (values['type'] === "number") {
+                                textInput.type = "number"
+                            }
 
                             function finish(mode) {
                                 if (textInput.value !== values['default']) {
-                                    settings[option] = textInput.value
+                                    settings[option] = values['type'] === "number" ? Number(textInput.value) : textInput.value
                                     text.style.color = "#ffeeaa"
                                 } else {
                                     delete settings[option]
