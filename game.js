@@ -1,4 +1,4 @@
-const VERSION = "0.27"
+const VERSION = "0.27.1"
 
 const gameTitleElement = document.getElementById("game-title")
 gameTitleElement.textContent = `Arkivia v${VERSION}`

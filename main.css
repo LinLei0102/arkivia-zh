@@ -432,7 +432,6 @@ img {
     position: absolute;
     background-color: var(--equipment-background);
     bottom: 0;
-    height: fit-content;
     width: calc(100% - 10px);
     display: grid;
     grid-template-columns: 1fr 1fr;
