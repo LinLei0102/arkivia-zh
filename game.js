@@ -1,4 +1,4 @@
-const VERSION = "0.26.1"
+const VERSION = "0.27"
 
 const gameTitleElement = document.getElementById("game-title")
 gameTitleElement.textContent = `Arkivia v${VERSION}`
@@ -18,6 +18,7 @@ let travelStatus = {
     "destination": null,
     "distance": 0,
     "completed": 0,
+    "backwards": false
 }
 let battleStats = {
     "str": 1,
@@ -398,7 +399,7 @@ const itemData = {
     },
     "exercisePill": {
         "name": "Exercise Pill",
-        "desc": "Increases stat gain from training by 50% for one hour",
+        "desc": "Increases stat gain from training by 50% for one hour (stackable)",
         "class": "consumable",
         "weight": 1,
         "execute": function() {
@@ -779,6 +780,15 @@ const itemData = {
                 "stone": 5
             }
         }
+    },
+    "apple": {
+        "name": "Apple",
+        "desc": "Increases energy by 10",
+        "class": "consumable",
+        "weight": 100,
+        "execute": function() {
+            changeEnergy(10)
+        }
     }
 }
 const effectData = {
@@ -968,7 +978,8 @@ const shopData = {
     "merchant": [
         {"name": "exercisePill", "chance": 100, "quantity": [1, 3], "price": [5, 7]},
         {"name": "knife", "chance": 50, "quantity": [1, 1], "price": [19, 25]},
-        {"name": "cauldron", "chance": 30, "quantity": [1, 1], "price": [60, 80]}
+        {"name": "cauldron", "chance": 30, "quantity": [1, 1], "price": [60, 80]},
+        {"name": "apple", "chance": 70, "quantity": [2, 3], "price": [3, 5]}
     ],
     "weaponShop": [
         {"name": "woodenClub", "chance": 100, "quantity": [1, 1], "price": [10, 15]},
@@ -1021,7 +1032,7 @@ const arenaStatData = [
     {"health": [200, 300], "stats": [50,100], "reward": 50},
     {"health": [400, 600], "stats": [200,300], "reward": 70},
     {"health": [800, 1_000], "stats": [600,800], "reward": 100},
-    {"enemyType": "death", "reward": 0} // Until future content is made
+    // {"enemyType": "death", "reward": 0} // Until future content is made
 ]
 const statTypes = ["str", "def", "spd", "dex"]
 
@@ -1687,7 +1698,7 @@ function changeSkill(skill, skillXp) {
 
         const skillbarText = document.createElement("div")
         skillbarText.className = "skillbar-text"
-        skillbarText.textContent = `${skillData[skill]['shortName'] || skillData[skill]['name']} ${xpToLevel(skills[skill], false, scaling)}: ${formatNumber(xpIntoLevel(skills[skill], scaling), "round")}/${formatNumber(xpForLevel(xpToLevel(skills[skill], false, scaling), scaling), "round")}`
+        skillbarText.textContent = `${skillData[skill]['shortName'] || skillData[skill]['name']} ${xpToLevel(skills[skill], false, scaling)}: ${formatNumber(xpIntoLevel(skills[skill], scaling), "floorAbove1k")}/${formatNumber(xpForLevel(xpToLevel(skills[skill], false, scaling), scaling), "floorAbove1k")}`
 
         skillbarParent.appendChild(skillbarFill)
         skillbarParent.appendChild(skillbarText)
@@ -1700,7 +1711,7 @@ function changeSkill(skill, skillXp) {
         skillbarFill.style.width = `${xpIntoLevel(skills[skill], scaling) / xpForLevel(xpToLevel(skills[skill], false, scaling), scaling) * 100}%`
 
         const skillbarText = document.getElementById(`skill-${skill}`).getElementsByClassName("skillbar-text")[0]
-        skillbarText.textContent = `${skillData[skill]['shortName'] || skillData[skill]['name']} ${xpToLevel(skills[skill], false, scaling)}: ${formatNumber(xpIntoLevel(skills[skill], scaling), "round")}/${formatNumber(xpForLevel(xpToLevel(skills[skill], false, scaling), scaling), "round")}`
+        skillbarText.textContent = `${skillData[skill]['shortName'] || skillData[skill]['name']} ${xpToLevel(skills[skill], false, scaling)}: ${formatNumber(xpIntoLevel(skills[skill], scaling), "floorAbove1k")}/${formatNumber(xpForLevel(xpToLevel(skills[skill], false, scaling), scaling), "floorAbove1k")}`
     }
 
     if (currentLevel < xpToLevel(skills[skill], false, scaling)) {
@@ -1732,12 +1743,12 @@ function formatNumber(num, round=false, lowPrecision=false) {
     } else {
         decimals = value < 1 ? 2 : value < 10 ? 1 : 0
     }
-    
-    if (round === "floor") {
+
+    if (round === "floor" || (round === "floorAbove1k" && num >= 1000)) {
         const factor = 10 ** decimals
         const floored = Math.floor(value * factor) / factor
         return sign + floored.toFixed(decimals).replace(/\.0+$/, "") + units[exp]
-    } else if (round === "round") {
+    } else if (round === "round" || round === "floorAbove1k") {
         return sign + Number(value.toFixed().replace(/\.0+$/, "")) + units[exp]
     } else {
         return sign + Number(value.toFixed(decimals).replace(/\.0+$/, "")) + units[exp]
@@ -1768,7 +1779,7 @@ function updateArrival(method="travel") {
     const arrivalElem = document.getElementById("text-arrival")
     if (arrivalElem) {
         if (method === "travel" && travelStatus['destination']) {
-            const arrival = Math.ceil(time + Number(travelStatus['distance'] - travelStatus['completed']) / getMovementSpeed())
+            const arrival = travelStatus['backwards'] !== true ? Math.ceil(time + Number(travelStatus['distance'] - travelStatus['completed']) / getMovementSpeed()) : Math.ceil(time + Number(travelStatus['completed']) / getMovementSpeed())
             arrivalElem.textContent = formatTime(arrival, true)
         } else if (method === "craft" && craftStatus['recipe']) {
             let craftingType = itemData[craftStatus['recipe']]['crafting']['type']
@@ -1797,7 +1808,7 @@ function getRandomItem(weightedDict) {
     }
 }
 
-function createItemDiv(item, type="inventory", stackable=true, increment=null) {
+function createItemDiv(item, type="inventory", stackable=true, increment=null, special={}) {
     const isInventory = type === "inventory"
 
     const idPrefix = isInventory ? "item" : "storage-item"
@@ -1828,11 +1839,13 @@ function createItemDiv(item, type="inventory", stackable=true, increment=null) {
         itemQuantity.textContent = `x${quantitySource[item]}`
         itemParent.appendChild(itemQuantity)
     }
-    const targetTable = document.getElementById(isInventory ? "inventory-table" : "storage-table")
-    for (const child of targetTable.children) {
-        if (itemData[item]['class'] < child.getAttribute("data-class") || (itemData[item]['class'] === child.getAttribute("data-class") && itemData[item]['name'] < child.getAttribute("data-tooltip-title"))) {
-            targetTable.insertBefore(itemParent, child)
-            return
+    const targetTable = special['fragment'] ? special['fragment'] : document.getElementById(isInventory ? "inventory-table" : "storage-table")
+    if (special['fragment'] === undefined) {
+        for (const child of targetTable.children) {
+            if (itemData[item]['class'] < child.getAttribute("data-class") || (itemData[item]['class'] === child.getAttribute("data-class") && itemData[item]['name'] < child.getAttribute("data-tooltip-title"))) {
+                targetTable.insertBefore(itemParent, child)
+                return
+            }
         }
     }
     targetTable.appendChild(itemParent)
@@ -1844,25 +1857,31 @@ function genItemLogText(item, amount) {
 
 let itemLogStackData = {"id": null, "item": null, "amount": null, "type": null}
 const inventoryWeightElement = document.getElementById("inventory-weight")
-function changeInventory(item, amount, announceReduction=false, itemId=null, newItemData=null) {
+function changeInventory(item, amount, itemId=null, newItemData=null, special={}) {
+    let success = true
     if (!itemData[item]) {
         insertLog(colorGen("#ff0000", `Attempted to create invalid item "${item}"`))
-        return
+        return false
     }
     if (!Number.isInteger(amount)) {
         insertLog(colorGen("#ff0000", `Attempted to change item "${item}" by invalid amount (${amount})`))
         if (Number.isFinite(amount)) {
             amount = Math.floor(amount)
         } else {
-            return
+            return false
         }
+    }
+
+    if (itemData[item]['weight'] && special['ignoreWeightLimit'] !== true && itemData[item]['ignoreWeightLimit'] !== true && itemData[item]['weight'] * amount + inventoryWeight > getMaxWeight() * 3 && amount >= 1) {
+        insertLog(colorGen("#ccaaaa", `You can't carry the ${itemData[item]['name']}`))
+        return false
     }
 
     if (itemData[item]['stackable'] !== false) {
         if (inventory[item] === undefined) {
             if (amount <= 0) {return false}
             inventory[item] = amount
-            createItemDiv(item)
+            createItemDiv(item, "inventory", true, null, {"fragment": special['fragment']})
         } else {
             if (inventory[item] + amount < 0) {return false}
             inventory[item] += amount
@@ -1900,16 +1919,25 @@ function changeInventory(item, amount, announceReduction=false, itemId=null, new
             if (itemId === null) {
                 inventoryNonStackable[inventoryNonStackableIncrement] = newItemData
                 inventoryNonStackableIncrement += 1
-                createItemDiv(item, "inventory", false, inventoryNonStackableIncrement - 1)
+                createItemDiv(item, "inventory", false, inventoryNonStackableIncrement - 1, {"fragment": special['fragment']})
             } else {
                 inventoryNonStackable[itemId] = newItemData
-                createItemDiv(item, "inventory", false, itemId)
+                createItemDiv(item, "inventory", false, itemId, {"fragment": special['fragment']})
             }
         } else {
             if (itemData[item]['equipment']) {
                 const itemClass = itemData[item]['equipment']['class']
-                if (equipment[itemClass] !== null && itemId === equipment[itemClass][1]) {
-                    changeEquipment(itemId)
+                if (itemClass === "accessory") {
+                    if (equipment['accessory1'] !== null && itemId === equipment['accessory1'][1]) {
+                        changeEquipment(itemId)
+                    }
+                    if (equipment['accessory2'] !== null && itemId === equipment['accessory2'][1]) {
+                        changeEquipment(itemId)
+                    }
+                } else {
+                    if (equipment[itemClass] !== null && itemId === equipment[itemClass][1]) {
+                        changeEquipment(itemId)
+                    }
                 }
             }
             delete inventoryNonStackable[itemId]
@@ -1927,7 +1955,7 @@ function changeInventory(item, amount, announceReduction=false, itemId=null, new
         itemLogStackData['amount'] += amount
         itemLogStackData['id'] = insertLog(`Obtained ${genItemLogText(item, itemLogStackData['amount'])}`, [itemData[item]['name'], itemData[item]['desc']], itemLogStackData['id'])
         itemLogStackData['type'] = "obtain"
-    } else if (announceReduction === true) {
+    } else if (special['announceReduction'] === true) {
         if (itemLogStackData['type'] !== "use") {
             itemLogStackData = {"id": null, "item": null, "amount": null, "type": null}
         }
@@ -1940,8 +1968,8 @@ function changeInventory(item, amount, announceReduction=false, itemId=null, new
     if (itemData[item]['weight']) {
         const maxWeight = getMaxWeight()
         inventoryWeight += itemData[item]['weight'] * amount
-        inventoryWeightElement.textContent = `${formatNumber(inventoryWeight)}g / ${formatNumber(maxWeight)}g`
-        if (inventoryWeight > maxWeight * 4) {
+        inventoryWeightElement.textContent = `${formatNumber(Math.max(inventoryWeight, 0))}g / ${formatNumber(maxWeight)}g`
+        if (inventoryWeight > maxWeight * 3) {
             inventoryWeightElement.style.color = "#ff0000"
         } else if (inventoryWeight > maxWeight * 2) {
             inventoryWeightElement.style.color = "#ff8800"
@@ -1965,6 +1993,8 @@ function changeInventory(item, amount, announceReduction=false, itemId=null, new
         insertLog(`${colorGen("#ffff00", "New Item:")} ${genItemLogText(item)}`, [itemData[item]['name'], itemData[item]['desc']])
         checkAchievement("collector")
     }
+
+    return success
 }
 
 function discoverRecipe(recipe) {
@@ -2082,15 +2112,37 @@ function itemClickDetector(e, isStorage=false) {
 
     if (item !== undefined) {
         if (isStorage === false) {
-            const newItemData = inventoryNonStackable[itemId]
-            const moveCount = itemId !== undefined ? 1 : Math.min(inventory[item], multi)
-            changeInventory(item, -moveCount, false, itemId)
-            changeStorage(item, moveCount, itemId, newItemData)
+            const moveCount = itemId !== undefined ? 1 : Math.min(inventory[item], moveMulti)
+            if (itemId && moveMulti >= 1e9) {
+                for (const [id, values] of Object.entries(inventoryNonStackable)) {
+                    if (values['name'] === item) {
+                        const newItemData = inventoryNonStackable[id]
+                        changeInventory(item, -moveCount, id)
+                        changeStorage(item, moveCount, id, newItemData)
+                    }
+                }
+            } else {
+                const newItemData = inventoryNonStackable[itemId]
+                changeInventory(item, -moveCount, itemId)
+                changeStorage(item, moveCount, itemId, newItemData)
+            }
         } else if (isStorage === true) {
-            const newItemData = storageNonStackable[itemId]
-            const moveCount = itemId !== undefined ? 1 : Math.min(storage[item], multi)
-            changeStorage(item, -moveCount, itemId)
-            changeInventory(item, moveCount, false, itemId, newItemData)
+            const moveCount = itemId !== undefined ? 1 : Math.min(storage[item], moveMulti)
+            if (itemId && moveMulti >= 1e9) {
+                for (const [id, values] of Object.entries(storageNonStackable)) {
+                    if (values['name'] === item) {
+                        const newItemData = storageNonStackable[id]
+                        if (changeInventory(item, moveCount, id, newItemData)) {
+                            changeStorage(item, -moveCount, id)
+                        }
+                    }
+                }
+            } else {
+                const newItemData = storageNonStackable[itemId]
+                if (changeInventory(item, moveCount, itemId, newItemData)) {
+                    changeStorage(item, -moveCount, itemId)
+                }
+            }
         }
     }
 }
@@ -2111,8 +2163,8 @@ function toggleStorageAccess(value) {
     }
 }
 
-function getMaxWeight() {
-    return 5000
+function getMaxWeight(str=battleStats['str']) {
+    return Math.round((5000 + Math.pow((str - 1) / 1000000, 0.3) * 95000) / 1000) * 1000
 }
 
 function changeEnergy(amount) {
@@ -2285,7 +2337,7 @@ function changeTime(amount) {
     }
     if (sceneProperties[currentScene]) {
         if (sceneProperties[currentScene].includes("outdoors") && weather === "rain") {
-            if (!effects['wet'] || effects['wet']['duration'] - time < 60) {
+            if (!effects['wet'] || effects['wet']['end'] - time < 60) {
                 changeEffect("wet", 5)
             }
         }
@@ -2293,8 +2345,8 @@ function changeTime(amount) {
 
     if (currentScene !== "sleep") {
         changeEnergy(-0.05 * amount)
-        if (noSleepTime >= 800) {
-            changeEnergy(-(noSleepTime - 800) * 0.0002 * amount)
+        if (noSleepTime >= 1200) {
+            changeEnergy(-(noSleepTime - 1200) * 0.0002 * amount)
         }
     }
 
@@ -2323,25 +2375,27 @@ function createEffectElement(effect, type="player") {
     div.id = type === "enemy" ? `enemy-effect-${effect}` : `effect-${effect}`
     div.style.backgroundColor = effectData[effect]['color']
     div.setAttribute("data-tooltip-title", effectData[effect]['name'])
+    div.setAttribute("data-tooltip-text", effectData[effect]['desc'])
+    div.setAttribute("data-tooltip-special", type === "enemy" ? "enemyEffect" : "effect")
 
     return div
 }
 
-function updateEffectTooltip(elem, effect, type="player") {
-    let data = type === "enemy" ? combatStatus['enemyEffects'][effect] : effects[effect]
-    let text = effectData[effect]['desc']
+// function updateEffectTooltip(elem, effect, type="player") {
+//     let data = type === "enemy" ? combatStatus['enemyEffects'][effect] : effects[effect]
+//     let text = effectData[effect]['desc']
 
-    if (!data['indefinite']) {
-        text += `<hr>Ends: ${colorGen("#ccccff", formatTime(data['duration'], true))}`
-    }
+//     if (!data['indefinite']) {
+//         text += `<hr>Ends: ${colorGen("#ccccff", formatTime(data['end'], true))}`
+//     }
 
-    elem.setAttribute("data-tooltip-text", text)
-}
+//     elem.setAttribute("data-tooltip-text", text)
+// }
 
 function createEffect(duration, absolute, properties) {
     const effect = {
         "indefinite": duration === 0,
-        "duration": duration === 0 ? null : (absolute ? duration : duration + time)
+        "end": duration === 0 ? null : (absolute ? duration : duration + time)
     }
 
     if (properties !== null) {
@@ -2365,27 +2419,27 @@ function changeEffect(effect, duration=0, absolute=false, properties=null) {
         effects[effect] = createEffect(duration, absolute, properties)
 
         const div = createEffectElement(effect)
-        updateEffectTooltip(div, effect)
+        // updateEffectTooltip(div, effect)
         document.getElementById("effects-bar").appendChild(div)
         return
     } else if (duration === 0) {
         existing['indefinite'] = true
-        existing['duration'] = null
+        existing['end'] = null
 
         if (properties) {existing['properties'] = properties}
     } else {
         existing['indefinite'] = false
 
         if (absolute) {
-            existing['duration'] = duration
+            existing['end'] = duration
         } else {
-            existing['duration'] += duration
+            existing['end'] += duration
         }
 
         if (properties) {existing['properties'] = properties}
     }
 
-    updateEffectTooltip(document.getElementById(`effect-${effect}`), effect)
+    // updateEffectTooltip(document.getElementById(`effect-${effect}`), effect)
 }
 
 function changeEnemyEffect(effect, duration=0, absolute=false) {
@@ -2402,23 +2456,23 @@ function changeEnemyEffect(effect, duration=0, absolute=false) {
         combatStatus['enemyEffects'][effect] = createEffect(duration, absolute)
 
         const div = createEffectElement(effect, "enemy")
-        updateEffectTooltip(div, effect, "enemy")
+        // updateEffectTooltip(div, effect, "enemy")
         document.getElementById("enemy-effects-bar").appendChild(div)
         return
     } else if (duration === 0) {
         existing['indefinite'] = true
-        existing['duration'] = null
+        existing['end'] = null
     } else {
         existing['indefinite'] = false
 
         if (absolute) {
-            existing['duration'] = duration
+            existing['end'] = duration
         } else {
-            existing['duration'] += duration
+            existing['end'] += duration
         }
     }
 
-    updateEffectTooltip(document.getElementById(`enemy-effect-${effect}`), effect, "enemy")
+    // updateEffectTooltip(document.getElementById(`enemy-effect-${effect}`), effect, "enemy")
 }
 
 function calcEnergyDebuff() {
@@ -2876,6 +2930,7 @@ function changeBattlestat(stat, amount, absolute=false) {
     if (newRank !== oldRank) {
         insertLog(`Rank Changed: ${colorGen("#88bb00", oldRank)} -> ${colorGen("#88bb00", newRank)}`)
     }
+    inventoryWeightElement.textContent = `${formatNumber(inventoryWeight)}g / ${formatNumber(getMaxWeight())}g`
     return amount * multi
 }
 
@@ -2940,10 +2995,11 @@ function generateShop(shopName) {
                 insertLog(colorGen("#aaaaaa", "Out of stock"))
             } else {
                 if (money >= shopStorage[shopName]['items'][item]['price']) {
-                    changeMoney(-shopStorage[shopName]['items'][item]['price'])
-                    shopStorage[shopName]['items'][item]['quantity'] -= 1
-                    document.getElementById(`shop-item-${item}`).getElementsByClassName("item-quantity")[0].textContent = `x${shopStorage[shopName]['items'][item]['quantity']}`
-                    changeInventory(item, 1)
+                    if (changeInventory(item, 1)) {
+                        changeMoney(-shopStorage[shopName]['items'][item]['price'])
+                        shopStorage[shopName]['items'][item]['quantity'] -= 1
+                        document.getElementById(`shop-item-${item}`).getElementsByClassName("item-quantity")[0].textContent = `x${shopStorage[shopName]['items'][item]['quantity']}`
+                    }
                 } else {
                     insertLog(colorGen("#aaaaaa", "Not enough money"))
                 }
@@ -3092,6 +3148,8 @@ function changeMoney(amount) {
     money += amount
     if (amount > 0) {
         insertLog(`Obtained ${colorGen("#cccc55", `$${formatNumber(amount)}`)}`)
+    } else {
+        insertLog(`Spent ${colorGen("#cccc55", `$${formatNumber(-amount)}`)}`)
     }
     document.getElementById("inventory-money").textContent = `$${formatNumber(money)}`
     checkAchievements(["money1", "money10", "money100"])
@@ -3203,6 +3261,8 @@ const onDeathFunctions = new Map([
     }],
     ["arenaWinMatch", function() {
         playTransition()
+        arenaData['endTime'] = time + 60
+        arenaData['round'] += 1
         sceneManager("theArenaWinMatch")
     }],
     ["forestLayer1Death", function() {
@@ -3436,7 +3496,7 @@ function processPlayerTurn() {
             if (getEquipmentStats("weapon")['durability'] <= 0) {
                 insertLog(`${genItemLogText(item, null)} broke`, [itemData[item]['name'], itemData[item]['desc']])
                 changeEquipment(itemId)
-                changeInventory(item, -1, false, itemId)
+                changeInventory(item, -1, itemId)
             }
 
             if (itemData[item]['equipment']['execute']) {
@@ -3468,7 +3528,7 @@ function processPlayerTurn() {
             giveAchievement("flatline")
         }
         if (combatStatus['enemyStats']['str'] > 0 && combatStatus['enemyStats']['spd'] > 0) {
-            if (combatStatus.tags?.['hits'] === undefined) {
+            if (combatStatus.tags?.['damagingHits'] === undefined) {
                 giveAchievement("untouchable")
             }
             if (health / calcMaxHp() <= 0.05) {
@@ -3505,8 +3565,10 @@ function processEnemyTurn() {
 
         if (turnHitChance / 100 > Math.random()) {
             insertLog(`${enemyData[combatStatus['enemy']]['name']} -> ${colorGen("#ff3333", turnActualDmg)}`)
-            const tags = (combatStatus['tags'] ??= {})
-            tags['hits'] = (tags['hits'] ?? 0) + 1
+            if (turnActualDmg >= 1) {
+                const tags = (combatStatus['tags'] ??= {})
+                tags['damagingHits'] = (tags['damagingHits'] ?? 0) + 1
+            }
 
             if (enemyData[combatStatus['enemy']]['attackExecute']) {
                 enemyData[combatStatus['enemy']]['attackExecute'](turnActualDmg)
@@ -3520,7 +3582,7 @@ function processEnemyTurn() {
                 if (getEquipmentStats(hitPart)['durability'] <= 0) {
                     insertLog(`${genItemLogText(item, null)} broke`, [itemData[item]['name'], itemData[item]['desc']])
                     changeEquipment(itemId)
-                    changeInventory(item, -1, false, itemId)
+                    changeInventory(item, -1, itemId)
                 }
             }
         } else {
@@ -3536,17 +3598,18 @@ function tick() {
     updateBar("health")
 
     if (travelStatus['destination'] !== null) {
-        travelStatus['completed'] += getMovementSpeed()
+        travelStatus['completed'] += travelStatus['backwards'] !== true ? getMovementSpeed() : -getMovementSpeed()
         stats['distanceTravelled'] = (stats['distanceTravelled'] ?? 0) + getMovementSpeed()
         checkAchievements(["firstSteps", "walker", "marathon"])
         changeSkill("walking", 1)
         changeTitleXp("walker", 2)
-        if (travelStatus['completed'] >= travelStatus['distance']) {
+        if ((travelStatus['completed'] >= travelStatus['distance'] && travelStatus['backwards'] !== true) || (travelStatus['completed'] <= 0 && travelStatus['backwards'] === true)) {
             sceneManager(travelStatus['destination'])
             playTransition()
             travelStatus['destination'] = null
             travelStatus['distance'] = 0
             travelStatus['completed'] = 0
+            travelStatus['backwards'] = false
         }
     }
 
@@ -3571,10 +3634,10 @@ function tick() {
             }
 
             for (const item of craftStatus['using']) {
-                changeInventory(inventoryNonStackable[item]['name'], -1, false, item)
+                changeInventory(inventoryNonStackable[item]['name'], -1, item)
             }
 
-            changeInventory(craftStatus['recipe'], 1)
+            changeInventory(craftStatus['recipe'], 1, null, null, {"ignoreWeightLimit": true})
             const storedRecipe = craftStatus['recipe']
             craftStatus['recipe'] = null
             craftStatus['completed'] = 0
@@ -3608,8 +3671,8 @@ function tick() {
     }
 
     for (const [effect, value] of Object.entries(effects)) {
-        if (Number.isInteger(value['duration'])) {
-            if (value['duration'] <= time) {
+        if (Number.isInteger(value['end'])) {
+            if (value['end'] <= time) {
                 changeEffect(effect, null)
             }
         }
@@ -3618,8 +3681,8 @@ function tick() {
     // Combat
     if (combatStatus['enemy'] !== null) {
         for (const [effect, value] of Object.entries(combatStatus['enemyEffects'] || {})) {
-            if (Number.isInteger(value['duration'])) {
-                if (value['duration'] <= time) {
+            if (Number.isInteger(value['end'])) {
+                if (value['end'] <= time) {
                     changeEnemyEffect(effect, null)
                 }
             }
@@ -3782,6 +3845,16 @@ function updateTooltip() {
                 tooltipText += "<hr>"
                 if (itemData[item]) {tooltipText += `Weight: ${colorGen("#00ff00", `${formatNumber(itemData[item]['weight'])}g`)}\n`}
             }
+        } else if (tooltipSpecial === "effect") {
+            const effect = activeTarget.id.replace("effect-", "")
+            if (effects[effect] && effects[effect]['end']) {
+                tooltipText += `<hr>Ends: ${colorGen("#ccccff", effects[effect]['end'] - time)}`
+            }
+        } else if (tooltipSpecial === "enemyEffect") {
+            const effect = activeTarget.id.replace("enemy-effect-", "")
+            if (combatStatus['enemyEffects'][effect] && combatStatus['enemyEffects'][effect]['end']) {
+                tooltipText += `<hr>Ends: ${colorGen("#ccccff", combatStatus['enemyEffects'][effect]['end'] - time)}`
+            }
         }
 
         document.getElementById("tooltip-title").textContent = tooltipTitle
@@ -3930,14 +4003,14 @@ function hasEquipment(item) {
     return false
 }
 
-let multi = 1
+let moveMulti = 1
 
 function setMulti(newMulti) {
-    if (newMulti !== multi) {
-        multi = newMulti
+    if (newMulti !== moveMulti) {
+        moveMulti = newMulti
         return true
     } else {
-        multi = 1
+        moveMulti = 1
         return false
     }
 }
@@ -3973,8 +4046,8 @@ document.getElementById("inventory-table").addEventListener("click", function(e)
                 insertLog("You probably shouldn't throw this away")
                 return
             }
-            const deleteCount = itemId !== undefined ? 1 : Math.min(inventory[item], multi)
-            changeInventory(item, -deleteCount, false, itemId)
+            const deleteCount = itemId !== undefined ? 1 : Math.min(inventory[item], moveMulti)
+            changeInventory(item, -deleteCount, itemId)
             if (itemLogStackData['type'] !== "discard" || itemLogStackData['item'] !== item) {
                 itemLogStackData = {"id": null, "item": null, "amount": null, "type": null}
             }
@@ -4028,7 +4101,7 @@ document.getElementById("inventory-table").addEventListener("click", function(e)
     if (item !== null) {
         if (itemData[item]['execute']) {
             itemData[item]['execute']()
-            changeInventory(item, -1, true)
+            changeInventory(item, -1, null, null, {"announceReduction": true})
         } else if (itemData[item]['equipment']) {
             changeEquipment(itemId)
         }
@@ -4084,7 +4157,7 @@ function genQuestGiver(checkId, actionTexts, questList) {
             }
             if (quest['rewards']) {
                 for (const [item, amount] of Object.entries(quest['rewards'])) {
-                    changeInventory(item, amount)
+                    changeInventory(item, amount, null, null, {"ignoreWeightLimit": true})
                 }
             }
             if (quest['money']) {
@@ -4130,7 +4203,7 @@ function changeEquipmentDurability(selected, change) {
     if (getEquipmentStats(selected)['durability'] <= 0) {
         insertLog(`${genItemLogText(item)} broke`, [itemData[item]['name'], itemData[item]['desc']])
         changeEquipment(itemId)
-        changeInventory(item, -1, false, itemId)
+        changeInventory(item, -1, itemId)
         return true
     }
 }
@@ -4183,6 +4256,9 @@ const actionData = {
                     if (processStatus['completed'] >= processStatus['goal']) {
                         startProcess("chop", randomRange(20, 30, 0))
                         changeInventory("wood", randomRange(1, 2, 0))
+                        if (randomRange(1, 10, 0) === 1) {
+                            changeInventory("apple", 1)
+                        }
                         stats['treesCut'] = (stats['treesCut'] ?? 0) + 1
                         checkAchievement("deforestation")
                     }
@@ -4196,8 +4272,18 @@ const actionData = {
 
 function generateActions() {
     const actions = []
-    if (currentScene === "forestLayer1" && equipment['tool'] !== null && itemData[equipment['tool'][0]]['subclass'] === "axe") {
-        actions.push("chopTrees")
+    const possibleActions = []
+    if (currentScene === "forestLayer1") {
+        if (equipment['tool'] !== null && itemData[equipment['tool'][0]]['subclass'] === "axe") {
+            actions.push("chopTrees")
+        } else {
+            for (const tool of Object.values(inventoryNonStackable)) {
+                if (itemData[tool['name']]['subclass'] === "axe") {
+                    possibleActions.push("chopTrees")
+                    break
+                }
+            }
+        }
     }
 
     document.getElementById("center-bottom").replaceChildren()
@@ -4222,6 +4308,16 @@ function generateActions() {
             if (activeActions[action]) {
                 actionButton.classList.add("enabled")
             }
+
+            document.getElementById("center-bottom").appendChild(actionButton)
+        }
+    }
+
+    if (possibleActions.length >= 1) {
+        for (const action of possibleActions) {
+            const actionButton = document.createElement("button")
+            actionButton.className = "action-button disabled"
+            actionButton.textContent = actionData[action]['name']
 
             document.getElementById("center-bottom").appendChild(actionButton)
         }
@@ -4373,7 +4469,7 @@ class scenes {
     }
 
     static townCenter() {
-        return `You are at the center of the town. Many people rush by hastily.\n\n{![poster.png]Notice Board|noticeBoard}\n{![dumbbells.png]Training Grounds|trainingGrounds}\n{![training_dummy.png]Dojo|dojo}\n\n{![hospital.png]Hospital|hospital}\n{![dollar.png]Merchant|merchant}\n\n{![alley.png]Alley|alley}\n\n{![wood_door.png]Housing Area|housingArea|250}\n{![arrow_up.png]Town North|townNorth|250}`
+        return `You are at the center of the town. Many people rush by hastily.\n\n{![poster.png]Notice Board|noticeBoard}\n{![dumbbells.png]Training Grounds|trainingGrounds}\n{![training_dummy.png]Dojo|dojo}\n\n{![hospital.png]Hospital|hospital}\n{![dollar.png]Merchant|merchant}\n\n{![alley.png]Alley|alley}\n\n{![arrow_up.png]Town North|townNorth|250}\n{![wood_door.png]Housing Area|housingArea|250}`
     }
 
     static noticeBoard() {
@@ -4437,7 +4533,7 @@ class scenes {
     }
 
     static trainingGroundsTeamIntro4() {
-        changeInventory("exercisePill", 4)
+        changeInventory("exercisePill", 4, null, null, {"ignoreWeightLimit": true})
         team = "nextLevel"
         return `"Arena matches always run on a Sunday, I suggest beginning your training now. Here are 4 exercise pills as a thanks for joining us."\n\n{Next|trainingGrounds_nextLevel}`
     }
@@ -4596,7 +4692,7 @@ class scenes {
     }
 
     static merchantGuildQuestSupplies() {
-        changeInventory("huntersGuildSupplies", 1)
+        changeInventory("huntersGuildSupplies", 1, null, null, {"ignoreWeightLimit": true})
         return `"Ah, Els sent you right? Here, take this."\n\nYou pick up the heavy box the merchant hands you.\n\n{Next|merchant}`
     }
 
@@ -4642,7 +4738,11 @@ class scenes {
 
     static theArenaWalkIn() {
         delete arenaData['endTime']
-        return `You walk into the arena and prepare to fight your opponent.\n\nThe organiser shouts, "This is round ${arenaData['round']}, get ready."\n\n{![sword.png]Fight|theArenaFight}`
+        if (arenaData['round'] > arenaStatData.length) {
+            return `While walking in to the arena, the organiser stops you with his arm. "This is the end currently, it would be ill advised to proceed. The person who built this place has stated that there is nothing remaining to achieve for now."\n\n{![leave.png]Resign|theArenaEntrance|0|theArenaResign}`
+        } else {
+            return `You walk into the arena and prepare to fight your opponent.\n\nThe organiser shouts, "This is round ${arenaData['round']}, get ready."\n\n{![sword.png]Fight|theArenaFight}`
+        }
     }
 
     static theArenaFight() {
@@ -4659,7 +4759,7 @@ class scenes {
             generateEnemy(newStats['enemyType'])
         }
         combatStatus['onDeath'] = "arenaWinMatch"
-        return `You are currently fighting your opponent in The Arena${processingGen()}`
+        return `You are currently fighting your opponent in The Arena${processingGen()}\n\n{![shield.png]Surrender|theArenaEntrance|0|theArenaResign}`
     }
 
     static theArenaWinMatch() {
@@ -4671,8 +4771,6 @@ class scenes {
             r += `"Good job contestant on winning your ${englishifyNumber(arenaData['round'])} round, the next round will begin shortly."`
         }
         r += `\n\n{![enter.png]Begin Immediately|theArenaWalkIn}\n\n{![hospital.png]Medbay|theArenaMedbay}\n\n{![leave.png]Resign|theArenaEntrance|0|theArenaResign}`
-        arenaData['endTime'] = time + 60
-        arenaData['round'] += 1
         return r
     }
 
@@ -4695,11 +4793,11 @@ class scenes {
     }
 
     static townGatesNorthExterior() {
-        return `You are standing in front of the exterior of the town gates.\n\n{![enter.png]Enter the town|townGatesNorth}\n{![park.png]Grass Plains|grassPlains|500}`
+        return `You are standing in front of the exterior of the town gates.\n\n{![park.png]Grass Plains|grassPlains|500}\n{![enter.png]Enter the town|townGatesNorth}`
     }
 
     static grassPlains() {
-        return `You are standing in the grass plains. You notice some slimes jumping around.\n\n{![leave.png]Escape|grassPlains|0|grassPlainsEscape}\n\n{![enter.png]Town Gates|townGatesNorthExterior|500|endFight}\n{![forest.png]Forest|forestLayer1|1000|endFight}`
+        return `You are standing in the grass plains. You notice some slimes jumping around.\n\n{![leave.png]Escape|grassPlains|0|grassPlainsEscape}\n\n{![forest.png]Forest|forestLayer1|1000|endFight}\n{![enter.png]Town Gates|townGatesNorthExterior|500|endFight}`
     }
 
     static forestLayer1() {
@@ -5007,6 +5105,7 @@ class sceneFunctions {
     }
 
     static theArenaResign() {
+        endFight()
         prependText = `You resigned from The Arena\n\n${colorGen("#ffee00", `You received $${arenaStatData[arenaData['round'] - 2]['reward']} for participating`)}\n\n`
         changeMoney(arenaStatData[arenaData['round'] - 2]['reward'])
         if (team === "nextLevel") {
@@ -5016,7 +5115,7 @@ class sceneFunctions {
     }
 
     static nextLevelClaimExercisePill() {
-        changeInventory("exercisePill", checks['nextLevelExercisePills'])
+        changeInventory("exercisePill", checks['nextLevelExercisePills'], null, null, {"ignoreWeightLimit": true})
         delete checks['nextLevelExercisePills']
     }
 
@@ -5047,10 +5146,11 @@ class sceneFunctions {
 
     static forestGymCharmPurchase() {
         if (money >= 200) {
-            changeMoney(-200)
-            changeInventory("strangeTrainingCharm", 1)
-            checks['forestGymCharmPurchase'] = true
-            prependText = `You purchased a training charm for ${colorGen("#cccc55", "$200")}.\n\n`
+            if (changeInventory("strangeTrainingCharm", 1)) {
+                changeMoney(-200)
+                checks['forestGymCharmPurchase'] = true
+                prependText = `You purchased a training charm for ${colorGen("#cccc55", "$200")}.\n\n`
+            }
         } else {
             prependText = "You do not have enough money to purchase this.\n\n"
         }
@@ -5096,6 +5196,13 @@ class sceneFunctions {
     static endHunt() {
         checks['huntersGuildMission']['stats']['health'] = combatStatus['enemyHealth']
         endFight()
+    }
+
+    static walkBack() {
+        travelStatus['backwards'] = true
+        travelStatus['destination'] = currentScene
+        let arrival = Math.ceil(time + Number(travelStatus['completed']) / getMovementSpeed())
+        processText(`You are walking back. You'll arrive at ${colorGen("#ccccff", formatTime(arrival, true), "text-arrival")}${processingGen()}`)
     }
 }
 
@@ -5209,7 +5316,7 @@ function processText(text) {
                         changeTime(arrival - time)
                         sceneManager(splitLinks[num][2])
                     } else {
-                        processText(`You are walking towards the ${colorGen("#99bbee", walkTextOverride || splitLinks[num][1].replace(imageRegex, ""))}. You'll arrive at ${colorGen("#ccccff", formatTime(arrival, true), "text-arrival")}${processingGen()}`)
+                        processText(`You are walking towards the ${colorGen("#99bbee", walkTextOverride || splitLinks[num][1].replace(imageRegex, ""))}. You'll arrive at ${colorGen("#ccccff", formatTime(arrival, true), "text-arrival")}${processingGen()}\n\n{![arrow_left.png]Walk Back|noChange|0|walkBack}`)
                         travelStatus['destination'] = splitLinks[num][2]
                         travelStatus['distance'] = Number(distance)
                     }
@@ -5222,6 +5329,8 @@ function processText(text) {
 }
 
 function sceneManager(selected) {
+    if (selected === "noChange") {return}
+
     const selectedScene = scenes[selected]()
     if (sceneRegions[selected]) {
         region = sceneRegions[selected]
@@ -5311,7 +5420,7 @@ const settingsData = {
     "skipTravel": {
         "type": "number",
         "text": "Skip Travel Under",
-        "tooltip": "Travel that takes shorter than the specified minutes will be skipped",
+        "tooltip": "Travel that takes shorter than the specified minutes will be skipped.\n\nIt is somewhat cheaty to put this on a very high number but nothing stops you.",
         "default": "0"
     },
     "dateFormat": {
@@ -5448,6 +5557,44 @@ const settingsData = {
         "execute": function(value) {
             document.documentElement.style.setProperty("--bottombar-background", value)
         }
+    },
+    "theme_skillbarFill": {
+        "type": "color",
+        "text": "Skillbar Background Color",
+        "default": "#888844",
+        "execute": function(value) {
+            document.documentElement.style.setProperty("--skillbar-background", value)
+        }
+    },
+    "theme_healthbarFill": {
+        "type": "color",
+        "text": "Healthbar Background Color",
+        "default": "#449944",
+        "execute": function(value) {
+            document.documentElement.style.setProperty("--healthbar-background", value)
+        }
+    },
+    "theme_energybarFill": {
+        "type": "color",
+        "text": "Energy Bar Background Color",
+        "default": "#bb4444",
+        "execute": function(value) {
+            document.documentElement.style.setProperty("--energy-bar-background", value)
+        }
+    },
+    "theme_xpbarFill": {
+        "type": "color",
+        "text": "XP Bar Background Color",
+        "default": "#4444bb",
+        "execute": function(value) {
+            document.documentElement.style.setProperty("--xp-bar-background", value)
+        }
+    },
+    "saveName": {
+        "type": "text",
+        "text": "Save Name",
+        "tooltip": "Allows for changing of the save name when exporting. Do not use characters that are restricted by your file system as it may cause issues, these may include: < > : \" / \\ | ? * .\n\nPlaceholders are specified using ${name}.\n\nAvailable placeholders: realYear, realMonth, realDay, realHours, realMinutes, realSeconds, timestamp, day, version",
+        "default": "Arkivia.sav"
     }
 }
 const settingsCategories = {
@@ -5471,8 +5618,7 @@ const settingsCategories = {
     "gameplay": {
         "name": "Gameplay",
         "settings": [
-            "autoRepeatCrafting",
-            "skipTravel"
+            "autoRepeatCrafting"
         ]
     },
     "theme": {
@@ -5495,7 +5641,25 @@ const settingsCategories = {
             "theme_tooltipColor",
             "theme_menuButtonBackground",
             "theme_menuButtonBackgroundHover",
-            "theme_bottombarBackground"
+            "theme_bottombarBackground",
+            "theme_skillbarFill",
+            "theme_healthbarFill",
+            "theme_energybarFill",
+            "theme_xpbarFill"
+        ]
+    },
+    "misc": {
+        "name": "Miscellaneous",
+        "settings": [
+            "saveName"
+        ]
+    },
+    "cheats": {
+        "name": "Cheats",
+        "settings": [
+            {"type": "text", "text": "Skip travel was moved here because it felt a bit too cheaty."},
+            "",
+            "skipTravel"
         ]
     },
     "stats": {
@@ -5506,7 +5670,7 @@ const settingsCategories = {
             text += `Game Time: ${stats['gametime']}\n\n`
 
             text += `Quests: ${completedQuests.length}/${Object.keys(questData).length}\n`
-            text += `Items: ${stats['discoveredItems'].length}/${Object.keys(itemData).length}\n`
+            text += `Items: ${(stats['discoveredItems'] ?? []).length}/${Object.keys(itemData).length}\n`
             text += `Skills: ${Object.keys(skills).length}/${Object.keys(skillData).length}\n`
             text += `Achievements: ${achievements.length}/${Object.keys(achievementData).length}\n`
 
@@ -5518,6 +5682,52 @@ const settingsCategories = {
                 text += "\n"
             }
             settingsOptionsElement.textContent = text
+        }
+    },
+    "exportImport": {
+        "name": "Export / Import",
+        "execute": function(settingsOptionsElement) {
+            settingsOptionsElement.textContent = "You can use these options to export or import your save configuration.\n"
+            const exportButton = document.createElement("button")
+            exportButton.textContent = "Export"
+            exportButton.addEventListener("click", function() {
+                const blob = new Blob([JSON.stringify(settings)], {"type": "application/json"})
+                const url = URL.createObjectURL(blob)
+                const a = document.createElement("a")
+                a.href = url
+                a.download = "ArkiviaSettings.json"
+                a.click()
+                URL.revokeObjectURL(url)
+            })
+            settingsOptionsElement.appendChild(exportButton)
+
+            const importButton = document.createElement("button")
+            importButton.textContent = "Import"
+            importButton.addEventListener("click", async function() {
+                let file
+                if ("showOpenFilePicker" in window) {
+                    const [fileHandle] = await window.showOpenFilePicker({
+                        "types": [{"description": "Arkivia Settings", "accept": {"application/json": [".json"]}}]
+                    })
+                    file = await fileHandle.getFile()
+                } else {
+                    file = await new Promise(function(resolve, reject) {
+                        const input = document.createElement("input")
+                        input.type = "file"
+                        input.accept = ".json"
+                        input.click()
+                        input.addEventListener("change", function() {
+                            resolve(input.files[0])
+                        })
+                    })
+                }
+
+                const text = await file.text()
+                settings = JSON.parse(text)
+                saveToLocal(settings, "arkivia-settings")
+                window.location.reload()
+            })
+            settingsOptionsElement.appendChild(importButton)
         }
     },
     "saves": {
@@ -5565,6 +5775,15 @@ const settingsCategories = {
         "execute": function(settingsOptionsElement) {
             settingsOptionsElement.innerHTML = "Solo developed by Pointless\n\nDiscord Server: <a href=https://discord.gg/R3DV8ZX5NE target=\"_blank\" rel=\"noopener\">https://discord.gg/R3DV8ZX5NE</a>"
         }
+    },
+    "close": {
+        "name": "Close Menu",
+        "special": {
+            "noChangeMenu": true
+        },
+        "execute": function() {
+            document.getElementById("settings").style.display = "none"
+        }
     }
 }
 
@@ -5593,6 +5812,12 @@ document.getElementById("settings-button").addEventListener("click", function() 
             category.textContent = data['name']
 
             category.addEventListener("click", function() {
+                if (data['special'] && data['special']['noChangeMenu']) {
+                    if (data['execute']) {
+                        data['execute']()
+                    }
+                    return
+                }
                 const settingsOptionsElement = document.getElementById("settings-options")
                 settingsOptionsElement.replaceChildren()
                 
@@ -5925,16 +6150,24 @@ function makeSave() { // Optimisation at all costs
     return base
 }
 
+function bytesToBinary(bytes) {
+    let result = ""
+    for (let i = 0; i < bytes.length; i += 16384) {
+        result += String.fromCharCode(...bytes.subarray(i, i + 16384))
+    }
+    return result
+}
+
 function saveToLocal(dict, slot="arkivia-save1") {
     const msgpackData = MessagePack.encode(dict)
-    const packed = LZString.compressToBase64(String.fromCharCode.apply(null, msgpackData))
+    const packed = LZString.compressToBase64(bytesToBinary(msgpackData))
     localStorage.setItem(slot, packed)
 }
 
 function exportDict(dict, filename="Arkivia.sav") {
     const msgpackData = MessagePack.encode(dict)
-    const packed = LZString.compressToUint8Array(String.fromCharCode.apply(null, msgpackData))
-    const blob = new Blob([packed], {type: "application/octet-stream"})
+    const packed = LZString.compressToUint8Array(bytesToBinary(msgpackData))
+    const blob = new Blob([packed], {"type": "application/octet-stream"})
 
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
@@ -5985,6 +6218,7 @@ function versionCompare(v1, v2) {
 
 function loadSave(dict) {
     const startTime = performance.now()
+    let hasUpdate = false
     try {
         if (versionCompare(dict['version'], VERSION)) {
             for (let i = 3; i > 1; i--) {
@@ -6005,6 +6239,7 @@ function loadSave(dict) {
                 gameTitleElement.textContent = `Arkivia v${VERSION}`
                 gameTitleElement.classList.remove("update")
             }, 20000)
+            hasUpdate = true
         }
 
         // Migrations
@@ -6032,6 +6267,29 @@ function loadSave(dict) {
             dict['combatStatus'] = dict['combatData']
             dict['craftStatus'] = dict['craftInfo']
             dict['exploreStatus'] = dict['exploreData']
+        } if (versionCompare(dict['version'], "0.27")) {
+            for (const [effect, data] of Object.entries(dict['effects'] ?? {})) {
+                if (data['duration'] !== undefined) {
+                    data['end'] = data['duration']
+                    delete data['duration']
+                }
+            }
+
+            if (dict['combatStatus'] && dict['combatStatus']['enemyEffects']) {
+                for (const [effect, data] of Object.entries(dict['combatStatus']['enemyEffects'])) {
+                    if (data['duration'] !== undefined) {
+                        data['end'] = data['duration']
+                        delete data['duration']
+                    }
+                }
+            }
+
+            // console.log(dict['arenaData']['round'] >= 7)
+            if (dict['arenaData'] && dict['arenaData']['round'] >= 7) {
+                dict['arenaData'] = {}
+                dict['currentScene'] = "empty"
+                dict['sceneText'] = `${colorGen("#ff99ff", "You have been teleported out of the arena due to a bug in the previous versions that caused softlocks")}\n\n{Continue|theArenaEntrance}`
+            }
         }
         
         // Stats
@@ -6066,7 +6324,7 @@ function loadSave(dict) {
 
         if (dict['effects']) {
             for (const [effect, data] of Object.entries(dict['effects'])) {
-                changeEffect(effect, data['duration'] || 0, true, data['properties'] || null)
+                changeEffect(effect, data['end'] || 0, true, data['properties'] || null)
             }
         }
         achievements = dict['achievements'] ?? achievements
@@ -6075,20 +6333,53 @@ function loadSave(dict) {
         // Inventory
         inventoryNonStackableIncrement = dict['inventoryNonStackableIncrement'] ?? inventoryNonStackableIncrement
         shopStorage = dict['shopStorage'] ?? shopStorage
-        for (const [item, amount] of Object.entries(dict['inventory'] ?? {})) {
-            changeInventory(item, amount)
-        }
-        for (const [item, amount] of Object.entries(dict['storage'] ?? {})) {
-            changeStorage(item, amount)
-        }
+        
+        const inventoryCombined = [
+            ...Object.entries(dict['inventory'] ?? {}).map(([item, amount]) => ({item, amount, "id": null, "data": null})),
+            ...Object.entries(dict['inventoryNonStackable'] ?? {}).map(([id, data]) => ({"item": data['name'], "amount": 1, id, data}))
+        ]
 
-        for (const [id, data] of Object.entries(dict['inventoryNonStackable'] ?? {})) {
-            const item = data['name']
-            changeInventory(item, 1, false, id, data)
+        const storageCombined = [
+            ...Object.entries(dict['storage'] ?? {}).map(([item, amount]) => ({item, amount, "id": null, "data": null})),
+            ...Object.entries(dict['storageNonStackable'] ?? {}).map(([id, data]) => ({"item": data['name'], "amount": 1, id, data}))
+        ]
+
+        inventoryCombined.sort(function(a, b) {
+            const itemA = itemData[a['item']]
+            const itemB = itemData[b['item']]
+            return itemA['class'] < itemB['class'] ? -1 : itemA['class'] > itemB['class'] ? 1 : itemA['name'] < itemB['name'] ? -1 : itemA['name'] > itemB['name'] ? 1 : 0
+        })
+
+        storageCombined.sort(function(a, b) {
+            const itemA = itemData[a['item']]
+            const itemB = itemData[b['item']]
+            return itemA['class'] < itemB['class'] ? -1 : itemA['class'] > itemB['class'] ? 1 : itemA['name'] < itemB['name'] ? -1 : itemA['name'] > itemB['name'] ? 1 : 0
+        })
+
+        const fragment = new DocumentFragment()
+        for (const item of inventoryCombined) {
+            changeInventory(item['item'], item['amount'], item['id'], item['data'], {"fragment": fragment, "ignoreWeightLimit": true})
         }
-        for (const [id, data] of Object.entries(dict['storageNonStackable'] ?? {})) {
-            const item = data['name']
-            changeStorage(item, 1, id, data)
+        document.getElementById("inventory-table").appendChild(fragment)
+
+        // for (const [item, amount] of Object.entries(dict['inventory'] ?? {})) {
+        //     changeInventory(item, amount)
+        // }
+        // for (const [item, amount] of Object.entries(dict['storage'] ?? {})) {
+        //     changeStorage(item, amount)
+        // }
+
+        // for (const [id, data] of Object.entries(dict['inventoryNonStackable'] ?? {})) {
+        //     const item = data['name']
+        //     changeInventory(item, 1, id, data)
+        // }
+        // for (const [id, data] of Object.entries(dict['storageNonStackable'] ?? {})) {
+        //     const item = data['name']
+        //     changeStorage(item, 1, id, data)
+        // }
+
+        for (const item of storageCombined) {
+            changeStorage(item['item'], item['amount'], item['id'], item['data'])
         }
 
         for (const [item, data] of Object.entries(dict['equipment'] ?? {})) {
@@ -6120,7 +6411,7 @@ function loadSave(dict) {
             if (combatStatus['enemyEffects']) {
                 for (const [effect, data] of Object.entries(dict['combatStatus']['enemyEffects'])) {
                     delete combatStatus['enemyEffects'][effect]
-                    changeEnemyEffect(effect, data['duration'] || 0, true)
+                    changeEnemyEffect(effect, data['end'] || 0, true)
                 }
             }
         }
@@ -6198,6 +6489,10 @@ function loadSave(dict) {
         itemLogStackData = {"id": null, "item": null, "amount": null, "type": null}
 
         insertLog(colorGen("#aaaaaa", `Loaded in ${(performance.now() - startTime).toFixed()}ms`))
+        if (hasUpdate) {
+            insertLog(colorGen("#ffff00", `The game has been updated from v${dict['version']} to v${VERSION}. Restore a backup save in settings if any issues occur.`))
+            insertLog(colorGen("#cccc00", "The game is still in the testing stage so please export your save frequently"))
+        }
     } catch (error) {
         saveEnabled = false
         insertLog(colorGen("#ff0000", `Loading failed: ${error}`))
@@ -6207,18 +6502,34 @@ function loadSave(dict) {
 
 document.getElementById("delete-save").addEventListener("click", function() {
     let confirm = prompt("THIS WILL DELETE YOUR SAVE. TYPE CONFIRM TO CONFIRM")
-    if (confirm.toLowerCase() === "confirm") {
-        saveEnabled = false
-        localStorage.removeItem("arkivia-save1")
-        localStorage.removeItem("save1") // Remove this later
-        window.location.reload()
-    } else if (confirm.toLowerCase() === "confirm to confirm") {
-        alert(`I meant "confirm" not "confirm to confirm"`)
+    if (confirm) {
+        if (confirm.toLowerCase() === "confirm") {
+            saveEnabled = false
+            localStorage.removeItem("arkivia-save1")
+            localStorage.removeItem("save1") // Remove this later
+            window.location.reload()
+        } else if (confirm.toLowerCase() === "confirm to confirm") {
+            alert(`I meant "confirm" not "confirm to confirm"`)
+        }
     }
 })
 
 document.getElementById("export").addEventListener("click", function() {
-    exportDict(makeSave())
+    if (!settings['saveName']) {
+        exportDict(makeSave())
+    } else {
+        exportDict(makeSave(), formatString(settings['saveName'], {
+            "realYear": new Date().getFullYear(),
+            "realMonth": new Date().getMonth() + 1,
+            "realDay": new Date().getDate(),
+            "realHours": new Date().getHours(),
+            "realMinutes": new Date().getMinutes(),
+            "realSeconds": new Date().getSeconds(),
+            "timestamp": Math.floor(Date.now() / 1000),
+            "day": getDay(),
+            "version": VERSION.replaceAll(".", "")
+        }))
+    }
 })
 
 document.getElementById("import").addEventListener("click", function() {

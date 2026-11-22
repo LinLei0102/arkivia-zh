@@ -21,8 +21,8 @@
     --equipment-background: #333344;
     --equipment-border: #444499;
     --equipment-durability-background: #555577;
-    --skillbar-background: #bbbb44;
-    --healthbar-background: #44bb44;
+    --skillbar-background: #888844;
+    --healthbar-background: #449944;
     --healthbar-damage-background: #ff4444;
     --energy-bar-background: #bb4444;
     --xp-bar-background: #4444bb;
@@ -169,6 +169,11 @@ img {
     border: 1px solid #00ff00;
 }
 
+.action-button.disabled {
+    color: #aaaaaa;
+    border: 1px solid #555555
+}
+
 #sidebar {
     background-color: var(--foreground-background);
     position: fixed;
@@ -267,6 +272,8 @@ img {
     border-top: 1px solid #555555;
     border-bottom: 1px solid #555555;
     line-height: 20px;
+    display: flex;
+    overflow: hidden;
 }
 
 .crafting-item-parent {
