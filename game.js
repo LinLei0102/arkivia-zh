@@ -1,4 +1,4 @@
-const VERSION = "0.27.1"
+const VERSION = "0.27.2"
 
 const gameTitleElement = document.getElementById("game-title")
 gameTitleElement.textContent = `Arkivia v${VERSION}`
@@ -5106,10 +5106,14 @@ class sceneFunctions {
 
     static theArenaResign() {
         endFight()
-        prependText = `You resigned from The Arena\n\n${colorGen("#ffee00", `You received $${arenaStatData[arenaData['round'] - 2]['reward']} for participating`)}\n\n`
-        changeMoney(arenaStatData[arenaData['round'] - 2]['reward'])
-        if (team === "nextLevel") {
-            checks['nextLevelExercisePills'] = Math.round(arenaStatData[arenaData['round'] - 2]['reward'] / 10)
+        if (arenaStatData[arenaData['round'] - 2]) {
+            prependText = `You resigned from The Arena.\n\n${colorGen("#ffee00", `You received $${arenaStatData[arenaData['round'] - 2]['reward']} for participating`)}\n\n`
+            changeMoney(arenaStatData[arenaData['round'] - 2]['reward'])
+            if (team === "nextLevel") {
+                checks['nextLevelExercisePills'] = Math.round(arenaStatData[arenaData['round'] - 2]['reward'] / 10)
+            }
+        } else {
+            prependText = `You resigned from The Arena.\n\n`
         }
         arenaData = {}
     }
