@@ -236,7 +236,7 @@
  "Total: ": "合计：",
  "You died!": "你死了！",
  " Energy": " 体力",
- "Arkivia | DEAD": "Arkivia | 已死亡",
+ "Arkivia | DEAD": "阿克维亚 | 已死亡",
  "Completed Quest: ": "任务完成：",
  "Quest Met: ": "任务达成：",
  "Received Quest: ": "接受任务：",
@@ -260,7 +260,7 @@
  " broke": " 损坏了",
  "You missed": "你落空了",
  " missed": " 落空了",
- "Arkivia | L": "Arkivia | 等级",
+ "Arkivia | L": "阿克维亚 | 等级",
  "Last Save: ": "上次保存：",
  "Dmg: ": "伤害：",
  "Durability: ": "耐久：",
@@ -572,5 +572,6 @@
  "\\n\\n{![sword.png]Participate|theArenaSignup}": "\\n\\n{![sword.png]参赛|theArenaSignup}",
  "\\n\\nYou have an advanced membership.\\n\\n": "\\n\\n你已是高级会员。\\n\\n",
  "\\n\\nYou have a basic membership.\\n\\n": "\\n\\n你已是基础会员。\\n\\n",
- "You have been teleported out of the arena due to a bug in the previous versions that caused softlocks": "由于旧版本的 bug 会导致卡死，你已被传送出竞技场"
+ "You have been teleported out of the arena due to a bug in the previous versions that caused softlocks": "由于旧版本的 bug 会导致卡死，你已被传送出竞技场",
+ "Arkivia": "阿克维亚 Arkivia"
 }

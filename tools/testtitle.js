@@ -1,0 +1,20 @@
+const { chromium } = require('playwright-core');
+const { pathToFileURL } = require('url');
+const path = require('path');
+const EXE = 'C:/Users/Administrator/AppData/Local/ms-playwright/chromium-1255/chrome-win64/chrome.exe';
+(async () => {
+  const browser = await chromium.launch({ executablePath: EXE, headless: true });
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  await page.goto(pathToFileURL(path.join(__dirname, '..', 'dist', 'index.html')).href);
+  await page.waitForTimeout(1500);
+  console.log('ZH', JSON.stringify(await page.evaluate(() => ({ title: document.title, bottom: document.getElementById('game-title').textContent, lang: window.ARK_LANG }))));
+  await page.evaluate(() => { health = 0; changeHealth(0); });
+  await page.waitForTimeout(800);
+  console.log('DEAD title', JSON.stringify(await page.evaluate(() => document.title)));
+  await page.evaluate(() => localStorage.setItem('arkivia-lang', 'en'));
+  await page.goto(pathToFileURL(path.join(__dirname, '..', 'dist', 'index.html')).href);
+  await page.waitForTimeout(1500);
+  console.log('EN', JSON.stringify(await page.evaluate(() => ({ title: document.title, bottom: document.getElementById('game-title').textContent }))));
+  await page.evaluate(() => localStorage.setItem('arkivia-lang', 'zh'));
+  await browser.close();
+})();

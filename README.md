@@ -6,6 +6,7 @@ Inspired by proto23: https://github.com/23html/23html.github.io
 
 ## 简体中文汉化（Simplified Chinese localization）
 
+**中文正式译名：《阿克维亚》（Arkivia）**
 **在线游玩 / Play online：<https://linlei0102.github.io/arkivia-zh/>**
 
 本仓库在原作者 Arkivia 的基础上提供**完整简体中文汉化版**，保留英文原版并可随时切换。
@@ -13,6 +14,15 @@ Inspired by proto23: https://github.com/23html/23html.github.io
 - 上游：<https://github.com/LinLei0102/arkivia>
 - 汉化依据 commit：`a34d91fc5c97837ce720b744960a27ea4df17adc`（v0.27.2）
 - 上游原始文件（`game.js`、`index.html`、`main.css` 等）保持**零改动**，所有汉化产物都是新增文件。
+
+### 译名
+
+- **正式译名：阿克维亚（Arkivia）**。纯音译，按 `Ark-ivia`（/ɑːrˈkɪviə/）拆分，`Ark` 对应「阿克」，全称写作「阿克维亚 Arkivia」。
+- **依据**：上游 README 只有一句 "Simple incremental browser rpg game."，没有本地化资源，也没有官方中文名；中英文社区检索（GitHub / itch.io / 中文论坛）均无既定译法，因此由本汉化版确立。游戏内没有任何以 Arkivia 命名的地名或 NPC，标题即世界名，硬意译（如「方舟纪」）会引入并不存在的叙事，故不采用。
+- **使用规范**：
+  - 浏览器标签页、文档标题：`阿克维亚 Arkivia`；
+  - 品牌与存档相关保留英文原名：左下角 `Arkivia v0.27.2`、`Arkivia.sav`、`ArkiviaSettings.json`；
+  - 若上游日后公布官方中文名，只需改 `localize/zh-extra.json` 与 `localize/index.zh.html` 各一处，重新构建即可。
 
 ### 玩法与运行
 

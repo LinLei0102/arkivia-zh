@@ -2608,7 +2608,7 @@ function changeHealth(amount) {
         }
 
         if (document.visibilityState === "hidden") {
-            document.title = "Arkivia | 已死亡"
+            document.title = "阿克维亚 | 已死亡"
         }
     }
 
@@ -3723,7 +3723,7 @@ function tick() {
         }
 
         if (document.visibilityState === "hidden") {
-            document.title = `Arkivia | 等级${xpToLevel(xp)} (${Math.floor(xpIntoLevel(xp) / xpForLevel(xpToLevel(xp)) * 100)}%) ${formatNumber(health, "round")}hp`
+            document.title = `阿克维亚 | 等级${xpToLevel(xp)} (${Math.floor(xpIntoLevel(xp) / xpForLevel(xpToLevel(xp)) * 100)}%) ${formatNumber(health, "round")}hp`
         }
 
         if (settings['mobileLayout']) {
@@ -3759,7 +3759,7 @@ function tick() {
 }
 
 window.addEventListener("focus", function() {
-    document.title = "Arkivia"
+    document.title = "阿克维亚 Arkivia"
 })
 
 let tickDelay = 1000
