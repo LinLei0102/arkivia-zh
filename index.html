@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<head>
+    <title data-en="Arkivia">阿克维亚 Arkivia</title>
+    <script src="lang.js"></script>
+    <script>
+        // 依据语言设置加载对应游戏脚本（默认简体中文）
+        document.write('<script src="' + (window.ARK_LANG === "en" ? "game.js" : "game.zh.js") + '" defer><\/script>')
+    </script>
+    <script src="msgpack.js"></script>
+    <script src="lz-string.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <meta id="mobile-meta" name="viewport" content="width=1000">
+    <meta charset="utf-8">
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+    <div id="center">
+        <div id="center-top">
+            <span id="weather" style="color: #bbbbbb; background-color: #383838;" data-en="Clear">晴</span>
+            <span id="time" data-en="Saturday Morning 1600-01-01 07:00">星期六 早晨 1600-01-01 07:00</span>
+        </div>
+        <div id="main-transition"></div>
+        <div id="main"></div>
+        <div id="center-bottom"></div>
+    </div>
+    <div id="player-info">
+        <div id="player-info-left">
+            <div id="title" data-tooltip-title="称号" data-tooltip-text="你的称号会随着你在世界中的行为而改变" data-tooltip-title-en="Title" data-tooltip-text-en="Your title can change depending on your actions in the world" data-en="Unknown">未知</div>
+            <div id="level" data-tooltip-title="等级与评级" data-tooltip-text="显示你当前的等级和评级。评级由你的战斗属性决定" data-tooltip-title-en="Level &amp; Rank" data-tooltip-text-en="Shows your current level and rank. Rank is based off your battle stats" data-en="Level 0 G-">等级 0 G-</div>
+            <div class="bar-parent" id="healthbar">
+                <div class="bar-fill" id="healthbar-fill"></div>
+                <div class="bar-fill" id="healthbar-fill-damage" style="width: 0;"></div>
+                <div class="bar-text" id="healthbar-text" data-tooltip-title="生命" data-tooltip-text="生命降到 0 就会输掉战斗" data-tooltip-title-en="Health" data-tooltip-text-en="Reaching 0 health points causes you to lose a battle" data-en="HP: 10/10">生命：10/10</div>
+            </div>
+            <div class="bar-parent" id="energy-bar">
+                <div class="bar-fill" id="energy-bar-fill"></div>
+                <div class="bar-text" id="energy-bar-text" data-tooltip-title="体力" data-tooltip-text="要有体力才能高效完成任务。你需要定期睡觉来恢复体力" data-tooltip-title-en="Energy" data-tooltip-text-en="Energy is needed to be able to complete tasks efficiently. You need to sleep periodically to restore energy" data-en="Energy: 100/100">体力：100/100</div>
+            </div>
+            <div class="bar-parent" id="xp-bar">
+                <div class="bar-fill" id="xp-bar-fill"></div>
+                <div class="bar-text" id="xp-bar-text" data-tooltip-title="经验" data-tooltip-text="升级需要经验，升级能提升你的生命上限" data-tooltip-title-en="Experience" data-tooltip-text-en="Experience is needed to level up in order to increase your maximum health" data-en="XP: 0/50">经验：0/50</div>
+            </div>
+
+            <div id="effects-bar"></div>
+        </div>
+        <div id="player-info-divider"></div>
+        <div id="player-info-right">
+            <div id="stat-str" data-tooltip-title="力量" data-tooltip-special="stat" data-tooltip-text="提升造成的伤害" data-tooltip-title-en="Strength" data-tooltip-text-en="Increases damage dealt" data-en="Str: 1">力量：1</div>
+            <div id="stat-def" data-tooltip-title="防御" data-tooltip-special="stat" data-tooltip-text="减少受到的伤害" data-tooltip-title-en="Defense" data-tooltip-text-en="Reduces incoming damage" data-en="Def: 1">防御：1</div>
+            <div id="stat-spd" data-tooltip-title="速度" data-tooltip-special="stat" data-tooltip-text="提升命中率" data-tooltip-title-en="Speed" data-tooltip-text-en="Increases chances of hitting" data-en="Spd: 1">速度：1</div>
+            <div id="stat-dex" data-tooltip-title="敏捷" data-tooltip-special="stat" data-tooltip-text="提升闪避攻击的几率" data-tooltip-title-en="Dexterity" data-tooltip-text-en="Increases chances of dodging attacks" data-en="Dex: 1">敏捷：1</div>
+            <div id="stat-total" data-tooltip-title="总值" data-tooltip-text="显示你所有属性的总和" data-tooltip-title-en="Total" data-tooltip-text-en="Displays the total of all your stats combined" data-en="Ttl: 4">总值：4</div>
+        </div>
+    </div>
+    <div id="sidebar">
+        <div id="menu-buttons-holder">
+            <button class="menu-button" id="inventory-button" style="border-color: #7777cc;" data-en="Inventory">背包</button>
+            <button class="menu-button" id="skills-button" data-en="Skills">技能</button>
+            <button class="menu-button" id="quests-button" style="display: none;" data-en="Quests">任务</button>
+            <button class="menu-button" id="achievements-button" style="display: none;" data-en="Achievements">成就</button>
+            <button class="menu-button" id="debug-button" style="display: none;" data-en="Debug">调试</button>
+        </div>
+
+        <div class="sidebar-menu" id="sidebar-menu-inventory">
+            <div id="inventory-holder">
+                <div id="inventory-money" data-tooltip-title="金钱" data-tooltip-text="用来进行交易" data-tooltip-title-en="Money" data-tooltip-text-en="Allows you to make transactions">$0</div>
+                <div id="inventory-discard" data-tooltip-title="删除" data-tooltip-text="切换背包的删除模式" data-tooltip-title-en="Delete" data-tooltip-text-en="Toggle deletion mode for your inventory" data-en="Del">删</div>
+                <div class="sidebar-menu-title" data-en="Inventory">背包</div>
+                <div id="inventory-weight" data-tooltip-title="重量" data-tooltip-text="显示你背包里物品的当前重量，以及在不受到惩罚的情况下能背负的上限。超过上限会拖慢你的移动速度" data-tooltip-title-en="Weight" data-tooltip-text-en="This shows the current weight of items in your inventory and the limit you can carry without getting debuffs. Going above this limit will slow down your movement" data-en="0g / 5kg">0g / 5kg</div>
+            </div>
+            <div id="inventory-table"></div>
+            <div id="multi-holder">
+                <div class="multi-button" id="inventory-10x" data-tooltip-title="批量 10" data-tooltip-text="一次移动或删除 10 个物品" data-tooltip-title-en="Bulk 10" data-tooltip-text-en="Move or delete 10 items at once">10x</div>
+                <div class="multi-button" id="inventory-100x" data-tooltip-title="批量 100" data-tooltip-text="一次移动或删除 100 个物品" data-tooltip-title-en="Bulk 100" data-tooltip-text-en="Move or delete 100 items at once">100x</div>
+                <div class="multi-button" id="inventory-all" data-tooltip-title="批量全部" data-tooltip-text="一次移动或删除全部物品" data-tooltip-title-en="Bulk All" data-tooltip-text-en="Move or delete every item at once" data-en="All">全部</div>
+            </div>
+            <div id="equipment-holder">
+                <div class="equipment-item-holder" id="equipment-weapon" data-tooltip-title="武器" data-tooltip-text="用于攻击的主要武器" data-tooltip-title-en="Weapon" data-tooltip-text-en="Your main weapon used in attacks">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Weapon">武器</div>
+                </div>
+                <div class="equipment-item-holder" id="equipment-tool" data-tooltip-title="工具" data-tooltip-text="用于特定行动" data-tooltip-title-en="Tool" data-tooltip-text-en="Used for specific actions">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Tool">工具</div>
+                </div>
+                <div class="equipment-item-holder" id="equipment-head" data-tooltip-title="头部护甲" data-tooltip-text="减少头部受到的伤害" data-tooltip-title-en="Head Armor" data-tooltip-text-en="Reduces damage dealt to your head">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Head">头部</div>
+                </div>
+                <div class="equipment-item-holder" id="equipment-chest" data-tooltip-title="胸甲" data-tooltip-text="减少胸部受到的伤害" data-tooltip-title-en="Chest Armor" data-tooltip-text-en="Reduces damage dealt to your chest">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Chest">胸部</div>
+                </div>
+                <div class="equipment-item-holder" id="equipment-arms" data-tooltip-title="臂甲" data-tooltip-text="减少手臂受到的伤害" data-tooltip-title-en="Arm Armor" data-tooltip-text-en="Reduces damage dealt to your arms">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Arms">手臂</div>
+                </div>
+                <div class="equipment-item-holder" id="equipment-legs" data-tooltip-title="腿甲" data-tooltip-text="减少腿部受到的伤害" data-tooltip-title-en="Leg Armor" data-tooltip-text-en="Reduces damage dealt to your legs">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Legs">腿部</div>
+                </div>
+                <div class="equipment-item-holder" id="equipment-accessory1" data-tooltip-title="饰品" data-tooltip-text="提供特殊加成或效果" data-tooltip-title-en="Accessory" data-tooltip-text-en="Grants special bonuses or effects">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Accessory">饰品</div>
+                </div>
+                <div class="equipment-item-holder" id="equipment-accessory2" data-tooltip-title="饰品" data-tooltip-text="提供特殊加成或效果" data-tooltip-title-en="Accessory" data-tooltip-text-en="Grants special bonuses or effects">
+                    <div class="bar-fill equipment"></div>
+                    <div class="equipment-item-text" data-en="Accessory">饰品</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-menu" id="sidebar-menu-skills" style="display: none;">
+            <div class="sidebar-menu-title" data-en="Skills">技能</div>
+            <div id="skill-table"></div>
+        </div>
+
+        <div class="sidebar-menu" id="sidebar-menu-quests" style="display: none;">
+            <div class="sidebar-menu-title" data-en="Quests">任务</div>
+            <div id="quests-table"></div>
+            <div class="sidebar-menu-title" id="completed-quests-header" style="display: none;" data-en="Completed">已完成</div>
+            <div id="completed-quests-table" style="display: none;"></div>
+        </div>
+
+        <div class="sidebar-menu" id="sidebar-menu-achievements" style="display: none;">
+            <div class="sidebar-menu-title" data-en="Achievements">成就</div>
+            <div id="achievements-table"></div>
+        </div>
+
+        <div class="sidebar-menu" id="sidebar-menu-debug" style="display: none; text-align: center;">
+            <div class="sidebar-menu-title" data-en="Debug">调试</div>
+            <div class="debug-header" data-en="Stats">统计</div>
+            <input id="debug-stat-input" placeholder="数值" data-en-placeholder="Value">
+            <br>
+            <button id="debug-change-str">Str</button>
+            <button id="debug-change-def">Def</button>
+            <button id="debug-change-spd">Spd</button>
+            <button id="debug-change-dex">Dex</button>
+            <p></p>
+            <div class="debug-header" data-en="Scenes">场景</div>
+            <button id="debug-reload-scene" data-en="Reload">重载</button>
+            <div id="debug-scene-jump-container">
+                <input type="text" id="debug-scene-jump-input" placeholder="场景名" data-en-placeholder="Scene Name">
+                <div id="debug-scene-jump-autocomplete-suggestions"></div>
+            </div>
+            <p></p>
+            <div class="debug-header" data-en="Weather">天气</div>
+            <div id="weather-chances" style="white-space: pre;"></div>
+            <p></p>
+            <div class="debug-header" data-en="Settings">设置</div>
+            <span data-en="Tick Delay">刷新间隔</span>
+            <input id="debug-settings-tickDelay" value="1000">
+        </div>
+    </div>
+    <div id="bottombar">
+        <a id="game-title" href="changelog.html" target="_blank">Arkivia v?</a>
+        <div id="bottombar-right">
+            <div class="bottombar-text" id="last-save" data-en="Last Save: Never">上次保存：从不</div>
+            <button class="bottombar-button" id="manual-save" data-en="Save">保存</button>
+            <button class="bottombar-button" id="delete-save" data-en="Delete">删除</button>
+            <button class="bottombar-button" id="export" data-en="Export">导出</button>
+            <button class="bottombar-button" id="import" data-en="Import">导入</button>
+            <button class="bottombar-button" id="settings-button" data-en="Settings">设置</button>
+        </div>
+    </div>
+    <div id="attack-info">
+        <div id="attack-info-left" style="display: none;">
+            <div id="enemy-name" data-en="Unknown Enemy">未知敌人</div>
+            <div class="bar-parent" id="enemy-healthbar">
+                <div class="bar-fill" id="enemy-healthbar-fill"></div>
+                <div class="bar-fill" id="enemy-healthbar-fill-damage" style="width: 0;"></div>
+                <div class="bar-text" id="enemy-healthbar-text" data-tooltip-title="生命" data-tooltip-text="把它降到 0 就能赢得战斗" data-tooltip-title-en="Health" data-tooltip-text-en="Reducing this to 0 causes you to win the battle" data-en="HP: 10/10">生命：10/10</div>
+            </div>
+        </div>
+        <div id="enemy-effects-bar"></div>
+        <div id="attack-info-divider" style="display: none;"></div>
+        <div id="attack-info-right" style="display: none;">
+            <div id="enemy-stat-str" data-tooltip-title="力量" data-tooltip-text="提升造成的伤害" data-tooltip-title-en="Strength" data-tooltip-text-en="Increases damage dealt" data-en="Str: 1">力量：1</div>
+            <div id="enemy-stat-def" data-tooltip-title="防御" data-tooltip-text="减少受到的伤害" data-tooltip-title-en="Defense" data-tooltip-text-en="Reduces incoming damage" data-en="Def: 1">防御：1</div>
+            <div id="enemy-stat-spd" data-tooltip-title="速度" data-tooltip-text="提升命中率" data-tooltip-title-en="Speed" data-tooltip-text-en="Increases chances of hitting" data-en="Spd: 1">速度：1</div>
+            <div id="enemy-stat-dex" data-tooltip-title="敏捷" data-tooltip-text="提升闪避攻击的几率" data-tooltip-title-en="Dexterity" data-tooltip-text-en="Increases chances of dodging attacks" data-en="Dex: 1">敏捷：1</div>
+            <div id="enemy-stat-total" data-tooltip-title="总值" data-tooltip-text="显示敌人所有属性的总和" data-tooltip-title-en="Total" data-tooltip-text-en="Displays the total of all stats combined" data-en="Ttl: 4">总值：4</div>
+        </div>
+    </div>
+    <div id="log"></div>
+    <div id="tooltip">
+        <div id="tooltip-title"></div>
+        <hr id="tooltip-hr">
+        <div id="tooltip-text"></div>
+    </div>
+    <div id="settings" style="display: none;">
+        <div id="settings-categories"></div>
+        <div id="settings-options"></div>
+    </div>
+</body>
