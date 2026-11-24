@@ -1,0 +1,5975 @@
+[
+ {
+  "i": 0,
+  "raw": "Arkivia v",
+  "kind": "t",
+  "lines": [
+   4,
+   6055,
+   6236
+  ]
+ },
+ {
+  "i": 1,
+  "raw": "Unknown",
+  "kind": "s",
+  "lines": [
+   13,
+   16,
+   6311
+  ]
+ },
+ {
+  "i": 2,
+  "raw": "enemyMaxHealth",
+  "kind": "s",
+  "lines": [
+   32,
+   1539,
+   1542
+  ]
+ },
+ {
+  "i": 3,
+  "raw": "Straw Dummy",
+  "kind": "s",
+  "lines": [
+   108
+  ]
+ },
+ {
+  "i": 4,
+  "raw": "Mouse",
+  "kind": "s",
+  "lines": [
+   124
+  ]
+ },
+ {
+  "i": 5,
+  "raw": "Straw Golem",
+  "kind": "s",
+  "lines": [
+   133
+  ]
+ },
+ {
+  "i": 6,
+  "raw": "Wood Golem",
+  "kind": "s",
+  "lines": [
+   150
+  ]
+ },
+ {
+  "i": 7,
+  "raw": "Stone Golem",
+  "kind": "s",
+  "lines": [
+   159
+  ]
+ },
+ {
+  "i": 8,
+  "raw": "Coal Golem",
+  "kind": "s",
+  "lines": [
+   168
+  ]
+ },
+ {
+  "i": 9,
+  "raw": "Human",
+  "kind": "s",
+  "lines": [
+   177
+  ]
+ },
+ {
+  "i": 10,
+  "raw": "Green Slime",
+  "kind": "s",
+  "lines": [
+   180
+  ]
+ },
+ {
+  "i": 11,
+  "raw": "Blue Slime",
+  "kind": "s",
+  "lines": [
+   196
+  ]
+ },
+ {
+  "i": 12,
+  "raw": "Purple Slime",
+  "kind": "s",
+  "lines": [
+   213
+  ]
+ },
+ {
+  "i": 13,
+  "raw": "Lizard",
+  "kind": "s",
+  "lines": [
+   229
+  ]
+ },
+ {
+  "i": 14,
+  "raw": "Spider",
+  "kind": "s",
+  "lines": [
+   238
+  ]
+ },
+ {
+  "i": 15,
+  "raw": "Venomous Spider",
+  "kind": "s",
+  "lines": [
+   247
+  ]
+ },
+ {
+  "i": 16,
+  "raw": "You are poisoned",
+  "kind": "t",
+  "lines": [
+   258
+  ]
+ },
+ {
+  "i": 17,
+  "raw": "Death",
+  "kind": "s",
+  "lines": [
+   264
+  ]
+ },
+ {
+  "i": 18,
+  "raw": "You aren't supposed to get this far...",
+  "kind": "s",
+  "lines": [
+   271
+  ]
+ },
+ {
+  "i": 19,
+  "raw": "Bat",
+  "kind": "s",
+  "lines": [
+   275
+  ]
+ },
+ {
+  "i": 20,
+  "raw": "Wild Animal",
+  "kind": "s",
+  "lines": [
+   284
+  ]
+ },
+ {
+  "i": 21,
+  "raw": "Walking",
+  "kind": "s",
+  "lines": [
+   289
+  ]
+ },
+ {
+  "i": 22,
+  "raw": "Allows you to travel faster while walking",
+  "kind": "s",
+  "lines": [
+   290
+  ]
+ },
+ {
+  "i": 23,
+  "raw": "Fighting",
+  "kind": "s",
+  "lines": [
+   297
+  ]
+ },
+ {
+  "i": 24,
+  "raw": "Slightly increases damage dealt",
+  "kind": "s",
+  "lines": [
+   298
+  ]
+ },
+ {
+  "i": 25,
+  "raw": "Training",
+  "kind": "s",
+  "lines": [
+   302
+  ]
+ },
+ {
+  "i": 26,
+  "raw": "Increases stat gains from training",
+  "kind": "s",
+  "lines": [
+   303
+  ]
+ },
+ {
+  "i": 27,
+  "raw": "Crafting",
+  "kind": "s",
+  "lines": [
+   307,
+   3087
+  ]
+ },
+ {
+  "i": 28,
+  "raw": "Increases crafting speed",
+  "kind": "s",
+  "lines": [
+   308
+  ]
+ },
+ {
+  "i": 29,
+  "raw": "Exploration",
+  "kind": "s",
+  "lines": [
+   315
+  ]
+ },
+ {
+  "i": 30,
+  "raw": "Increases speed of exploring",
+  "kind": "s",
+  "lines": [
+   316
+  ]
+ },
+ {
+  "i": 31,
+  "raw": "Unarmed Mastery",
+  "kind": "s",
+  "lines": [
+   320
+  ]
+ },
+ {
+  "i": 32,
+  "raw": "Unarmed M",
+  "kind": "s",
+  "lines": [
+   321
+  ]
+ },
+ {
+  "i": 33,
+  "raw": "Increases damage dealt when unarmed",
+  "kind": "s",
+  "lines": [
+   322
+  ]
+ },
+ {
+  "i": 34,
+  "raw": "Club Mastery",
+  "kind": "s",
+  "lines": [
+   326
+  ]
+ },
+ {
+  "i": 35,
+  "raw": "Club M",
+  "kind": "s",
+  "lines": [
+   327
+  ]
+ },
+ {
+  "i": 36,
+  "raw": "Increases damage dealt with clubbing weapons",
+  "kind": "s",
+  "lines": [
+   328
+  ]
+ },
+ {
+  "i": 37,
+  "raw": "Spear Mastery",
+  "kind": "s",
+  "lines": [
+   332
+  ]
+ },
+ {
+  "i": 38,
+  "raw": "Spear M",
+  "kind": "s",
+  "lines": [
+   333
+  ]
+ },
+ {
+  "i": 39,
+  "raw": "Increases damage dealt with spear weapons",
+  "kind": "s",
+  "lines": [
+   334
+  ]
+ },
+ {
+  "i": 40,
+  "raw": "Knife Mastery",
+  "kind": "s",
+  "lines": [
+   338
+  ]
+ },
+ {
+  "i": 41,
+  "raw": "Knife M",
+  "kind": "s",
+  "lines": [
+   339
+  ]
+ },
+ {
+  "i": 42,
+  "raw": "Increases damage dealt with knife weapons",
+  "kind": "s",
+  "lines": [
+   340
+  ]
+ },
+ {
+  "i": 43,
+  "raw": "Sword Mastery",
+  "kind": "s",
+  "lines": [
+   344
+  ]
+ },
+ {
+  "i": 44,
+  "raw": "Sword M",
+  "kind": "s",
+  "lines": [
+   345
+  ]
+ },
+ {
+  "i": 45,
+  "raw": "Increases damage dealt with sword weapons",
+  "kind": "s",
+  "lines": [
+   346
+  ]
+ },
+ {
+  "i": 46,
+  "raw": "Alchemy",
+  "kind": "s",
+  "lines": [
+   350,
+   3091
+  ]
+ },
+ {
+  "i": 47,
+  "raw": "Increases speed of alchemy and unlocks more recipes",
+  "kind": "s",
+  "lines": [
+   351
+  ]
+ },
+ {
+  "i": 48,
+  "raw": "Mining",
+  "kind": "s",
+  "lines": [
+   358
+  ]
+ },
+ {
+  "i": 49,
+  "raw": "Increases speed of mining",
+  "kind": "s",
+  "lines": [
+   359
+  ]
+ },
+ {
+  "i": 50,
+  "raw": "Felling",
+  "kind": "s",
+  "lines": [
+   363
+  ]
+ },
+ {
+  "i": 51,
+  "raw": "Increases speed of chopping down trees",
+  "kind": "s",
+  "lines": [
+   364
+  ]
+ },
+ {
+  "i": 52,
+  "raw": "Sleeping",
+  "kind": "s",
+  "lines": [
+   368
+  ]
+ },
+ {
+  "i": 53,
+  "raw": "Increases energy regeneration while sleeping",
+  "kind": "s",
+  "lines": [
+   369
+  ]
+ },
+ {
+  "i": 54,
+  "raw": "Hunting",
+  "kind": "s",
+  "lines": [
+   373
+  ]
+ },
+ {
+  "i": 55,
+  "raw": "Increases speed of hunting",
+  "kind": "s",
+  "lines": [
+   374
+  ]
+ },
+ {
+  "i": 56,
+  "raw": "Strand of Straw",
+  "kind": "s",
+  "lines": [
+   386
+  ]
+ },
+ {
+  "i": 57,
+  "raw": "A strand of straw that came from a training dummy",
+  "kind": "s",
+  "lines": [
+   387
+  ]
+ },
+ {
+  "i": 58,
+  "raw": "Exercise Pill",
+  "kind": "s",
+  "lines": [
+   401,
+   801,
+   2891
+  ]
+ },
+ {
+  "i": 59,
+  "raw": "Increases stat gain from training by 50% for one hour (stackable)",
+  "kind": "s",
+  "lines": [
+   402
+  ]
+ },
+ {
+  "i": 60,
+  "raw": "Straw Basket",
+  "kind": "s",
+  "lines": [
+   410
+  ]
+ },
+ {
+  "i": 61,
+  "raw": "A small basket made of straw",
+  "kind": "s",
+  "lines": [
+   411
+  ]
+ },
+ {
+  "i": 62,
+  "raw": "Wooden Stick",
+  "kind": "s",
+  "lines": [
+   422
+  ]
+ },
+ {
+  "i": 63,
+  "raw": "A blunt wooden stick. Barely better than your fists",
+  "kind": "s",
+  "lines": [
+   423
+  ]
+ },
+ {
+  "i": 64,
+  "raw": "Blade of Grass",
+  "kind": "s",
+  "lines": [
+   435
+  ]
+ },
+ {
+  "i": 65,
+  "raw": "Can be used to make healing potions",
+  "kind": "s",
+  "lines": [
+   436
+  ]
+ },
+ {
+  "i": 66,
+  "raw": "Wooden Spear",
+  "kind": "s",
+  "lines": [
+   441
+  ]
+ },
+ {
+  "i": 67,
+  "raw": "A pointy wooden stick, more durable and does more damage",
+  "kind": "s",
+  "lines": [
+   442
+  ]
+ },
+ {
+  "i": 68,
+  "raw": "Knife",
+  "kind": "s",
+  "lines": [
+   461
+  ]
+ },
+ {
+  "i": 69,
+  "raw": "A basic knife made out of stone",
+  "kind": "s",
+  "lines": [
+   462
+  ]
+ },
+ {
+  "i": 70,
+  "raw": "Slime",
+  "kind": "s",
+  "lines": [
+   474
+  ]
+ },
+ {
+  "i": 71,
+  "raw": "It's sticky",
+  "kind": "s",
+  "lines": [
+   475
+  ]
+ },
+ {
+  "i": 72,
+  "raw": "Straw Pendant",
+  "kind": "s",
+  "lines": [
+   480
+  ]
+ },
+ {
+  "i": 73,
+  "raw": "Small pendant made out of straw. Increases all stats by 10%",
+  "kind": "s",
+  "lines": [
+   481
+  ]
+ },
+ {
+  "i": 74,
+  "raw": "Wooden Club",
+  "kind": "s",
+  "lines": [
+   499
+  ]
+ },
+ {
+  "i": 75,
+  "raw": "Medium sized wooden club, delivers a small shock to your enemies",
+  "kind": "s",
+  "lines": [
+   500
+  ]
+ },
+ {
+  "i": 76,
+  "raw": "largeWoodenClub",
+  "kind": "s",
+  "lines": [
+   511,
+   986
+  ]
+ },
+ {
+  "i": 77,
+  "raw": "Large Wooden Club",
+  "kind": "s",
+  "lines": [
+   512
+  ]
+ },
+ {
+  "i": 78,
+  "raw": "A larger version of the wooden club, hard to swing but has a chance of stunning enemies",
+  "kind": "s",
+  "lines": [
+   513
+  ]
+ },
+ {
+  "i": 79,
+  "raw": " is stunned",
+  "kind": "t",
+  "lines": [
+   529
+  ]
+ },
+ {
+  "i": 80,
+  "raw": "Copper Sword",
+  "kind": "s",
+  "lines": [
+   536
+  ]
+ },
+ {
+  "i": 81,
+  "raw": "A basic sword made out of copper, slightly blunt but cuts well",
+  "kind": "s",
+  "lines": [
+   537
+  ]
+ },
+ {
+  "i": 82,
+  "raw": "Cauldron",
+  "kind": "s",
+  "lines": [
+   549
+  ]
+ },
+ {
+  "i": 83,
+  "raw": "Used for crafting potions",
+  "kind": "s",
+  "lines": [
+   550
+  ]
+ },
+ {
+  "i": 84,
+  "raw": "basicHealthPotion",
+  "kind": "s",
+  "lines": [
+   554,
+   557
+  ]
+ },
+ {
+  "i": 85,
+  "raw": "Basic Health Potion",
+  "kind": "s",
+  "lines": [
+   558
+  ]
+ },
+ {
+  "i": 86,
+  "raw": "Small and simple health potion. Increases your health by +30",
+  "kind": "s",
+  "lines": [
+   559
+  ]
+ },
+ {
+  "i": 87,
+  "raw": "Wood",
+  "kind": "s",
+  "lines": [
+   576
+  ]
+ },
+ {
+  "i": 88,
+  "raw": "Can be used as fuel for a fire",
+  "kind": "s",
+  "lines": [
+   577
+  ]
+ },
+ {
+  "i": 89,
+  "raw": "Straw Helmet",
+  "kind": "s",
+  "lines": [
+   582
+  ]
+ },
+ {
+  "i": 90,
+  "raw": "A basic helmet made out of straw",
+  "kind": "s",
+  "lines": [
+   583
+  ]
+ },
+ {
+  "i": 91,
+  "raw": "Straw Chestplate",
+  "kind": "s",
+  "lines": [
+   600
+  ]
+ },
+ {
+  "i": 92,
+  "raw": "A basic chestplate made out of straw",
+  "kind": "s",
+  "lines": [
+   601
+  ]
+ },
+ {
+  "i": 93,
+  "raw": "Straw Bracers",
+  "kind": "s",
+  "lines": [
+   618
+  ]
+ },
+ {
+  "i": 94,
+  "raw": "Basic bracers made out of straw",
+  "kind": "s",
+  "lines": [
+   619
+  ]
+ },
+ {
+  "i": 95,
+  "raw": "Straw Leggings",
+  "kind": "s",
+  "lines": [
+   636
+  ]
+ },
+ {
+  "i": 96,
+  "raw": "Basic leggings made out of straw",
+  "kind": "s",
+  "lines": [
+   637
+  ]
+ },
+ {
+  "i": 97,
+  "raw": "Wooden Pickaxe",
+  "kind": "s",
+  "lines": [
+   654
+  ]
+ },
+ {
+  "i": 98,
+  "raw": "Nobody knows how this is able to mine stone or other materials",
+  "kind": "s",
+  "lines": [
+   655
+  ]
+ },
+ {
+  "i": 99,
+  "raw": "You are mining for stone and other materials with your pickaxe",
+  "kind": "t",
+  "lines": [
+   667,
+   746
+  ]
+ },
+ {
+  "i": 100,
+  "raw": "You will need a pickaxe equipped to mine.",
+  "kind": "s",
+  "lines": [
+   673,
+   752,
+   3382
+  ]
+ },
+ {
+  "i": 101,
+  "raw": "Stone",
+  "kind": "s",
+  "lines": [
+   685
+  ]
+ },
+ {
+  "i": 102,
+  "raw": "Slightly heavy, can be used to craft stronger gear",
+  "kind": "s",
+  "lines": [
+   686
+  ]
+ },
+ {
+  "i": 103,
+  "raw": "Wooden Axe",
+  "kind": "s",
+  "lines": [
+   695
+  ]
+ },
+ {
+  "i": 104,
+  "raw": "Allows you to cut wood using wood",
+  "kind": "s",
+  "lines": [
+   696
+  ]
+ },
+ {
+  "i": 105,
+  "raw": "huntersGuildSupplies",
+  "kind": "s",
+  "lines": [
+   714,
+   950,
+   4695
+  ]
+ },
+ {
+  "i": 106,
+  "raw": "Supply Box",
+  "kind": "s",
+  "lines": [
+   715
+  ]
+ },
+ {
+  "i": 107,
+  "raw": "Supplies for the Hunters' Guild",
+  "kind": "s",
+  "lines": [
+   716
+  ]
+ },
+ {
+  "i": 108,
+  "raw": "strangeTrainingCharm",
+  "kind": "s",
+  "lines": [
+   721,
+   2853,
+   2870
+  ]
+ },
+ {
+  "i": 109,
+  "raw": "Strange Training Charm",
+  "kind": "s",
+  "lines": [
+   722,
+   2893
+  ]
+ },
+ {
+  "i": 110,
+  "raw": "Increases training gains when worn but decreases your health while training",
+  "kind": "s",
+  "lines": [
+   723
+  ]
+ },
+ {
+  "i": 111,
+  "raw": "Stone Pickaxe",
+  "kind": "s",
+  "lines": [
+   733
+  ]
+ },
+ {
+  "i": 112,
+  "raw": "A pickaxe made out of the same thing you're mining. More durable and faster",
+  "kind": "s",
+  "lines": [
+   734
+  ]
+ },
+ {
+  "i": 113,
+  "raw": "Stone Axe",
+  "kind": "s",
+  "lines": [
+   764
+  ]
+ },
+ {
+  "i": 114,
+  "raw": "Allows you to cut wood using stone",
+  "kind": "s",
+  "lines": [
+   765
+  ]
+ },
+ {
+  "i": 115,
+  "raw": "Apple",
+  "kind": "s",
+  "lines": [
+   785
+  ]
+ },
+ {
+  "i": 116,
+  "raw": "Increases energy by 10",
+  "kind": "s",
+  "lines": [
+   786
+  ]
+ },
+ {
+  "i": 117,
+  "raw": "Sleep Deprived",
+  "kind": "s",
+  "lines": [
+   796
+  ]
+ },
+ {
+  "i": 118,
+  "raw": "Energy loss per minute increased",
+  "kind": "s",
+  "lines": [
+   797
+  ]
+ },
+ {
+  "i": 119,
+  "raw": "Stat gain is increased by 50%",
+  "kind": "s",
+  "lines": [
+   802
+  ]
+ },
+ {
+  "i": 120,
+  "raw": "Wet",
+  "kind": "s",
+  "lines": [
+   806
+  ]
+ },
+ {
+  "i": 121,
+  "raw": "Energy loss is increased",
+  "kind": "s",
+  "lines": [
+   807
+  ]
+ },
+ {
+  "i": 122,
+  "raw": "Stunned",
+  "kind": "s",
+  "lines": [
+   811
+  ]
+ },
+ {
+  "i": 123,
+  "raw": "Unable to attack",
+  "kind": "s",
+  "lines": [
+   812
+  ]
+ },
+ {
+  "i": 124,
+  "raw": "Poison",
+  "kind": "s",
+  "lines": [
+   816
+  ]
+ },
+ {
+  "i": 125,
+  "raw": "Takes damage over time",
+  "kind": "s",
+  "lines": [
+   817
+  ]
+ },
+ {
+  "i": 126,
+  "raw": "Dojo Introduction 1",
+  "kind": "s",
+  "lines": [
+   823
+  ]
+ },
+ {
+  "i": 127,
+  "raw": "You have been tasked by the instructor to defeat a total of 5 straw dummies and reach 1.5 strength",
+  "kind": "s",
+  "lines": [
+   824
+  ]
+ },
+ {
+  "i": 128,
+  "raw": "Dojo Introduction 2",
+  "kind": "s",
+  "lines": [
+   842
+  ]
+ },
+ {
+  "i": 129,
+  "raw": "You have been tasked by the instructor to reach 1.5 in every stat",
+  "kind": "s",
+  "lines": [
+   843
+  ]
+ },
+ {
+  "i": 130,
+  "raw": "Pest Control",
+  "kind": "s",
+  "lines": [
+   867
+  ]
+ },
+ {
+  "i": 131,
+  "raw": "You have been tasked by the instructor to defeat 10 mice in the alleys",
+  "kind": "s",
+  "lines": [
+   868
+  ]
+ },
+ {
+  "i": 132,
+  "raw": "Dojo Introduction 4",
+  "kind": "s",
+  "lines": [
+   880
+  ]
+ },
+ {
+  "i": 133,
+  "raw": "You have been tasked by the instructor to defeat the golem in the dojo yard",
+  "kind": "s",
+  "lines": [
+   881
+  ]
+ },
+ {
+  "i": 134,
+  "raw": "Dojo Introduction 5",
+  "kind": "s",
+  "lines": [
+   893
+  ]
+ },
+ {
+  "i": 135,
+  "raw": "You have been tasked by the instructor to reach 10 in every stat",
+  "kind": "s",
+  "lines": [
+   894
+  ]
+ },
+ {
+  "i": 136,
+  "raw": "Els's Quest",
+  "kind": "s",
+  "lines": [
+   918
+  ]
+ },
+ {
+  "i": 137,
+  "raw": "Els has requested you to obtain 3 pieces of wood",
+  "kind": "s",
+  "lines": [
+   919
+  ]
+ },
+ {
+  "i": 138,
+  "raw": "Forest Clearing",
+  "kind": "s",
+  "lines": [
+   929
+  ]
+ },
+ {
+  "i": 139,
+  "raw": "Els has requested you to clear the path in the forest",
+  "kind": "s",
+  "lines": [
+   930
+  ]
+ },
+ {
+  "i": 140,
+  "raw": "forestLayer1EnemiesRemaining",
+  "kind": "s",
+  "lines": [
+   934,
+   938,
+   3269
+  ]
+ },
+ {
+  "i": 141,
+  "raw": "Cleared",
+  "kind": "s",
+  "lines": [
+   935
+  ]
+ },
+ {
+  "i": 142,
+  "raw": "Hunters' Guild Supplies",
+  "kind": "s",
+  "lines": [
+   944
+  ]
+ },
+ {
+  "i": 143,
+  "raw": "Els has requested you to obtain supplies from the merchant in town and return back to him",
+  "kind": "s",
+  "lines": [
+   945
+  ]
+ },
+ {
+  "i": 144,
+  "raw": "Hunters' Guild Supplies 2",
+  "kind": "s",
+  "lines": [
+   955
+  ]
+ },
+ {
+  "i": 145,
+  "raw": "Els has requested you to obtain 10 pieces of stone",
+  "kind": "s",
+  "lines": [
+   956
+  ]
+ },
+ {
+  "i": 146,
+  "raw": "Hunters' Guild Supplies 3",
+  "kind": "s",
+  "lines": [
+   966
+  ]
+ },
+ {
+  "i": 147,
+  "raw": "Els has requested you to obtain 20 pieces of wood",
+  "kind": "s",
+  "lines": [
+   967
+  ]
+ },
+ {
+  "i": 148,
+  "raw": "forestGymBasic",
+  "kind": "s",
+  "lines": [
+   1003,
+   3395,
+   3398
+  ]
+ },
+ {
+  "i": 149,
+  "raw": "forestGymAdvanced",
+  "kind": "s",
+  "lines": [
+   1009,
+   3407,
+   3410
+  ]
+ },
+ {
+  "i": 150,
+  "raw": "Athlete",
+  "kind": "s",
+  "lines": [
+   1017
+  ]
+ },
+ {
+  "i": 151,
+  "raw": "Fighter",
+  "kind": "s",
+  "lines": [
+   1018
+  ]
+ },
+ {
+  "i": 152,
+  "raw": "Disciple",
+  "kind": "s",
+  "lines": [
+   1019
+  ]
+ },
+ {
+  "i": 153,
+  "raw": "Seeker",
+  "kind": "s",
+  "lines": [
+   1020
+  ]
+ },
+ {
+  "i": 154,
+  "raw": "Crafter",
+  "kind": "s",
+  "lines": [
+   1021,
+   1229
+  ]
+ },
+ {
+  "i": 155,
+  "raw": "Sleeper",
+  "kind": "s",
+  "lines": [
+   1022
+  ]
+ },
+ {
+  "i": 156,
+  "raw": "Alchemist",
+  "kind": "s",
+  "lines": [
+   1023
+  ]
+ },
+ {
+  "i": 157,
+  "raw": "Miner",
+  "kind": "s",
+  "lines": [
+   1024
+  ]
+ },
+ {
+  "i": 158,
+  "raw": "Lumberjack",
+  "kind": "s",
+  "lines": [
+   1025
+  ]
+ },
+ {
+  "i": 159,
+  "raw": "Walker",
+  "kind": "s",
+  "lines": [
+   1026,
+   1259
+  ]
+ },
+ {
+  "i": 160,
+  "raw": "Sunday",
+  "kind": "s",
+  "lines": [
+   1040,
+   4718
+  ]
+ },
+ {
+  "i": 161,
+  "raw": "Monday",
+  "kind": "s",
+  "lines": [
+   1040
+  ]
+ },
+ {
+  "i": 162,
+  "raw": "Tuesday",
+  "kind": "s",
+  "lines": [
+   1040
+  ]
+ },
+ {
+  "i": 163,
+  "raw": "Wednesday",
+  "kind": "s",
+  "lines": [
+   1040
+  ]
+ },
+ {
+  "i": 164,
+  "raw": "Thursday",
+  "kind": "s",
+  "lines": [
+   1040
+  ]
+ },
+ {
+  "i": 165,
+  "raw": "Friday",
+  "kind": "s",
+  "lines": [
+   1040
+  ]
+ },
+ {
+  "i": 166,
+  "raw": "Saturday",
+  "kind": "s",
+  "lines": [
+   1040
+  ]
+ },
+ {
+  "i": 167,
+  "raw": ":",
+  "kind": "t",
+  "lines": [
+   1066
+  ]
+ },
+ {
+  "i": 168,
+  "raw": "shortDayName",
+  "kind": "s",
+  "lines": [
+   1079
+  ]
+ },
+ {
+  "i": 169,
+  "raw": "G-",
+  "kind": "s",
+  "lines": [
+   1118
+  ]
+ },
+ {
+  "i": 170,
+  "raw": "G",
+  "kind": "s",
+  "lines": [
+   1119
+  ]
+ },
+ {
+  "i": 171,
+  "raw": "G+",
+  "kind": "s",
+  "lines": [
+   1120
+  ]
+ },
+ {
+  "i": 172,
+  "raw": "F-",
+  "kind": "s",
+  "lines": [
+   1121
+  ]
+ },
+ {
+  "i": 173,
+  "raw": "F",
+  "kind": "s",
+  "lines": [
+   1122
+  ]
+ },
+ {
+  "i": 174,
+  "raw": "F+",
+  "kind": "s",
+  "lines": [
+   1123
+  ]
+ },
+ {
+  "i": 175,
+  "raw": "E-",
+  "kind": "s",
+  "lines": [
+   1124
+  ]
+ },
+ {
+  "i": 176,
+  "raw": "E",
+  "kind": "s",
+  "lines": [
+   1125,
+   3972
+  ]
+ },
+ {
+  "i": 177,
+  "raw": "E+",
+  "kind": "s",
+  "lines": [
+   1126
+  ]
+ },
+ {
+  "i": 178,
+  "raw": "D-",
+  "kind": "s",
+  "lines": [
+   1127
+  ]
+ },
+ {
+  "i": 179,
+  "raw": "D",
+  "kind": "s",
+  "lines": [
+   1128
+  ]
+ },
+ {
+  "i": 180,
+  "raw": "D+",
+  "kind": "s",
+  "lines": [
+   1129
+  ]
+ },
+ {
+  "i": 181,
+  "raw": "C-",
+  "kind": "s",
+  "lines": [
+   1130
+  ]
+ },
+ {
+  "i": 182,
+  "raw": "C",
+  "kind": "s",
+  "lines": [
+   1131,
+   3085
+  ]
+ },
+ {
+  "i": 183,
+  "raw": "C+",
+  "kind": "s",
+  "lines": [
+   1132
+  ]
+ },
+ {
+  "i": 184,
+  "raw": "B-",
+  "kind": "s",
+  "lines": [
+   1133
+  ]
+ },
+ {
+  "i": 185,
+  "raw": "B",
+  "kind": "s",
+  "lines": [
+   1134,
+   1732
+  ]
+ },
+ {
+  "i": 186,
+  "raw": "B+",
+  "kind": "s",
+  "lines": [
+   1135
+  ]
+ },
+ {
+  "i": 187,
+  "raw": "First Blood",
+  "kind": "s",
+  "lines": [
+   1155
+  ]
+ },
+ {
+  "i": 188,
+  "raw": "Defeat 1 enemy",
+  "kind": "s",
+  "lines": [
+   1156
+  ]
+ },
+ {
+  "i": 189,
+  "raw": "Hunter",
+  "kind": "s",
+  "lines": [
+   1161
+  ]
+ },
+ {
+  "i": 190,
+  "raw": "Defeat 10 enemies",
+  "kind": "s",
+  "lines": [
+   1162
+  ]
+ },
+ {
+  "i": 191,
+  "raw": "Killer",
+  "kind": "s",
+  "lines": [
+   1167
+  ]
+ },
+ {
+  "i": 192,
+  "raw": "Defeat 100 enemies",
+  "kind": "s",
+  "lines": [
+   1168
+  ]
+ },
+ {
+  "i": 193,
+  "raw": "Exterminator",
+  "kind": "s",
+  "lines": [
+   1173
+  ]
+ },
+ {
+  "i": 194,
+  "raw": "Defeat 1,000 enemies",
+  "kind": "s",
+  "lines": [
+   1174
+  ]
+ },
+ {
+  "i": 195,
+  "raw": "Collector",
+  "kind": "s",
+  "lines": [
+   1179
+  ]
+ },
+ {
+  "i": 196,
+  "raw": "Discover 10 items",
+  "kind": "s",
+  "lines": [
+   1180
+  ]
+ },
+ {
+  "i": 197,
+  "raw": "Hoarder",
+  "kind": "s",
+  "lines": [
+   1185
+  ]
+ },
+ {
+  "i": 198,
+  "raw": "Carry 200 or more of a single item at once",
+  "kind": "s",
+  "lines": [
+   1186
+  ]
+ },
+ {
+  "i": 199,
+  "raw": "Flatline",
+  "kind": "s",
+  "lines": [
+   1189
+  ]
+ },
+ {
+  "i": 200,
+  "raw": "Defeat an enemy in one hit",
+  "kind": "s",
+  "lines": [
+   1190
+  ]
+ },
+ {
+  "i": 201,
+  "raw": "Overkill",
+  "kind": "s",
+  "lines": [
+   1193
+  ]
+ },
+ {
+  "i": 202,
+  "raw": "Deal 3x or more damage than an enemy's max health",
+  "kind": "s",
+  "lines": [
+   1194
+  ]
+ },
+ {
+  "i": 203,
+  "raw": "Discovery",
+  "kind": "s",
+  "lines": [
+   1197
+  ]
+ },
+ {
+  "i": 204,
+  "raw": "Unlock a crafting recipe",
+  "kind": "s",
+  "lines": [
+   1198
+  ]
+ },
+ {
+  "i": 205,
+  "raw": "Survivor",
+  "kind": "s",
+  "lines": [
+   1201
+  ]
+ },
+ {
+  "i": 206,
+  "raw": "Win a battle with 5% or less health remaining (enemies with attacks only)",
+  "kind": "s",
+  "lines": [
+   1202
+  ]
+ },
+ {
+  "i": 207,
+  "raw": "Insomniac",
+  "kind": "s",
+  "lines": [
+   1205
+  ]
+ },
+ {
+  "i": 208,
+  "raw": "Stay awake for 48 hours",
+  "kind": "s",
+  "lines": [
+   1206
+  ]
+ },
+ {
+  "i": 209,
+  "raw": "Money",
+  "kind": "s",
+  "lines": [
+   1211
+  ]
+ },
+ {
+  "i": 210,
+  "raw": "Earn $1",
+  "kind": "s",
+  "lines": [
+   1212
+  ]
+ },
+ {
+  "i": 211,
+  "raw": "Pocket Change",
+  "kind": "s",
+  "lines": [
+   1217
+  ]
+ },
+ {
+  "i": 212,
+  "raw": "Earn $10",
+  "kind": "s",
+  "lines": [
+   1218
+  ]
+ },
+ {
+  "i": 213,
+  "raw": "Getting Somewhere",
+  "kind": "s",
+  "lines": [
+   1223
+  ]
+ },
+ {
+  "i": 214,
+  "raw": "Earn $100",
+  "kind": "s",
+  "lines": [
+   1224
+  ]
+ },
+ {
+  "i": 215,
+  "raw": "Craft an item",
+  "kind": "s",
+  "lines": [
+   1230
+  ]
+ },
+ {
+  "i": 216,
+  "raw": "Skilled",
+  "kind": "s",
+  "lines": [
+   1233
+  ]
+ },
+ {
+  "i": 217,
+  "raw": "Unlock 10 skills",
+  "kind": "s",
+  "lines": [
+   1234
+  ]
+ },
+ {
+  "i": 218,
+  "raw": "Untouchable",
+  "kind": "s",
+  "lines": [
+   1239
+  ]
+ },
+ {
+  "i": 219,
+  "raw": "Win a battle without taking damage (enemies with attacks only)",
+  "kind": "s",
+  "lines": [
+   1240
+  ]
+ },
+ {
+  "i": 220,
+  "raw": "Golem Breaker",
+  "kind": "s",
+  "lines": [
+   1243
+  ]
+ },
+ {
+  "i": 221,
+  "raw": "Defeat a golem",
+  "kind": "s",
+  "lines": [
+   1244
+  ]
+ },
+ {
+  "i": 222,
+  "raw": "Wasteful",
+  "kind": "s",
+  "lines": [
+   1247
+  ]
+ },
+ {
+  "i": 223,
+  "raw": "Discard 10 items",
+  "kind": "s",
+  "lines": [
+   1248
+  ]
+ },
+ {
+  "i": 224,
+  "raw": "First Steps",
+  "kind": "s",
+  "lines": [
+   1253
+  ]
+ },
+ {
+  "i": 225,
+  "raw": "Travel 5 kilometers",
+  "kind": "s",
+  "lines": [
+   1254
+  ]
+ },
+ {
+  "i": 226,
+  "raw": "Travel 10 kilometers",
+  "kind": "s",
+  "lines": [
+   1260
+  ]
+ },
+ {
+  "i": 227,
+  "raw": "Marathon",
+  "kind": "s",
+  "lines": [
+   1265
+  ]
+ },
+ {
+  "i": 228,
+  "raw": "Travel 25 kilometers",
+  "kind": "s",
+  "lines": [
+   1266
+  ]
+ },
+ {
+  "i": 229,
+  "raw": "Deforestation",
+  "kind": "s",
+  "lines": [
+   1271
+  ]
+ },
+ {
+  "i": 230,
+  "raw": "Cut down 100 trees",
+  "kind": "s",
+  "lines": [
+   1272
+  ]
+ },
+ {
+  "i": 231,
+  "raw": "Achievement Unlocked: ",
+  "kind": "t",
+  "lines": [
+   1280,
+   1314
+  ]
+ },
+ {
+  "i": 232,
+  "raw": " / ",
+  "kind": "t",
+  "lines": [
+   1299,
+   1356
+  ]
+ },
+ {
+  "i": 233,
+  "raw": "%",
+  "kind": "t",
+  "lines": [
+   1300,
+   1360,
+   1391
+  ]
+ },
+ {
+  "i": 234,
+  "raw": "Level ",
+  "kind": "t",
+  "lines": [
+   1375,
+   5760
+  ]
+ },
+ {
+  "i": 235,
+  "raw": "HP: ",
+  "kind": "t",
+  "lines": [
+   1390,
+   1406
+  ]
+ },
+ {
+  "i": 236,
+  "raw": "/",
+  "kind": "t",
+  "lines": [
+   1390,
+   1402,
+   1406
+  ]
+ },
+ {
+  "i": 237,
+  "raw": "Energy: ",
+  "kind": "t",
+  "lines": [
+   1399
+  ]
+ },
+ {
+  "i": 238,
+  "raw": "/100",
+  "kind": "t",
+  "lines": [
+   1399
+  ]
+ },
+ {
+  "i": 239,
+  "raw": "XP: ",
+  "kind": "t",
+  "lines": [
+   1402
+  ]
+ },
+ {
+  "i": 240,
+  "raw": ": ",
+  "kind": "t",
+  "lines": [
+   1426,
+   1439,
+   1701
+  ]
+ },
+ {
+  "i": 241,
+  "raw": "Ttl: ",
+  "kind": "t",
+  "lines": [
+   1429,
+   1442,
+   6406
+  ]
+ },
+ {
+  "i": 242,
+  "raw": "<span ",
+  "kind": "t",
+  "lines": [
+   1446
+  ]
+ },
+ {
+  "i": 243,
+  "raw": "style=\"color:",
+  "kind": "t",
+  "lines": [
+   1446
+  ]
+ },
+ {
+  "i": 244,
+  "raw": "\">",
+  "kind": "t",
+  "lines": [
+   1446
+  ]
+ },
+ {
+  "i": 245,
+  "raw": "</span>",
+  "kind": "t",
+  "lines": [
+   1446,
+   4989
+  ]
+ },
+ {
+  "i": 246,
+  "raw": "<span class=main-processing></span>",
+  "kind": "s",
+  "lines": [
+   1450
+  ]
+ },
+ {
+  "i": 247,
+  "raw": "#",
+  "kind": "s",
+  "lines": [
+   1454,
+   1467
+  ]
+ },
+ {
+  "i": 248,
+  "raw": "<",
+  "kind": "s",
+  "lines": [
+   1494,
+   3862
+  ]
+ },
+ {
+  "i": 249,
+  "raw": " died",
+  "kind": "t",
+  "lines": [
+   1601
+  ]
+ },
+ {
+  "i": 250,
+  "raw": "Attempted to change invalid skill \"",
+  "kind": "t",
+  "lines": [
+   1671
+  ]
+ },
+ {
+  "i": 251,
+  "raw": "\"",
+  "kind": "t",
+  "lines": [
+   1671,
+   1863,
+   2023
+  ]
+ },
+ {
+  "i": 252,
+  "raw": "Attempted to change skill \"",
+  "kind": "t",
+  "lines": [
+   1679
+  ]
+ },
+ {
+  "i": 253,
+  "raw": "\" by invalid amount (",
+  "kind": "t",
+  "lines": [
+   1679,
+   1867,
+   2027
+  ]
+ },
+ {
+  "i": 254,
+  "raw": ")",
+  "kind": "t",
+  "lines": [
+   1679,
+   1867,
+   2027
+  ]
+ },
+ {
+  "i": 255,
+  "raw": " increased to ",
+  "kind": "t",
+  "lines": [
+   1718
+  ]
+ },
+ {
+  "i": 256,
+  "raw": "M",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 257,
+  "raw": "T",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 258,
+  "raw": "Qa",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 259,
+  "raw": "Qt",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 260,
+  "raw": "Sx",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 261,
+  "raw": "Sp",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 262,
+  "raw": "Oc",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 263,
+  "raw": "No",
+  "kind": "s",
+  "lines": [
+   1732
+  ]
+ },
+ {
+  "i": 264,
+  "raw": "+",
+  "kind": "s",
+  "lines": [
+   1736,
+   2076,
+   2848
+  ]
+ },
+ {
+  "i": 265,
+  "raw": "Attempted to create invalid item \"",
+  "kind": "t",
+  "lines": [
+   1863,
+   2023
+  ]
+ },
+ {
+  "i": 266,
+  "raw": "Attempted to change item \"",
+  "kind": "t",
+  "lines": [
+   1867,
+   2027
+  ]
+ },
+ {
+  "i": 267,
+  "raw": "ignoreWeightLimit",
+  "kind": "s",
+  "lines": [
+   1875,
+   1875,
+   3640
+  ]
+ },
+ {
+  "i": 268,
+  "raw": "You can't carry the ",
+  "kind": "t",
+  "lines": [
+   1876
+  ]
+ },
+ {
+  "i": 269,
+  "raw": "Obtained ",
+  "kind": "t",
+  "lines": [
+   1956,
+   3150
+  ]
+ },
+ {
+  "i": 270,
+  "raw": "Used ",
+  "kind": "t",
+  "lines": [
+   1963
+  ]
+ },
+ {
+  "i": 271,
+  "raw": "g / ",
+  "kind": "t",
+  "lines": [
+   1971,
+   2933
+  ]
+ },
+ {
+  "i": 272,
+  "raw": "New Recipe: ",
+  "kind": "t",
+  "lines": [
+   2004
+  ]
+ },
+ {
+  "i": 273,
+  "raw": "Deposited ",
+  "kind": "t",
+  "lines": [
+   2065
+  ]
+ },
+ {
+  "i": 274,
+  "raw": " XP",
+  "kind": "t",
+  "lines": [
+   2076
+  ]
+ },
+ {
+  "i": 275,
+  "raw": "Levelled up to ",
+  "kind": "t",
+  "lines": [
+   2080
+  ]
+ },
+ {
+  "i": 276,
+  "raw": "You start to feel tired",
+  "kind": "s",
+  "lines": [
+   2174
+  ]
+ },
+ {
+  "i": 277,
+  "raw": "Clear",
+  "kind": "s",
+  "lines": [
+   2227
+  ]
+ },
+ {
+  "i": 278,
+  "raw": "Sunny",
+  "kind": "s",
+  "lines": [
+   2228
+  ]
+ },
+ {
+  "i": 279,
+  "raw": "Foggy",
+  "kind": "s",
+  "lines": [
+   2229
+  ]
+ },
+ {
+  "i": 280,
+  "raw": "Speed is reduced by 25%",
+  "kind": "s",
+  "lines": [
+   2229
+  ]
+ },
+ {
+  "i": 281,
+  "raw": "Overcast",
+  "kind": "s",
+  "lines": [
+   2230
+  ]
+ },
+ {
+  "i": 282,
+  "raw": "Rain",
+  "kind": "s",
+  "lines": [
+   2231
+  ]
+ },
+ {
+  "i": 283,
+  "raw": "% (",
+  "kind": "t",
+  "lines": [
+   2312
+  ]
+ },
+ {
+  "i": 284,
+  "raw": "%)\\n",
+  "kind": "t",
+  "lines": [
+   2312
+  ]
+ },
+ {
+  "i": 285,
+  "raw": "totalTimeSlept",
+  "kind": "s",
+  "lines": [
+   2332
+  ]
+ },
+ {
+  "i": 286,
+  "raw": "???",
+  "kind": "s",
+  "lines": [
+   2368
+  ]
+ },
+ {
+  "i": 287,
+  "raw": "Energy",
+  "kind": "s",
+  "lines": [
+   2545,
+   2896
+  ]
+ },
+ {
+  "i": 288,
+  "raw": "Foggy Weather",
+  "kind": "s",
+  "lines": [
+   2548
+  ]
+ },
+ {
+  "i": 289,
+  "raw": "Total: ",
+  "kind": "t",
+  "lines": [
+   2565,
+   2918
+  ]
+ },
+ {
+  "i": 290,
+  "raw": "\\n",
+  "kind": "s",
+  "lines": [
+   2566,
+   2919,
+   3052
+  ]
+ },
+ {
+  "i": 291,
+  "raw": "theArenaFight",
+  "kind": "s",
+  "lines": [
+   2583
+  ]
+ },
+ {
+  "i": 292,
+  "raw": "nextLevelExercisePills",
+  "kind": "s",
+  "lines": [
+   2588,
+   4543,
+   5113
+  ]
+ },
+ {
+  "i": 293,
+  "raw": "huntersGuildHeal",
+  "kind": "s",
+  "lines": [
+   2595,
+   3369,
+   4381
+  ]
+ },
+ {
+  "i": 294,
+  "raw": "You died!",
+  "kind": "s",
+  "lines": [
+   2599
+  ]
+ },
+ {
+  "i": 295,
+  "raw": " Energy",
+  "kind": "t",
+  "lines": [
+   2601
+  ]
+ },
+ {
+  "i": 296,
+  "raw": "Arkivia | DEAD",
+  "kind": "s",
+  "lines": [
+   2609
+  ]
+ },
+ {
+  "i": 297,
+  "raw": "Completed Quest: ",
+  "kind": "t",
+  "lines": [
+   2678,
+   2785
+  ]
+ },
+ {
+  "i": 298,
+  "raw": "Quest Met: ",
+  "kind": "t",
+  "lines": [
+   2687
+  ]
+ },
+ {
+  "i": 299,
+  "raw": "Received Quest: ",
+  "kind": "t",
+  "lines": [
+   2712
+  ]
+ },
+ {
+  "i": 300,
+  "raw": " (+",
+  "kind": "t",
+  "lines": [
+   2848,
+   2850
+  ]
+ },
+ {
+  "i": 301,
+  "raw": "/s) ",
+  "kind": "t",
+  "lines": [
+   2848
+  ]
+ },
+ {
+  "i": 302,
+  "raw": "Arkivia | ",
+  "kind": "t",
+  "lines": [
+   2850
+  ]
+ },
+ {
+  "i": 303,
+  "raw": " +",
+  "kind": "t",
+  "lines": [
+   2850
+  ]
+ },
+ {
+  "i": 304,
+  "raw": "/s)",
+  "kind": "t",
+  "lines": [
+   2850
+  ]
+ },
+ {
+  "i": 305,
+  "raw": "Training Skill",
+  "kind": "s",
+  "lines": [
+   2888
+  ]
+ },
+ {
+  "i": 306,
+  "raw": "Rank Changed: ",
+  "kind": "t",
+  "lines": [
+   2931
+  ]
+ },
+ {
+  "i": 307,
+  "raw": " -> ",
+  "kind": "t",
+  "lines": [
+   2931,
+   3567
+  ]
+ },
+ {
+  "i": 308,
+  "raw": "$",
+  "kind": "t",
+  "lines": [
+   2977,
+   3154
+  ]
+ },
+ {
+  "i": 309,
+  "raw": "Out of stock",
+  "kind": "s",
+  "lines": [
+   2995
+  ]
+ },
+ {
+  "i": 310,
+  "raw": "Not enough money",
+  "kind": "s",
+  "lines": [
+   3004
+  ]
+ },
+ {
+  "i": 311,
+  "raw": "Missing materials",
+  "kind": "s",
+  "lines": [
+   3022,
+   3027
+  ]
+ },
+ {
+  "i": 312,
+  "raw": "You are crafting \"",
+  "kind": "t",
+  "lines": [
+   3048,
+   4406
+  ]
+ },
+ {
+  "i": 313,
+  "raw": "\". You'll finish at ",
+  "kind": "t",
+  "lines": [
+   3048,
+   4406
+  ]
+ },
+ {
+  "i": 314,
+  "raw": "\\n\\n{Cancel|table|0|cancelCrafting}",
+  "kind": "t",
+  "lines": [
+   3048,
+   4406
+  ]
+ },
+ {
+  "i": 315,
+  "raw": "- x",
+  "kind": "t",
+  "lines": [
+   3052,
+   4091
+  ]
+ },
+ {
+  "i": 316,
+  "raw": "Choose\\n",
+  "kind": "t",
+  "lines": [
+   3053,
+   4093
+  ]
+ },
+ {
+  "i": 317,
+  "raw": "\\nfrom your inventory\\n\\n{Cancel|table|0|cancelCrafting}",
+  "kind": "t",
+  "lines": [
+   3053,
+   4093
+  ]
+ },
+ {
+  "i": 318,
+  "raw": "A",
+  "kind": "s",
+  "lines": [
+   3089,
+   3937
+  ]
+ },
+ {
+  "i": 319,
+  "raw": ", ",
+  "kind": "t",
+  "lines": [
+   3122
+  ]
+ },
+ {
+  "i": 320,
+  "raw": "[id^=\\\"crafting-item-\\\"]",
+  "kind": "s",
+  "lines": [
+   3138
+  ]
+ },
+ {
+  "i": 321,
+  "raw": "Attempted to change money by invalid amount (",
+  "kind": "t",
+  "lines": [
+   3145
+  ]
+ },
+ {
+  "i": 322,
+  "raw": "Spent ",
+  "kind": "t",
+  "lines": [
+   3152
+  ]
+ },
+ {
+  "i": 323,
+  "raw": "firstTrainingDummy",
+  "kind": "s",
+  "lines": [
+   3238,
+   4578
+  ]
+ },
+ {
+  "i": 324,
+  "raw": "dojoQuestIntro",
+  "kind": "s",
+  "lines": [
+   3240
+  ]
+ },
+ {
+  "i": 325,
+  "raw": "arenaWinMatch",
+  "kind": "s",
+  "lines": [
+   3262,
+   4761
+  ]
+ },
+ {
+  "i": 326,
+  "raw": "theArenaWinMatch",
+  "kind": "s",
+  "lines": [
+   3266,
+   3331
+  ]
+ },
+ {
+  "i": 327,
+  "raw": "You are clearing the enemies blocking the pathway in the forest.\\n",
+  "kind": "t",
+  "lines": [
+   3270,
+   4821
+  ]
+ },
+ {
+  "i": 328,
+  "raw": " enemies remain",
+  "kind": "t",
+  "lines": [
+   3270,
+   4821
+  ]
+ },
+ {
+  "i": 329,
+  "raw": "\\n\\n{![stop.png]Stop|forestLayer1|0|endFight}",
+  "kind": "t",
+  "lines": [
+   3270,
+   4821
+  ]
+ },
+ {
+  "i": 330,
+  "raw": "You have finished clearing the enemies.\\n\\n",
+  "kind": "s",
+  "lines": [
+   3272
+  ]
+ },
+ {
+  "i": 331,
+  "raw": "huntingEnemyDeath",
+  "kind": "s",
+  "lines": [
+   3278,
+   3425
+  ]
+ },
+ {
+  "i": 332,
+  "raw": "huntersGuildMission",
+  "kind": "s",
+  "lines": [
+   3279,
+   3424,
+   3424
+  ]
+ },
+ {
+  "i": 333,
+  "raw": "theArenaWalkIn",
+  "kind": "s",
+  "lines": [
+   3335,
+   3343
+  ]
+ },
+ {
+  "i": 334,
+  "raw": "theArenaMedbay",
+  "kind": "s",
+  "lines": [
+   3338
+  ]
+ },
+ {
+  "i": 335,
+  "raw": "forestGymBasic_str",
+  "kind": "s",
+  "lines": [
+   3394
+  ]
+ },
+ {
+  "i": 336,
+  "raw": "forestGymBasic_def",
+  "kind": "s",
+  "lines": [
+   3397
+  ]
+ },
+ {
+  "i": 337,
+  "raw": "forestGymBasic_spd",
+  "kind": "s",
+  "lines": [
+   3400
+  ]
+ },
+ {
+  "i": 338,
+  "raw": "forestGymBasic_dex",
+  "kind": "s",
+  "lines": [
+   3403
+  ]
+ },
+ {
+  "i": 339,
+  "raw": "forestGymAdvanced_str",
+  "kind": "s",
+  "lines": [
+   3406
+  ]
+ },
+ {
+  "i": 340,
+  "raw": "forestGymAdvanced_def",
+  "kind": "s",
+  "lines": [
+   3409
+  ]
+ },
+ {
+  "i": 341,
+  "raw": "forestGymAdvanced_spd",
+  "kind": "s",
+  "lines": [
+   3412
+  ]
+ },
+ {
+  "i": 342,
+  "raw": "forestGymAdvanced_dex",
+  "kind": "s",
+  "lines": [
+   3415
+  ]
+ },
+ {
+  "i": 343,
+  "raw": "You -> ",
+  "kind": "t",
+  "lines": [
+   3437,
+   3489
+  ]
+ },
+ {
+  "i": 344,
+  "raw": "Mastery",
+  "kind": "t",
+  "lines": [
+   3477,
+   3506,
+   3507
+  ]
+ },
+ {
+  "i": 345,
+  "raw": ".bar-fill",
+  "kind": "s",
+  "lines": [
+   3495,
+   3581,
+   3967
+  ]
+ },
+ {
+  "i": 346,
+  "raw": " broke",
+  "kind": "t",
+  "lines": [
+   3497,
+   3583,
+   4204
+  ]
+ },
+ {
+  "i": 347,
+  "raw": "You missed",
+  "kind": "s",
+  "lines": [
+   3516
+  ]
+ },
+ {
+  "i": 348,
+  "raw": " missed",
+  "kind": "t",
+  "lines": [
+   3589
+  ]
+ },
+ {
+  "i": 349,
+  "raw": "autoRepeatCrafting",
+  "kind": "s",
+  "lines": [
+   3648,
+   5419,
+   5625
+  ]
+ },
+ {
+  "i": 350,
+  "raw": "Arkivia | L",
+  "kind": "t",
+  "lines": [
+   3724
+  ]
+ },
+ {
+  "i": 351,
+  "raw": " (",
+  "kind": "t",
+  "lines": [
+   3724
+  ]
+ },
+ {
+  "i": 352,
+  "raw": "%) ",
+  "kind": "t",
+  "lines": [
+   3724
+  ]
+ },
+ {
+  "i": 353,
+  "raw": "Arkivia",
+  "kind": "s",
+  "lines": [
+   3760
+  ]
+ },
+ {
+  "i": 354,
+  "raw": "Last Save: ",
+  "kind": "t",
+  "lines": [
+   3787,
+   3794
+  ]
+ },
+ {
+  "i": 355,
+  "raw": "<hr>",
+  "kind": "s",
+  "lines": [
+   3825,
+   3845
+  ]
+ },
+ {
+  "i": 356,
+  "raw": "Dmg: ",
+  "kind": "t",
+  "lines": [
+   3826
+  ]
+ },
+ {
+  "i": 357,
+  "raw": "Durability: ",
+  "kind": "t",
+  "lines": [
+   3827
+  ]
+ },
+ {
+  "i": 358,
+  "raw": "Armor: ",
+  "kind": "t",
+  "lines": [
+   3828
+  ]
+ },
+ {
+  "i": 359,
+  "raw": "Weight: ",
+  "kind": "t",
+  "lines": [
+   3829,
+   3846
+  ]
+ },
+ {
+  "i": 360,
+  "raw": "<hr><b>Stat Modifiers</b>\\n",
+  "kind": "t",
+  "lines": [
+   3836
+  ]
+ },
+ {
+  "i": 361,
+  "raw": "Total: 0%",
+  "kind": "s",
+  "lines": [
+   3838
+  ]
+ },
+ {
+  "i": 362,
+  "raw": "<hr><b>Training Modifiers</b>\\n",
+  "kind": "t",
+  "lines": [
+   3839
+  ]
+ },
+ {
+  "i": 363,
+  "raw": "<hr>Ends: ",
+  "kind": "t",
+  "lines": [
+   3851,
+   3856
+  ]
+ },
+ {
+  "i": 364,
+  "raw": "[data-tooltip-title]",
+  "kind": "s",
+  "lines": [
+   3878
+  ]
+ },
+ {
+  "i": 365,
+  "raw": ".equipment-item-text",
+  "kind": "s",
+  "lines": [
+   3955
+  ]
+ },
+ {
+  "i": 366,
+  "raw": ".item-equipped",
+  "kind": "s",
+  "lines": [
+   3958,
+   3985
+  ]
+ },
+ {
+  "i": 367,
+  "raw": "var(--color)",
+  "kind": "s",
+  "lines": [
+   3966
+  ]
+ },
+ {
+  "i": 368,
+  "raw": "[id^=\\\"item-\\\"]",
+  "kind": "s",
+  "lines": [
+   4041
+  ]
+ },
+ {
+  "i": 369,
+  "raw": "You probably shouldn't throw this away",
+  "kind": "s",
+  "lines": [
+   4046
+  ]
+ },
+ {
+  "i": 370,
+  "raw": "Discarded ",
+  "kind": "t",
+  "lines": [
+   4055
+  ]
+ },
+ {
+  "i": 371,
+  "raw": "S",
+  "kind": "s",
+  "lines": [
+   4079,
+   6459
+  ]
+ },
+ {
+  "i": 372,
+  "raw": "{Confirm|craftConfirm}\\n\\n{Cancel|table|0|cancelCrafting}",
+  "kind": "t",
+  "lines": [
+   4095
+  ]
+ },
+ {
+  "i": 373,
+  "raw": "Title Changed: ",
+  "kind": "t",
+  "lines": [
+   4132
+  ]
+ },
+ {
+  "i": 374,
+  "raw": "{![dumbbells.png]Train Strength|",
+  "kind": "t",
+  "lines": [
+   4136
+  ]
+ },
+ {
+  "i": 375,
+  "raw": "_str}\\n{![shield.png]Train Defense|",
+  "kind": "t",
+  "lines": [
+   4136
+  ]
+ },
+ {
+  "i": 376,
+  "raw": "_def}\\n{![treadmill.png]Train Speed|",
+  "kind": "t",
+  "lines": [
+   4136
+  ]
+ },
+ {
+  "i": 377,
+  "raw": "_spd}\\n{![dexterity.png]Train Dexterity|",
+  "kind": "t",
+  "lines": [
+   4136
+  ]
+ },
+ {
+  "i": 378,
+  "raw": "_dex}",
+  "kind": "t",
+  "lines": [
+   4136
+  ]
+ },
+ {
+  "i": 379,
+  "raw": "Chop Trees",
+  "kind": "s",
+  "lines": [
+   4235
+  ]
+ },
+ {
+  "i": 380,
+  "raw": "You are chopping a tree",
+  "kind": "t",
+  "lines": [
+   4238,
+   4249
+  ]
+ },
+ {
+  "i": 381,
+  "raw": "You need an axe to chop trees.\\n\\n",
+  "kind": "t",
+  "lines": [
+   4266
+  ]
+ },
+ {
+  "i": 382,
+  "raw": "action-button disabled",
+  "kind": "s",
+  "lines": [
+   4319
+  ]
+ },
+ {
+  "i": 383,
+  "raw": "trainingGroundsInstructor",
+  "kind": "s",
+  "lines": [
+   4332
+  ]
+ },
+ {
+  "i": 384,
+  "raw": "trainingGroundsInstructor_askStats",
+  "kind": "s",
+  "lines": [
+   4333
+  ]
+ },
+ {
+  "i": 385,
+  "raw": "trainingGroundsTeamIntro1",
+  "kind": "s",
+  "lines": [
+   4338
+  ]
+ },
+ {
+  "i": 386,
+  "raw": "townGatesNorth",
+  "kind": "s",
+  "lines": [
+   4346,
+   4376
+  ]
+ },
+ {
+  "i": 387,
+  "raw": "townGatesNorthExterior",
+  "kind": "s",
+  "lines": [
+   4347,
+   4377
+  ]
+ },
+ {
+  "i": 388,
+  "raw": "forestMineEntrance",
+  "kind": "s",
+  "lines": [
+   4354
+  ]
+ },
+ {
+  "i": 389,
+  "raw": "theArenaEntrance",
+  "kind": "s",
+  "lines": [
+   4375
+  ]
+ },
+ {
+  "i": 390,
+  "raw": "\"Hello?\"\\n\\n{Next|intro2}",
+  "kind": "t",
+  "lines": [
+   4410
+  ]
+ },
+ {
+  "i": 391,
+  "raw": "\"You all right?\"\\n\\n{Get up|intro3}",
+  "kind": "t",
+  "lines": [
+   4414
+  ]
+ },
+ {
+  "i": 392,
+  "raw": "\"Oh good, you're awake... You might feel a bit disorientated. That's expected.\"\\n\\n{Next|intro4}",
+  "kind": "t",
+  "lines": [
+   4418
+  ]
+ },
+ {
+  "i": 393,
+  "raw": "\"There has been an incident occurring recently which caused humans from other dimensions to warp here. We haven't identified the cause yet and I'm afraid you're stuck here for now.\"\\n\\n{Next|intro5}",
+  "kind": "t",
+  "lines": [
+   4422
+  ]
+ },
+ {
+  "i": 394,
+  "raw": "\"Not to worry as the leader of our town offers housing to all affected by this incident.\"\\n\\n{Next|intro6}",
+  "kind": "t",
+  "lines": [
+   4426
+  ]
+ },
+ {
+  "i": 395,
+  "raw": "\"I have others to check on. Someone else will take you from here.\"\\n\\nThey gesture toward a man of average height in a gray coat.\\n\\n{Approach the man|intro7}",
+  "kind": "t",
+  "lines": [
+   4430
+  ]
+ },
+ {
+  "i": 396,
+  "raw": "You approach the man.\\n\\nHe gives a brief nod.\\n\\n\"Name's Alan. I'll show you where you're staying.\"\\n\\n{Follow him|intro8}",
+  "kind": "t",
+  "lines": [
+   4434
+  ]
+ },
+ {
+  "i": 397,
+  "raw": "You follow Alan until he reaches a small wooden house. He gestures for you to head inside.\\n\\n{![enter.png]Enter|intro9}",
+  "kind": "t",
+  "lines": [
+   4438
+  ]
+ },
+ {
+  "i": 398,
+  "raw": "Newcomer",
+  "kind": "s",
+  "lines": [
+   4442
+  ]
+ },
+ {
+  "i": 399,
+  "raw": "The house is small.\\n\\nThin walls. Wooden floor. One bed. One table.\\n\\n\"It's yours. Nothing much but it's better than nothing.\"\\n\\n{Next|intro10}",
+  "kind": "t",
+  "lines": [
+   4443
+  ]
+ },
+ {
+  "i": 400,
+  "raw": "\"You can walk around town if you want. Just don't go past the outer fence. It's not safe.\"\\n\\nHe leaves without waiting.\\n\\n{Next|home}",
+  "kind": "t",
+  "lines": [
+   4447
+  ]
+ },
+ {
+  "i": 401,
+  "raw": "You are in your home. You can rest here.\\n\\n{![bed.png]Sleep|sleep}\\n{![storage.png]Storage|storage}\\n{![table.png]Crafting Table|table}\\n\\n{![leave.png]Leave|housingArea}",
+  "kind": "t",
+  "lines": [
+   4451
+  ]
+ },
+ {
+  "i": 402,
+  "raw": "You are currently sleeping. Time passes faster",
+  "kind": "t",
+  "lines": [
+   4456
+  ]
+ },
+ {
+  "i": 403,
+  "raw": "\\n\\n{![leave.png]Get up|home}",
+  "kind": "t",
+  "lines": [
+   4456
+  ]
+ },
+ {
+  "i": 404,
+  "raw": "You can store items here for future use.\\n\\n{![leave.png]Leave|home|0|leaveStorage}",
+  "kind": "t",
+  "lines": [
+   4460
+  ]
+ },
+ {
+  "i": 405,
+  "raw": "You are able to craft items here.\\n\\n{![leave.png]Leave|home}",
+  "kind": "t",
+  "lines": [
+   4464
+  ]
+ },
+ {
+  "i": 406,
+  "raw": "You are in the housing area of the town. You can access your home or other areas from here.\\n\\n{![enter.png]Home|home}\\n\\n{![town_center.png]Town Center|townCenter|250}",
+  "kind": "t",
+  "lines": [
+   4468
+  ]
+ },
+ {
+  "i": 407,
+  "raw": "You are at the center of the town. Many people rush by hastily.\\n\\n{![poster.png]Notice Board|noticeBoard}\\n{![dumbbells.png]Training Grounds|trainingGrounds}\\n{![training_dummy.png]Dojo|dojo}\\n\\n{![hospital.png]Hospital|hospital}\\n{![dollar.png]Merchant|merchant}\\n\\n{![alley.png]Alley|alley}\\n\\n{![arrow_up.png]Town North|townNorth|250}\\n{![wood_door.png]Housing Area|housingArea|250}",
+  "kind": "t",
+  "lines": [
+   4472
+  ]
+ },
+ {
+  "i": 408,
+  "raw": "There is nothing of interest to you here.\\n\\n{![leave.png]Return|townCenter}",
+  "kind": "t",
+  "lines": [
+   4476
+  ]
+ },
+ {
+  "i": 409,
+  "raw": "trainingGroundsTeamIntro",
+  "kind": "s",
+  "lines": [
+   4480,
+   4481,
+   4486
+  ]
+ },
+ {
+  "i": 410,
+  "raw": "\"Hi! we're an up-and-coming fighting team for matches in The Arena. If you're willing to represent our team, we'll give you various supplies and equipment to help you improve your stats quickly. Sounds good?\"\\n\\n{![tick.png]Yes|trainingGroundsTeamIntro1}\\n\\n{![cross.png]Maybe Later|trainingGrounds}",
+  "kind": "t",
+  "lines": [
+   4482
+  ]
+ },
+ {
+  "i": 411,
+  "raw": "You are in the training grounds. You are able to improve your strength, defense, speed or dexterity here.\\n\\n{![chat.png]Training Instructor|trainingGroundsInstructor}",
+  "kind": "t",
+  "lines": [
+   4485
+  ]
+ },
+ {
+  "i": 412,
+  "raw": "\\n\\n{![tick.png]Join Team|trainingGroundsTeamIntro1}",
+  "kind": "t",
+  "lines": [
+   4487
+  ]
+ },
+ {
+  "i": 413,
+  "raw": "\\n\\n{Team Tent|trainingGrounds_nextLevel}",
+  "kind": "t",
+  "lines": [
+   4491
+  ]
+ },
+ {
+  "i": 414,
+  "raw": "\\n\\n{![leave.png]Leave|townCenter}",
+  "kind": "t",
+  "lines": [
+   4495,
+   4664
+  ]
+ },
+ {
+  "i": 415,
+  "raw": "{![chat.png]Ask about stats|trainingGroundsInstructor_askStats}\\n\\n{![leave.png]Return|trainingGrounds}",
+  "kind": "t",
+  "lines": [
+   4500
+  ]
+ },
+ {
+  "i": 416,
+  "raw": "\"Everyone has four main stats. Strength increases the damage you deal, Defense reduces the damage you take, Speed increases your chances of hitting and Dexterity increases the chance of dodging attacks.\"\\n\\n{![leave.png]Return|trainingGroundsInstructor}",
+  "kind": "t",
+  "lines": [
+   4504
+  ]
+ },
+ {
+  "i": 417,
+  "raw": "You are doing push-ups in the training grounds",
+  "kind": "t",
+  "lines": [
+   4508
+  ]
+ },
+ {
+  "i": 418,
+  "raw": "\\n\\n{![stop.png]Stop|trainingGrounds}",
+  "kind": "t",
+  "lines": [
+   4508,
+   4512,
+   4516
+  ]
+ },
+ {
+  "i": 419,
+  "raw": "You are practicing bracing in the training grounds",
+  "kind": "t",
+  "lines": [
+   4512
+  ]
+ },
+ {
+  "i": 420,
+  "raw": "You are practicing speed punching in the training grounds",
+  "kind": "t",
+  "lines": [
+   4516
+  ]
+ },
+ {
+  "i": 421,
+  "raw": "You are balancing on a beam in the training grounds",
+  "kind": "t",
+  "lines": [
+   4520
+  ]
+ },
+ {
+  "i": 422,
+  "raw": "\"Awesome! I'll tell you everything you need to know. Follow me.\"\\n\\n{Next|trainingGroundsTeamIntro2}",
+  "kind": "t",
+  "lines": [
+   4524
+  ]
+ },
+ {
+  "i": 423,
+  "raw": "You follow the young man in to a large tent on the field.\\n\\n\"This is the tent with all our special training equipment and staff. Training here would be double as effective than the public equipment.\"\\n\\n{Next|trainingGroundsTeamIntro3}",
+  "kind": "t",
+  "lines": [
+   4528
+  ]
+ },
+ {
+  "i": 424,
+  "raw": "\"We give rewards like exercise pills depending on how well you place in the weekly arena matches. On top of that, you also gain money from the competition organisers themselves.\"\\n\\n{Next|trainingGroundsTeamIntro4}",
+  "kind": "t",
+  "lines": [
+   4532
+  ]
+ },
+ {
+  "i": 425,
+  "raw": "\"Arena matches always run on a Sunday, I suggest beginning your training now. Here are 4 exercise pills as a thanks for joining us.\"\\n\\n{Next|trainingGrounds_nextLevel}",
+  "kind": "t",
+  "lines": [
+   4538
+  ]
+ },
+ {
+  "i": 426,
+  "raw": "You are inside your team's tent.",
+  "kind": "t",
+  "lines": [
+   4542
+  ]
+ },
+ {
+  "i": 427,
+  "raw": "\\n\\n{Claim Exercise Pills|trainingGrounds_nextLevel|0|nextLevelClaimExercisePill}",
+  "kind": "t",
+  "lines": [
+   4543
+  ]
+ },
+ {
+  "i": 428,
+  "raw": "\\n\\n{![leave.png]Leave|trainingGrounds}",
+  "kind": "t",
+  "lines": [
+   4544
+  ]
+ },
+ {
+  "i": 429,
+  "raw": "You are lifting weights in your team's tent",
+  "kind": "t",
+  "lines": [
+   4549
+  ]
+ },
+ {
+  "i": 430,
+  "raw": "\\n\\n{![stop.png]Stop|trainingGrounds_nextLevel}",
+  "kind": "t",
+  "lines": [
+   4549,
+   4553,
+   4557
+  ]
+ },
+ {
+  "i": 431,
+  "raw": "You are practicing sparring against a team member",
+  "kind": "t",
+  "lines": [
+   4553
+  ]
+ },
+ {
+  "i": 432,
+  "raw": "You are practicing spot jogging in your team's tent",
+  "kind": "t",
+  "lines": [
+   4557
+  ]
+ },
+ {
+  "i": 433,
+  "raw": "You are practicing dodging punches from a team member",
+  "kind": "t",
+  "lines": [
+   4561
+  ]
+ },
+ {
+  "i": 434,
+  "raw": "As you walk into the dojo, an old man greets you.\\n\\n\"Welcome to the dojo. This is the main place in town where fighters of all classes come to train their fighting skills.\"\\n\\n{Next|dojo}",
+  "kind": "t",
+  "lines": [
+   4567
+  ]
+ },
+ {
+  "i": 435,
+  "raw": "You are in the dojo.\\n\\n{![chat.png]Dojo Instructor|dojoInstructor}\\n{![sword.png]Practice fighting a training dummy|dojo_trainingDummy}\\n\\n",
+  "kind": "t",
+  "lines": [
+   4569
+  ]
+ },
+ {
+  "i": 436,
+  "raw": "{![park.png]Yard|dojoYard}",
+  "kind": "t",
+  "lines": [
+   4570
+  ]
+ },
+ {
+  "i": 437,
+  "raw": "\\n{![leave.png]Leave|townCenter}",
+  "kind": "t",
+  "lines": [
+   4571
+  ]
+ },
+ {
+  "i": 438,
+  "raw": "You are practicing fighting against training dummies",
+  "kind": "t",
+  "lines": [
+   4579
+  ]
+ },
+ {
+  "i": 439,
+  "raw": "\\n\\n{![stop.png]Stop|dojo|0|endFight}",
+  "kind": "t",
+  "lines": [
+   4579
+  ]
+ },
+ {
+  "i": 440,
+  "raw": "As you defeat your first training dummy, the instructor walks towards you.\\n\\n\"You're not from around here are you? You seem like you're from another world but I can see potential.\"\\n\\n{Next|dojoQuestIntro2}",
+  "kind": "t",
+  "lines": [
+   4584
+  ]
+ },
+ {
+  "i": 441,
+  "raw": "\"I'm willing to guide you in order to become stronger. But first, you need to reach the goal of 1.5 strength and destroy 5 straw dummies. Come talk to me again once you're done.\"\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4590
+  ]
+ },
+ {
+  "i": 442,
+  "raw": "\"I'm willing to guide you in order to become stronger. But first, you need to destroy 5 straw dummies. Come talk to me again once you're done.\"\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4592
+  ]
+ },
+ {
+  "i": 443,
+  "raw": "\"Need something?\"\\n\\n{![poster.png]Quest Completion|dojoInstructorQuest}\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4597
+  ]
+ },
+ {
+  "i": 444,
+  "raw": "\"You don't seem to have completed any new quests.\"\\n\\n{![leave.png]Return|dojoInstructor}",
+  "kind": "t",
+  "lines": [
+   4601
+  ]
+ },
+ {
+  "i": 445,
+  "raw": "\"Good job, you've proven that you're able to do some basic fighting. Unlike real enemies, these dummies don't fight back or move. For your next task: get all your battle stats to 1.5. Then I can give you some real enemies to fight.\"\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4607
+  ]
+ },
+ {
+  "i": 446,
+  "raw": "\"You now have some decent stats, still below the average human in this world but you should now be able do my next quest without issue. Your goal is to defeat 10 mice in the alleys. Visit the hospital if your health drops too low. If you struggle to defeat the mice, I suggest training a bit more.\"\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4614
+  ]
+ },
+ {
+  "i": 447,
+  "raw": "\"Good job, you've proven that you're able to fight real enemies now. Although only small ones, it's still progress. Your next task is to defeat the wooden golem located in the dojo yard. This is significantly harder than the mice but you'll only have to defeat one of them.\"\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4621
+  ]
+ },
+ {
+  "i": 448,
+  "raw": "\"Congratulations on beating the golem, there are more available for you to fight if you wish. For my final quest: I want you to reach 10 in every stat. Upon completion you'll gain permission to explore outside of the town. This may take you a while and I wouldn't expect you to complete it quickly. You can continue exploring other areas inside the town while working your way towards completion.\"\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4628
+  ]
+ },
+ {
+  "i": 449,
+  "raw": "\"This is the end of my questline for now, you are free to explore outside the town but be careful as there are stronger enemies around.\"\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4635
+  ]
+ },
+ {
+  "i": 450,
+  "raw": "You are in the yard of the dojo.\\n\\n{![training_dummy.png]Golems|dojoGolems}\\n\\n{![leave.png]Return|dojo}",
+  "kind": "t",
+  "lines": [
+   4641
+  ]
+ },
+ {
+  "i": 451,
+  "raw": "{Wood Golem|dojo_golemFight|0|generateEnemy(woodGolem,woodGolem)}\\n",
+  "kind": "t",
+  "lines": [
+   4646
+  ]
+ },
+ {
+  "i": 452,
+  "raw": "{Stone Golem|dojo_golemFight|0|generateEnemy(stoneGolem,stoneGolem)}\\n",
+  "kind": "t",
+  "lines": [
+   4647
+  ]
+ },
+ {
+  "i": 453,
+  "raw": "{Coal Golem|dojo_golemFight|0|generateEnemy(coalGolem,coalGolem)}\\n",
+  "kind": "t",
+  "lines": [
+   4648
+  ]
+ },
+ {
+  "i": 454,
+  "raw": "{Straw Golem|dojo_golemFight|0|generateEnemy(strawGolem,strawGolem)}\\n",
+  "kind": "t",
+  "lines": [
+   4650
+  ]
+ },
+ {
+  "i": 455,
+  "raw": "\\n{![leave.png]Return|dojoYard}",
+  "kind": "t",
+  "lines": [
+   4654
+  ]
+ },
+ {
+  "i": 456,
+  "raw": "You are fighting a golem",
+  "kind": "t",
+  "lines": [
+   4659
+  ]
+ },
+ {
+  "i": 457,
+  "raw": "\\n\\n{![leave.png]Return|dojoYard|0|endFight}",
+  "kind": "t",
+  "lines": [
+   4659
+  ]
+ },
+ {
+  "i": 458,
+  "raw": "You are getting healed by a doctor",
+  "kind": "t",
+  "lines": [
+   4664,
+   4780
+  ]
+ },
+ {
+  "i": 459,
+  "raw": "You are already at maximum health.\\n\\n{![leave.png]Leave|townCenter}",
+  "kind": "t",
+  "lines": [
+   4666
+  ]
+ },
+ {
+  "i": 460,
+  "raw": "\"Sorry, no civilians allowed here. We have an infestation problem.\"\\n\\n{![leave.png]Leave|townCenter}",
+  "kind": "t",
+  "lines": [
+   4672
+  ]
+ },
+ {
+  "i": 461,
+  "raw": "You are in the alley. There are mice and rats everywhere.\\n\\n{![leave.png]Leave|townCenter|0|endFight}",
+  "kind": "t",
+  "lines": [
+   4675
+  ]
+ },
+ {
+  "i": 462,
+  "raw": "\"Welcome! I'm the main supplier of various goods in this town. I can also buy any straw baskets that you may have. Feel free to look around.\"",
+  "kind": "t",
+  "lines": [
+   4680
+  ]
+ },
+ {
+  "i": 463,
+  "raw": "\\n\\n{![chat.png]Request for supplies|merchantGuildQuestSupplies}",
+  "kind": "t",
+  "lines": [
+   4681
+  ]
+ },
+ {
+  "i": 464,
+  "raw": "\\n\\n{![dollar.png]Sell|merchantSell}\\n\\n{![leave.png]Leave|townCenter}",
+  "kind": "t",
+  "lines": [
+   4682
+  ]
+ },
+ {
+  "i": 465,
+  "raw": "\"It appears that you don't have any straw baskets to sell. Come back when you get some, I pay $5 for each.\"\\n\\n{![leave.png]Return|merchant}",
+  "kind": "t",
+  "lines": [
+   4688
+  ]
+ },
+ {
+  "i": 466,
+  "raw": "\"Would you like to sell all your straw baskets for a total of ",
+  "kind": "t",
+  "lines": [
+   4690
+  ]
+ },
+ {
+  "i": 467,
+  "raw": "?\"\\n\\n{![tick.png]Yes|merchant|0|merchantSell}\\n\\n{![leave.png]Return|merchant}",
+  "kind": "t",
+  "lines": [
+   4690
+  ]
+ },
+ {
+  "i": 468,
+  "raw": "\"Ah, Els sent you right? Here, take this.\"\\n\\nYou pick up the heavy box the merchant hands you.\\n\\n{Next|merchant}",
+  "kind": "t",
+  "lines": [
+   4696
+  ]
+ },
+ {
+  "i": 469,
+  "raw": "You are at the north of the town. This area is commonly used for entertainment activites.\\n\\n{![park.png]Park|park}\\n{![sword.png]Weapon Shop|weaponShop}\\n{![sword.png]The Arena|theArenaEntrance}\\n\\n{![leave.png]Town Gates|townGatesNorth|250}\\n{![town_center.png]Town Center|townCenter|250}",
+  "kind": "t",
+  "lines": [
+   4700
+  ]
+ },
+ {
+  "i": 470,
+  "raw": "You are in the park. Various trees and plants are scattered around.\\n\\n{![search.png]Explore|parkExplore}\\n\\n{![leave.png]Leave|townNorth}",
+  "kind": "t",
+  "lines": [
+   4704
+  ]
+ },
+ {
+  "i": 471,
+  "raw": "You are searching for valuable objects in the park",
+  "kind": "t",
+  "lines": [
+   4708
+  ]
+ },
+ {
+  "i": 472,
+  "raw": "\\n\\n{![stop.png]Stop|park}",
+  "kind": "t",
+  "lines": [
+   4708
+  ]
+ },
+ {
+  "i": 473,
+  "raw": "\"Welcome to my weapon shop, I craft and import weapons from various places. Don't think about stealing, you are in a weapon shop after all.\"\\n\\n{![leave.png]Leave|townNorth}",
+  "kind": "t",
+  "lines": [
+   4712
+  ]
+ },
+ {
+  "i": 474,
+  "raw": "You are in the entrance of the arena.",
+  "kind": "t",
+  "lines": [
+   4717
+  ]
+ },
+ {
+  "i": 475,
+  "raw": " It's quite crowded with many people rushing to join the queue for tickets.",
+  "kind": "t",
+  "lines": [
+   4718
+  ]
+ },
+ {
+  "i": 476,
+  "raw": " It's quite empty, more people would be here on a Sunday.",
+  "kind": "s",
+  "lines": [
+   4718
+  ]
+ },
+ {
+  "i": 477,
+  "raw": "\\n\\n{![leave.png]Leave|townNorth}",
+  "kind": "t",
+  "lines": [
+   4719
+  ]
+ },
+ {
+  "i": 478,
+  "raw": "You join the signup queue and patiently wait for your turn.\\n\\n",
+  "kind": "t",
+  "lines": [
+   4724
+  ]
+ },
+ {
+  "i": 479,
+  "raw": "\"Hello, would you like to participate in the matches?\"\\n\\n{![tick.png]Yes|theArenaSignupIntro1}\\n{![cross.png]No|theArenaEntrance}",
+  "kind": "t",
+  "lines": [
+   4725
+  ]
+ },
+ {
+  "i": 480,
+  "raw": "\"Unfortunately you do not meet the minimum requirements. Come back when you have a rank of ",
+  "kind": "t",
+  "lines": [
+   4725
+  ]
+ },
+ {
+  "i": 481,
+  "raw": " or higher.\"\\n\\n{![leave.png]Leave|theArenaEntrance}",
+  "kind": "t",
+  "lines": [
+   4725
+  ]
+ },
+ {
+  "i": 482,
+  "raw": "\"Great, please head towards the doors over there.\"\\n\\n{![enter.png]Enter|theArenaSignupIntro2}",
+  "kind": "t",
+  "lines": [
+   4730
+  ]
+ },
+ {
+  "i": 483,
+  "raw": "\"Welcome to The Arena, fighter. You will be participating in a series of matches against opponents that get increasingly stronger with one loss resulting in elimination. This is the biggest event in this town with hundreds of participants and thousands of spectators. You get up to a 60 minute break after every match. Best of luck, you can begin when you're ready.\"\\n\\n{![enter.png]Begin|theArenaWalkIn}",
+  "kind": "t",
+  "lines": [
+   4736
+  ]
+ },
+ {
+  "i": 484,
+  "raw": "While walking in to the arena, the organiser stops you with his arm. \"This is the end currently, it would be ill advised to proceed. The person who built this place has stated that there is nothing remaining to achieve for now.\"\\n\\n{![leave.png]Resign|theArenaEntrance|0|theArenaResign}",
+  "kind": "t",
+  "lines": [
+   4742
+  ]
+ },
+ {
+  "i": 485,
+  "raw": "You walk into the arena and prepare to fight your opponent.\\n\\nThe organiser shouts, \"This is round ",
+  "kind": "t",
+  "lines": [
+   4744
+  ]
+ },
+ {
+  "i": 486,
+  "raw": ", get ready.\"\\n\\n{![sword.png]Fight|theArenaFight}",
+  "kind": "t",
+  "lines": [
+   4744
+  ]
+ },
+ {
+  "i": 487,
+  "raw": "You are currently fighting your opponent in The Arena",
+  "kind": "t",
+  "lines": [
+   4762
+  ]
+ },
+ {
+  "i": 488,
+  "raw": "\\n\\n{![shield.png]Surrender|theArenaEntrance|0|theArenaResign}",
+  "kind": "t",
+  "lines": [
+   4762
+  ]
+ },
+ {
+  "i": 489,
+  "raw": "nextLevelCongrats",
+  "kind": "s",
+  "lines": [
+   4767,
+   4769
+  ]
+ },
+ {
+  "i": 490,
+  "raw": "A member of your team runs towards you\\n\\n\"Congrats on winning your first match, you did great in there\"\\n\\n",
+  "kind": "t",
+  "lines": [
+   4768
+  ]
+ },
+ {
+  "i": 491,
+  "raw": "\"Good job contestant on winning your ",
+  "kind": "t",
+  "lines": [
+   4771
+  ]
+ },
+ {
+  "i": 492,
+  "raw": " round, the next round will begin shortly.\"",
+  "kind": "t",
+  "lines": [
+   4771
+  ]
+ },
+ {
+  "i": 493,
+  "raw": "\\n\\n{![enter.png]Begin Immediately|theArenaWalkIn}\\n\\n{![hospital.png]Medbay|theArenaMedbay}\\n\\n{![leave.png]Resign|theArenaEntrance|0|theArenaResign}",
+  "kind": "t",
+  "lines": [
+   4773
+  ]
+ },
+ {
+  "i": 494,
+  "raw": "You are already at maximum health.",
+  "kind": "t",
+  "lines": [
+   4782
+  ]
+ },
+ {
+  "i": 495,
+  "raw": "\\n\\n{![leave.png]Leave|theArenaWinMatch}",
+  "kind": "t",
+  "lines": [
+   4784
+  ]
+ },
+ {
+  "i": 496,
+  "raw": "You are standing in front of the town gates.\\n\\n",
+  "kind": "t",
+  "lines": [
+   4789
+  ]
+ },
+ {
+  "i": 497,
+  "raw": "\"You have permission to leave the town if you wish. You can come back at any time.\"\\n\\n{![leave.png]Leave the town|townGatesNorthExterior}",
+  "kind": "t",
+  "lines": [
+   4790
+  ]
+ },
+ {
+  "i": 498,
+  "raw": "\"You're too weak to leave the town on your own, it would be reckless of us to let you through.\"",
+  "kind": "t",
+  "lines": [
+   4790
+  ]
+ },
+ {
+  "i": 499,
+  "raw": "\\n\\n{![arrow_up.png]Town North|townNorth|250}",
+  "kind": "t",
+  "lines": [
+   4791
+  ]
+ },
+ {
+  "i": 500,
+  "raw": "You are standing in front of the exterior of the town gates.\\n\\n{![park.png]Grass Plains|grassPlains|500}\\n{![enter.png]Enter the town|townGatesNorth}",
+  "kind": "t",
+  "lines": [
+   4796
+  ]
+ },
+ {
+  "i": 501,
+  "raw": "You are standing in the grass plains. You notice some slimes jumping around.\\n\\n{![leave.png]Escape|grassPlains|0|grassPlainsEscape}\\n\\n{![forest.png]Forest|forestLayer1|1000|endFight}\\n{![enter.png]Town Gates|townGatesNorthExterior|500|endFight}",
+  "kind": "t",
+  "lines": [
+   4800
+  ]
+ },
+ {
+  "i": 502,
+  "raw": "You are standing near the entrance of the forest. The nearby trees provide some shade.",
+  "kind": "t",
+  "lines": [
+   4805
+  ]
+ },
+ {
+  "i": 503,
+  "raw": " Some monsters are blocking the path to the deeper layers.",
+  "kind": "t",
+  "lines": [
+   4806
+  ]
+ },
+ {
+  "i": 504,
+  "raw": "\\n\\n{![search.png]Explore|forestLayer1Explore}",
+  "kind": "t",
+  "lines": [
+   4807
+  ]
+ },
+ {
+  "i": 505,
+  "raw": "\\n{![sword.png]Clear path|forestLayer1Clear}",
+  "kind": "t",
+  "lines": [
+   4808
+  ]
+ },
+ {
+  "i": 506,
+  "raw": "\\n{![sword.png]Hunt|forestHunt}",
+  "kind": "t",
+  "lines": [
+   4809
+  ]
+ },
+ {
+  "i": 507,
+  "raw": "\\n\\n{![sword_shield.png]Hunters' Guild|huntersGuild}\\n\\n",
+  "kind": "t",
+  "lines": [
+   4810
+  ]
+ },
+ {
+  "i": 508,
+  "raw": "{![arrow_right.png]Walk towards the center|forestLayer2|300(Forest Center)}\\n",
+  "kind": "t",
+  "lines": [
+   4811
+  ]
+ },
+ {
+  "i": 509,
+  "raw": "{![park.png]Grass Plains|grassPlains|1000}",
+  "kind": "t",
+  "lines": [
+   4812
+  ]
+ },
+ {
+  "i": 510,
+  "raw": "You are searching for items in the forest",
+  "kind": "t",
+  "lines": [
+   4817
+  ]
+ },
+ {
+  "i": 511,
+  "raw": "\\n\\n{![stop.png]Stop|forestLayer1}",
+  "kind": "t",
+  "lines": [
+   4817
+  ]
+ },
+ {
+  "i": 512,
+  "raw": "huntersGuildIntro",
+  "kind": "s",
+  "lines": [
+   4825,
+   4836
+  ]
+ },
+ {
+  "i": 513,
+  "raw": "You slowly walk into the Hunters' guild, the occupants appear to be having a discussion about enemies in the forest. You stand around for a minute until one of them invites you to listen.\\n\\nYou couldn't understand anything.\\n\\n{Next|huntersGuildIntro}",
+  "kind": "t",
+  "lines": [
+   4826
+  ]
+ },
+ {
+  "i": 514,
+  "raw": "You are in the Hunters' guild. A group of hunters gather around the fireplace.\\n\\n{![fire.png]Fireplace|huntersGuildFireplace}",
+  "kind": "t",
+  "lines": [
+   4828
+  ]
+ },
+ {
+  "i": 515,
+  "raw": "\\n{![poster.png]Hunting Missions|huntersGuildMissions}",
+  "kind": "t",
+  "lines": [
+   4829
+  ]
+ },
+ {
+  "i": 516,
+  "raw": "\\n\\n{![leave.png]Leave|forestLayer1}",
+  "kind": "t",
+  "lines": [
+   4830
+  ]
+ },
+ {
+  "i": 517,
+  "raw": "\"Sorry if that was a bit rushed or hard to understand. We had to prepare an emergency plan due to an imminent threat in the forest.\"\\n\\nHe reaches out and firmly shakes your hand.\\n\\n\"My name's Els and I'm the leader of this guild. We focus on discovering, researching and hunting the various creatures in this forest.\"\\n\\n\"If you would like to know more, come talk to me near the fireplace.\"\\n\\n{Next|huntersGuild}",
+  "kind": "t",
+  "lines": [
+   4837
+  ]
+ },
+ {
+  "i": 518,
+  "raw": "You are sitting on a chair near the fireplace in the Hunters' guild.\\n\\n{![chat.png]Talk to Els|huntersGuildEls}\\n\\n{![leave.png]Leave|huntersGuild}",
+  "kind": "t",
+  "lines": [
+   4841
+  ]
+ },
+ {
+  "i": 519,
+  "raw": "\"Hello, what do you need today?\"",
+  "kind": "t",
+  "lines": [
+   4845
+  ]
+ },
+ {
+  "i": 520,
+  "raw": "huntersGuildAskQuest",
+  "kind": "s",
+  "lines": [
+   4846,
+   4854,
+   4921
+  ]
+ },
+ {
+  "i": 521,
+  "raw": "\\n\\n{![poster.png]Receive Quest|huntersGuildElsQuest}",
+  "kind": "t",
+  "lines": [
+   4848
+  ]
+ },
+ {
+  "i": 522,
+  "raw": "\\n\\n{![poster.png]Quest Completion|huntersGuildElsQuest}",
+  "kind": "t",
+  "lines": [
+   4850
+  ]
+ },
+ {
+  "i": 523,
+  "raw": "\\n\\n{![chat.png]Ask about the guild|huntersGuildEls_askGuild}\\n{![chat.png]Ask about creatures|huntersGuildEls_askForest}",
+  "kind": "t",
+  "lines": [
+   4853
+  ]
+ },
+ {
+  "i": 524,
+  "raw": "\\n{![chat.png]Ask about quests|huntersGuildEls_askQuests}",
+  "kind": "t",
+  "lines": [
+   4854
+  ]
+ },
+ {
+  "i": 525,
+  "raw": "\\n\\n{![leave.png]Leave|huntersGuildFireplace}",
+  "kind": "t",
+  "lines": [
+   4855
+  ]
+ },
+ {
+  "i": 526,
+  "raw": "\"You haven't fulfilled my quest.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4860
+  ]
+ },
+ {
+  "i": 527,
+  "raw": "\"You've completed all my quests for now.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4860
+  ]
+ },
+ {
+  "i": 528,
+  "raw": "\"We've been needing some firewood lately in order to keep the fireplace burning. Obtain 3 pieces of wood by searching in the forest. Come back when you're done.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4867
+  ]
+ },
+ {
+  "i": 529,
+  "raw": "\"Thanks for the firewood, this should help extend the duration of the fire for a few hours.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4868
+  ]
+ },
+ {
+  "i": 530,
+  "raw": "\"We're planning on expanding our search operation into a new area of the forest. Go to the forest path and clear the enemies there.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4873
+  ]
+ },
+ {
+  "i": 531,
+  "raw": "\"Thanks for your help, I'll be sending a few of our guys to explore deeper in to the forest. I'll let you know if we find anything.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4874
+  ]
+ },
+ {
+  "i": 532,
+  "raw": "elsQuestlineCooldown",
+  "kind": "s",
+  "lines": [
+   4883,
+   4895
+  ]
+ },
+ {
+  "i": 533,
+  "raw": "\"We've been running a bit low on supplies lately and we're planning on setting up a new area in this building. Would you be able to fetch some supplies from the merchant in town? Just tell the merchant that I've sent you. The package may be a little heavy.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4885
+  ]
+ },
+ {
+  "i": 534,
+  "raw": "\"Thanks again, this should be good for now. I'll be able to give you another quest in around 2 days from now\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4886
+  ]
+ },
+ {
+  "i": 535,
+  "raw": "\"We're not quite ready yet, come back on ",
+  "kind": "t",
+  "lines": [
+   4895
+  ]
+ },
+ {
+  "i": 536,
+  "raw": ".\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4895
+  ]
+ },
+ {
+  "i": 537,
+  "raw": "\"We're going to need some stone for our project. Go to the mine deeper in the forest and collect 10 stones. Come back when you're done.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4897
+  ]
+ },
+ {
+  "i": 538,
+  "raw": "\"Thanks for the stone, we're closer to finishing our project.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4898
+  ]
+ },
+ {
+  "i": 539,
+  "raw": "\"This should be the final requirement for our project. We need quite a bit of wood, around 20 to be precise. I suggest using an axe to chop down a few trees.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4906
+  ]
+ },
+ {
+  "i": 540,
+  "raw": "\"That should be all, give me a few moments.\"\\n\\nYou patiently wait while he gives the wood you just delivered to a few guild members.\\n\\nHe jogs back to you.\\n\\n\"Yep, that's all we needed. I'm proud to announce that we now have a dedicated area for hunting missions. All members of the guild will now be able to take on small missions to hunt down creatures for pay. We should have our first few missions up shortly.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4907
+  ]
+ },
+ {
+  "i": 541,
+  "raw": "\"The Hunters' guild was founded years ago by a small group of people who wished to research the forest. I was appointed as the leader a short while after the guild was founded.\"\\n\\n\"The forest is quite vast making exploration difficult. We still aren't aware of all the creatures in the forest.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4913
+  ]
+ },
+ {
+  "i": 542,
+  "raw": "\"The forest is home to many creatures. Some harmless, some extremely dangerous. Generally the outskirts of the forest are safe so I suggest refraining from going in too deep unless you're strong enough.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4917
+  ]
+ },
+ {
+  "i": 543,
+  "raw": "\"Quests?\"\\n\\n\"I could probably give you a few quests to collect resources, obviously you'll be paid for them. Talk to me again if you're interested.\"\\n\\n{![leave.png]Return|huntersGuildEls}",
+  "kind": "t",
+  "lines": [
+   4922
+  ]
+ },
+ {
+  "i": 544,
+  "raw": "You are in a room located in the Hunters' guild.\\n\\n\"Our resources are a bit limited here so we're unable to heal you completely. Head back to the hospital in town when you're ready.\"\\n\\n",
+  "kind": "t",
+  "lines": [
+   4926
+  ]
+ },
+ {
+  "i": 545,
+  "raw": "Right before Els walks out of the room, he says, \"Reminder that the forest is more dangerous at night\"\\n\\n",
+  "kind": "t",
+  "lines": [
+   4927
+  ]
+ },
+ {
+  "i": 546,
+  "raw": "{![leave.png]Return|huntersGuild}",
+  "kind": "t",
+  "lines": [
+   4928
+  ]
+ },
+ {
+  "i": 547,
+  "raw": "You look at the mission board in the Hunters' Guild.",
+  "kind": "t",
+  "lines": [
+   4933
+  ]
+ },
+ {
+  "i": 548,
+  "raw": "huntersGuildMissions",
+  "kind": "s",
+  "lines": [
+   4935,
+   4936,
+   4947
+  ]
+ },
+ {
+  "i": 549,
+  "raw": " to ",
+  "kind": "t",
+  "lines": [
+   4955
+  ]
+ },
+ {
+  "i": 550,
+  "raw": "{Claim|huntersGuild|0|huntersGuildClaimMission(",
+  "kind": "t",
+  "lines": [
+   4957
+  ]
+ },
+ {
+  "i": 551,
+  "raw": ")} - ",
+  "kind": "t",
+  "lines": [
+   4957
+  ]
+ },
+ {
+  "i": 552,
+  "raw": "\\n\\nThere are no available missions today.",
+  "kind": "s",
+  "lines": [
+   4959
+  ]
+ },
+ {
+  "i": 553,
+  "raw": "\\n\\n{![dollar.png]Claim Reward|huntersGuild|0|huntersGuildClaimMission(-1)}",
+  "kind": "s",
+  "lines": [
+   4964
+  ]
+ },
+ {
+  "i": 554,
+  "raw": "\\n\\n{![cross.png]Abandon Mission|huntersGuild|0|huntersGuildClaimMission(-1)}",
+  "kind": "s",
+  "lines": [
+   4966
+  ]
+ },
+ {
+  "i": 555,
+  "raw": "\\n\\n{![leave.png]Leave|huntersGuild}",
+  "kind": "s",
+  "lines": [
+   4970
+  ]
+ },
+ {
+  "i": 556,
+  "raw": "You are hunting for the target",
+  "kind": "t",
+  "lines": [
+   4975
+  ]
+ },
+ {
+  "i": 557,
+  "raw": "\\n\\n{![stop.png]Stop|forestLayer1|0|endHunt}",
+  "kind": "t",
+  "lines": [
+   4975
+  ]
+ },
+ {
+  "i": 558,
+  "raw": "You can see the entrance of the forest in the distance.\\n\\n{![alley.png]Mine|forestMineEntrance}\\n{![dumbbells.png]Forest Gym|forestGym}\\n\\n{![arrow_left.png]Walk towards the exit|forestLayer1|300(Forest Entrance)}",
+  "kind": "t",
+  "lines": [
+   4979
+  ]
+ },
+ {
+  "i": 559,
+  "raw": "You are at the entrance of the mine. It appears to be abandoned.\\n\\n{![enter.png]Enter|forestMine}\\n\\n{![forest.png]Forest|forestLayer2}",
+  "kind": "t",
+  "lines": [
+   4983
+  ]
+ },
+ {
+  "i": 560,
+  "raw": "You are in the mine.\\n",
+  "kind": "t",
+  "lines": [
+   4988
+  ]
+ },
+ {
+  "i": 561,
+  "raw": "<span id=action-text>You are mining for stone and other materials with your pickaxe",
+  "kind": "t",
+  "lines": [
+   4989
+  ]
+ },
+ {
+  "i": 562,
+  "raw": "<span id=action-text>You will need a pickaxe equipped to mine.</span>",
+  "kind": "t",
+  "lines": [
+   4989
+  ]
+ },
+ {
+  "i": 563,
+  "raw": "\\n\\n{![leave.png]Leave|forestMineEntrance}",
+  "kind": "t",
+  "lines": [
+   4990
+  ]
+ },
+ {
+  "i": 564,
+  "raw": "You are in the forest gym. It appears to be a membership only gym.",
+  "kind": "t",
+  "lines": [
+   4995
+  ]
+ },
+ {
+  "i": 565,
+  "raw": "\\n\\n{![chat.png]Trainer|forestGymTrainer}\\n\\n{![leave.png]Leave|forestLayer2}",
+  "kind": "t",
+  "lines": [
+   4995
+  ]
+ },
+ {
+  "i": 566,
+  "raw": "\"Welcome to the forest gym, I built this facility by hand in order to fully optimise training. It was originally made for my own use but I've decided to start selling memberships.\"",
+  "kind": "t",
+  "lines": [
+   4999
+  ]
+ },
+ {
+  "i": 567,
+  "raw": "forestGymMembership1",
+  "kind": "s",
+  "lines": [
+   5000,
+   5008,
+   5135
+  ]
+ },
+ {
+  "i": 568,
+  "raw": "forestGymMembership2",
+  "kind": "s",
+  "lines": [
+   5000,
+   5001,
+   5008
+  ]
+ },
+ {
+  "i": 569,
+  "raw": "\\n\\n{![chat.png]Ask about membership|forestGymTrainerMembershipAsk}",
+  "kind": "t",
+  "lines": [
+   5000
+  ]
+ },
+ {
+  "i": 570,
+  "raw": "forestGymCharmPurchase",
+  "kind": "s",
+  "lines": [
+   5001,
+   5155
+  ]
+ },
+ {
+  "i": 571,
+  "raw": "\\n\\n{![chat.png]Ask about the charm he's wearing|forestGymTrainerCharmAsk}",
+  "kind": "t",
+  "lines": [
+   5001
+  ]
+ },
+ {
+  "i": 572,
+  "raw": "\\n\\n{![leave.png]Leave|forestGym}",
+  "kind": "t",
+  "lines": [
+   5002,
+   5010
+  ]
+ },
+ {
+  "i": 573,
+  "raw": "\"I offer 2 levels of membership. The basic membership costs $100, which gives you access to the basic equipment. The advanced membership costs $400, which includes the perks of the basic membership and gives you access to experimental equipment that I use myself. The price is a bit steep but it's really good value for money.\"",
+  "kind": "t",
+  "lines": [
+   5007
+  ]
+ },
+ {
+  "i": 574,
+  "raw": "\\n\\n{Basic Membership ($100)|forestGym|0|forestGymMembershipPurchase(basic)}",
+  "kind": "t",
+  "lines": [
+   5008
+  ]
+ },
+ {
+  "i": 575,
+  "raw": "{Advanced Membership ($400)|forestGym|0|forestGymMembershipPurchase(advanced)}",
+  "kind": "t",
+  "lines": [
+   5009
+  ]
+ },
+ {
+  "i": 576,
+  "raw": "\"I occasionally wear this charm while training. I can't use it very often though as it physically hurts when I use it. But it does make my training slightly more effective. If you want I could sell it to you for $200.\"\\n\\n{Buy Charm ($200)|forestGym|0|forestGymCharmPurchase}\\n\\n{![leave.png]Leave|forestGym}",
+  "kind": "t",
+  "lines": [
+   5015
+  ]
+ },
+ {
+  "i": 577,
+  "raw": "You are lifting weights in the forest gym",
+  "kind": "t",
+  "lines": [
+   5019
+  ]
+ },
+ {
+  "i": 578,
+  "raw": "\\n\\n{![stop.png]Stop|forestGym}",
+  "kind": "t",
+  "lines": [
+   5019,
+   5023,
+   5027
+  ]
+ },
+ {
+  "i": 579,
+  "raw": "You are practicing blocking in the forest gym",
+  "kind": "t",
+  "lines": [
+   5023
+  ]
+ },
+ {
+  "i": 580,
+  "raw": "You are running on a track in the forest gym",
+  "kind": "t",
+  "lines": [
+   5027
+  ]
+ },
+ {
+  "i": 581,
+  "raw": "You are practicing movement in the forest gym",
+  "kind": "t",
+  "lines": [
+   5031
+  ]
+ },
+ {
+  "i": 582,
+  "raw": "You are lifting rocks in the forest gym",
+  "kind": "t",
+  "lines": [
+   5035
+  ]
+ },
+ {
+  "i": 583,
+  "raw": "forestGymAdvancedDefFirst",
+  "kind": "s",
+  "lines": [
+   5040,
+   5042
+  ]
+ },
+ {
+  "i": 584,
+  "raw": "You question the trainer about this training technique.\\n\\n\"It worked for me so it should work for everyone else too.\"\\n\\n",
+  "kind": "t",
+  "lines": [
+   5041
+  ]
+ },
+ {
+  "i": 585,
+  "raw": "You are practicing running in to a wall in the forest gym",
+  "kind": "t",
+  "lines": [
+   5044
+  ]
+ },
+ {
+  "i": 586,
+  "raw": "You are running up slopes in the forest gym",
+  "kind": "t",
+  "lines": [
+   5049
+  ]
+ },
+ {
+  "i": 587,
+  "raw": "You are practicing jumping over rods in the forest gym",
+  "kind": "t",
+  "lines": [
+   5053
+  ]
+ },
+ {
+  "i": 588,
+  "raw": ".item-selected",
+  "kind": "s",
+  "lines": [
+   5089
+  ]
+ },
+ {
+  "i": 589,
+  "raw": "You resigned from The Arena.\\n\\n",
+  "kind": "t",
+  "lines": [
+   5110,
+   5116
+  ]
+ },
+ {
+  "i": 590,
+  "raw": "You purchased a basic membership for ",
+  "kind": "t",
+  "lines": [
+   5136
+  ]
+ },
+ {
+  "i": 591,
+  "raw": ".\\n\\n",
+  "kind": "t",
+  "lines": [
+   5136,
+   5144,
+   5156
+  ]
+ },
+ {
+  "i": 592,
+  "raw": "You do not have enough money to purchase this.\\n\\n",
+  "kind": "s",
+  "lines": [
+   5138,
+   5146,
+   5159
+  ]
+ },
+ {
+  "i": 593,
+  "raw": "You purchased an advanced membership for ",
+  "kind": "t",
+  "lines": [
+   5144
+  ]
+ },
+ {
+  "i": 594,
+  "raw": "You purchased a training charm for ",
+  "kind": "t",
+  "lines": [
+   5156
+  ]
+ },
+ {
+  "i": 595,
+  "raw": "You received ",
+  "kind": "t",
+  "lines": [
+   5167
+  ]
+ },
+ {
+  "i": 596,
+  "raw": " for completing the mission.\\n\\n",
+  "kind": "t",
+  "lines": [
+   5167
+  ]
+ },
+ {
+  "i": 597,
+  "raw": "You abandoned your mission.\\n\\n",
+  "kind": "s",
+  "lines": [
+   5170
+  ]
+ },
+ {
+  "i": 598,
+  "raw": "This mission has expired.\\n\\n",
+  "kind": "s",
+  "lines": [
+   5178
+  ]
+ },
+ {
+  "i": 599,
+  "raw": "You already have a mission active.\\n\\n",
+  "kind": "s",
+  "lines": [
+   5196
+  ]
+ },
+ {
+  "i": 600,
+  "raw": "You are walking back. You'll arrive at ",
+  "kind": "t",
+  "lines": [
+   5209
+  ]
+ },
+ {
+  "i": 601,
+  "raw": "img/",
+  "kind": "s",
+  "lines": [
+   5254,
+   5284
+  ]
+ },
+ {
+  "i": 602,
+  "raw": "1.5em",
+  "kind": "s",
+  "lines": [
+   5256,
+   5257,
+   5286
+  ]
+ },
+ {
+  "i": 603,
+  "raw": "(",
+  "kind": "t",
+  "lines": [
+   5277,
+   5298,
+   5312
+  ]
+ },
+ {
+  "i": 604,
+  "raw": ") ",
+  "kind": "t",
+  "lines": [
+   5277,
+   5298
+  ]
+ },
+ {
+  "i": 605,
+  "raw": ",",
+  "kind": "s",
+  "lines": [
+   5306,
+   5306
+  ]
+ },
+ {
+  "i": 606,
+  "raw": "Timeskipped ",
+  "kind": "t",
+  "lines": [
+   5317
+  ]
+ },
+ {
+  "i": 607,
+  "raw": " minutes",
+  "kind": "t",
+  "lines": [
+   5317
+  ]
+ },
+ {
+  "i": 608,
+  "raw": "You are walking towards the ",
+  "kind": "t",
+  "lines": [
+   5323
+  ]
+ },
+ {
+  "i": 609,
+  "raw": ". You'll arrive at ",
+  "kind": "t",
+  "lines": [
+   5323
+  ]
+ },
+ {
+  "i": 610,
+  "raw": "\\n\\n{![arrow_left.png]Walk Back|noChange|0|walkBack}",
+  "kind": "t",
+  "lines": [
+   5323
+  ]
+ },
+ {
+  "i": 611,
+  "raw": "Scene Transitions",
+  "kind": "s",
+  "lines": [
+   5373
+  ]
+ },
+ {
+  "i": 612,
+  "raw": "Scene Images",
+  "kind": "s",
+  "lines": [
+   5378
+  ]
+ },
+ {
+  "i": 613,
+  "raw": "Keyboard Navigation",
+  "kind": "s",
+  "lines": [
+   5383
+  ]
+ },
+ {
+  "i": 614,
+  "raw": "Mobile Layout",
+  "kind": "s",
+  "lines": [
+   5409
+  ]
+ },
+ {
+  "i": 615,
+  "raw": "Swipe right to access your inventory and skills",
+  "kind": "s",
+  "lines": [
+   5413,
+   6063
+  ]
+ },
+ {
+  "i": 616,
+  "raw": "Auto Repeat Crafting",
+  "kind": "s",
+  "lines": [
+   5421
+  ]
+ },
+ {
+  "i": 617,
+  "raw": "Skip Travel Under",
+  "kind": "s",
+  "lines": [
+   5426
+  ]
+ },
+ {
+  "i": 618,
+  "raw": "Travel that takes shorter than the specified minutes will be skipped.\\n\\nIt is somewhat cheaty to put this on a very high number but nothing stops you.",
+  "kind": "s",
+  "lines": [
+   5427
+  ]
+ },
+ {
+  "i": 619,
+  "raw": "Date Format",
+  "kind": "s",
+  "lines": [
+   5432
+  ]
+ },
+ {
+  "i": 620,
+  "raw": "Allows for configuration of the date format. Placeholders are specified using ${name}.\\n\\nAvailable placeholders: dayName, shortDayName, timeName, year, month, day, hours, minutes.\\n\\ne.g. ${hours}:${minutes} -> 12:34",
+  "kind": "s",
+  "lines": [
+   5433
+  ]
+ },
+ {
+  "i": 621,
+  "raw": "${dayName} ${timeName} ${year}-${month}-${day} ${hours}:${minutes}",
+  "kind": "s",
+  "lines": [
+   5434
+  ]
+ },
+ {
+  "i": 622,
+  "raw": "Background Color",
+  "kind": "s",
+  "lines": [
+   5439
+  ]
+ },
+ {
+  "i": 623,
+  "raw": "Text Color",
+  "kind": "s",
+  "lines": [
+   5447
+  ]
+ },
+ {
+  "i": 624,
+  "raw": "Foreground Background Color",
+  "kind": "s",
+  "lines": [
+   5455
+  ]
+ },
+ {
+  "i": 625,
+  "raw": "theme_foregroundBackgroundDark",
+  "kind": "s",
+  "lines": [
+   5461,
+   5636
+  ]
+ },
+ {
+  "i": 626,
+  "raw": "Foreground Background Dark Color",
+  "kind": "s",
+  "lines": [
+   5463
+  ]
+ },
+ {
+  "i": 627,
+  "raw": "Background Background Color",
+  "kind": "s",
+  "lines": [
+   5471
+  ]
+ },
+ {
+  "i": 628,
+  "raw": "Center Background Color",
+  "kind": "s",
+  "lines": [
+   5479
+  ]
+ },
+ {
+  "i": 629,
+  "raw": "theme_centerTopBackground",
+  "kind": "s",
+  "lines": [
+   5485,
+   5639
+  ]
+ },
+ {
+  "i": 630,
+  "raw": "Center Topbar Background Color",
+  "kind": "s",
+  "lines": [
+   5487
+  ]
+ },
+ {
+  "i": 631,
+  "raw": "theme_centerTopColor",
+  "kind": "s",
+  "lines": [
+   5493,
+   5640
+  ]
+ },
+ {
+  "i": 632,
+  "raw": "Center Topbar Text Color",
+  "kind": "s",
+  "lines": [
+   5495
+  ]
+ },
+ {
+  "i": 633,
+  "raw": "Equipment Background Color",
+  "kind": "s",
+  "lines": [
+   5503
+  ]
+ },
+ {
+  "i": 634,
+  "raw": "Equipment Border Color",
+  "kind": "s",
+  "lines": [
+   5511
+  ]
+ },
+ {
+  "i": 635,
+  "raw": "theme_equipmentDurabilityBackground",
+  "kind": "s",
+  "lines": [
+   5517,
+   5643
+  ]
+ },
+ {
+  "i": 636,
+  "raw": "Equipment Durability Background Color",
+  "kind": "s",
+  "lines": [
+   5519
+  ]
+ },
+ {
+  "i": 637,
+  "raw": "Tooltip Background Color",
+  "kind": "s",
+  "lines": [
+   5527
+  ]
+ },
+ {
+  "i": 638,
+  "raw": "Tooltip Text Color",
+  "kind": "s",
+  "lines": [
+   5535
+  ]
+ },
+ {
+  "i": 639,
+  "raw": "theme_menuButtonBackground",
+  "kind": "s",
+  "lines": [
+   5541,
+   5646
+  ]
+ },
+ {
+  "i": 640,
+  "raw": "Menu Button Background Color",
+  "kind": "s",
+  "lines": [
+   5543
+  ]
+ },
+ {
+  "i": 641,
+  "raw": "theme_menuButtonBackgroundHover",
+  "kind": "s",
+  "lines": [
+   5549,
+   5647
+  ]
+ },
+ {
+  "i": 642,
+  "raw": "Menu Button Hover Color",
+  "kind": "s",
+  "lines": [
+   5551
+  ]
+ },
+ {
+  "i": 643,
+  "raw": "Bottombar Background Color",
+  "kind": "s",
+  "lines": [
+   5559
+  ]
+ },
+ {
+  "i": 644,
+  "raw": "Skillbar Background Color",
+  "kind": "s",
+  "lines": [
+   5567
+  ]
+ },
+ {
+  "i": 645,
+  "raw": "Healthbar Background Color",
+  "kind": "s",
+  "lines": [
+   5575
+  ]
+ },
+ {
+  "i": 646,
+  "raw": "Energy Bar Background Color",
+  "kind": "s",
+  "lines": [
+   5583
+  ]
+ },
+ {
+  "i": 647,
+  "raw": "XP Bar Background Color",
+  "kind": "s",
+  "lines": [
+   5591
+  ]
+ },
+ {
+  "i": 648,
+  "raw": "Save Name",
+  "kind": "s",
+  "lines": [
+   5599
+  ]
+ },
+ {
+  "i": 649,
+  "raw": "Allows for changing of the save name when exporting. Do not use characters that are restricted by your file system as it may cause issues, these may include: < > : \\\" / \\\\ | ? * .\\n\\nPlaceholders are specified using ${name}.\\n\\nAvailable placeholders: realYear, realMonth, realDay, realHours, realMinutes, realSeconds, timestamp, day, version",
+  "kind": "s",
+  "lines": [
+   5600
+  ]
+ },
+ {
+  "i": 650,
+  "raw": "Arkivia.sav",
+  "kind": "s",
+  "lines": [
+   5601,
+   6171
+  ]
+ },
+ {
+  "i": 651,
+  "raw": "Interface",
+  "kind": "s",
+  "lines": [
+   5606
+  ]
+ },
+ {
+  "i": 652,
+  "raw": "Accessibility",
+  "kind": "s",
+  "lines": [
+   5617
+  ]
+ },
+ {
+  "i": 653,
+  "raw": "Gameplay",
+  "kind": "s",
+  "lines": [
+   5623
+  ]
+ },
+ {
+  "i": 654,
+  "raw": "Theme",
+  "kind": "s",
+  "lines": [
+   5629
+  ]
+ },
+ {
+  "i": 655,
+  "raw": "These features are experimental and incomplete",
+  "kind": "s",
+  "lines": [
+   5631
+  ]
+ },
+ {
+  "i": 656,
+  "raw": "Miscellaneous",
+  "kind": "s",
+  "lines": [
+   5656
+  ]
+ },
+ {
+  "i": 657,
+  "raw": "Cheats",
+  "kind": "s",
+  "lines": [
+   5662
+  ]
+ },
+ {
+  "i": 658,
+  "raw": "Skip travel was moved here because it felt a bit too cheaty.",
+  "kind": "s",
+  "lines": [
+   5664
+  ]
+ },
+ {
+  "i": 659,
+  "raw": "Stats",
+  "kind": "s",
+  "lines": [
+   5670
+  ]
+ },
+ {
+  "i": 660,
+  "raw": "Playtime: ",
+  "kind": "t",
+  "lines": [
+   5673
+  ]
+ },
+ {
+  "i": 661,
+  "raw": "Game Time: ",
+  "kind": "t",
+  "lines": [
+   5674
+  ]
+ },
+ {
+  "i": 662,
+  "raw": "Quests: ",
+  "kind": "t",
+  "lines": [
+   5676
+  ]
+ },
+ {
+  "i": 663,
+  "raw": "Items: ",
+  "kind": "t",
+  "lines": [
+   5677
+  ]
+ },
+ {
+  "i": 664,
+  "raw": "Skills: ",
+  "kind": "t",
+  "lines": [
+   5678
+  ]
+ },
+ {
+  "i": 665,
+  "raw": "Achievements: ",
+  "kind": "t",
+  "lines": [
+   5679
+  ]
+ },
+ {
+  "i": 666,
+  "raw": "\\nKills:\\n",
+  "kind": "t",
+  "lines": [
+   5682
+  ]
+ },
+ {
+  "i": 667,
+  "raw": " - ",
+  "kind": "t",
+  "lines": [
+   5684
+  ]
+ },
+ {
+  "i": 668,
+  "raw": "Export / Import",
+  "kind": "s",
+  "lines": [
+   5692
+  ]
+ },
+ {
+  "i": 669,
+  "raw": "You can use these options to export or import your save configuration.\\n",
+  "kind": "s",
+  "lines": [
+   5694
+  ]
+ },
+ {
+  "i": 670,
+  "raw": "Export",
+  "kind": "s",
+  "lines": [
+   5696
+  ]
+ },
+ {
+  "i": 671,
+  "raw": "ArkiviaSettings.json",
+  "kind": "s",
+  "lines": [
+   5702
+  ]
+ },
+ {
+  "i": 672,
+  "raw": "Import",
+  "kind": "s",
+  "lines": [
+   5709
+  ]
+ },
+ {
+  "i": 673,
+  "raw": "showOpenFilePicker",
+  "kind": "s",
+  "lines": [
+   5712,
+   6186
+  ]
+ },
+ {
+  "i": 674,
+  "raw": "Arkivia Settings",
+  "kind": "s",
+  "lines": [
+   5714
+  ]
+ },
+ {
+  "i": 675,
+  "raw": ".json",
+  "kind": "s",
+  "lines": [
+   5714,
+   5721
+  ]
+ },
+ {
+  "i": 676,
+  "raw": "Backup Saves",
+  "kind": "s",
+  "lines": [
+   5738
+  ]
+ },
+ {
+  "i": 677,
+  "raw": "These are only meant to be used as backups for when your main save breaks. A new backup save is created whenever the version changes. Loading these saves will overwrite your main save so make sure to back up your current one as well.",
+  "kind": "s",
+  "lines": [
+   5740
+  ]
+ },
+ {
+  "i": 678,
+  "raw": "Backup ",
+  "kind": "t",
+  "lines": [
+   5750
+  ]
+ },
+ {
+  "i": 679,
+  "raw": " - v",
+  "kind": "t",
+  "lines": [
+   5750
+  ]
+ },
+ {
+  "i": 680,
+  "raw": "Download",
+  "kind": "s",
+  "lines": [
+   5766
+  ]
+ },
+ {
+  "i": 681,
+  "raw": "ArkiviaBackup.sav",
+  "kind": "s",
+  "lines": [
+   5768
+  ]
+ },
+ {
+  "i": 682,
+  "raw": "Links & Info",
+  "kind": "s",
+  "lines": [
+   5778
+  ]
+ },
+ {
+  "i": 683,
+  "raw": "Solo developed by Pointless\\n\\nDiscord Server: <a href=https://discord.gg/R3DV8ZX5NE target=\\\"_blank\\\" rel=\\\"noopener\\\">https://discord.gg/R3DV8ZX5NE</a>",
+  "kind": "s",
+  "lines": [
+   5780
+  ]
+ },
+ {
+  "i": 684,
+  "raw": "Close Menu",
+  "kind": "s",
+  "lines": [
+   5784
+  ]
+ },
+ {
+  "i": 685,
+  "raw": "noChangeMenu",
+  "kind": "s",
+  "lines": [
+   5786,
+   5819
+  ]
+ },
+ {
+  "i": 686,
+  "raw": "Enter",
+  "kind": "s",
+  "lines": [
+   5917,
+   6665,
+   6669
+  ]
+ },
+ {
+  "i": 687,
+  "raw": "Reset",
+  "kind": "s",
+  "lines": [
+   5952
+  ]
+ },
+ {
+  "i": 688,
+  "raw": "width=device-width, initial-scale=1",
+  "kind": "s",
+  "lines": [
+   5991
+  ]
+ },
+ {
+  "i": 689,
+  "raw": "Del",
+  "kind": "s",
+  "lines": [
+   5998
+  ]
+ },
+ {
+  "i": 690,
+  "raw": "Conf",
+  "kind": "s",
+  "lines": [
+   5999
+  ]
+ },
+ {
+  "i": 691,
+  "raw": "translateX(",
+  "kind": "t",
+  "lines": [
+   6014,
+   6016
+  ]
+ },
+ {
+  "i": 692,
+  "raw": "px)",
+  "kind": "t",
+  "lines": [
+   6014,
+   6016
+  ]
+ },
+ {
+  "i": 693,
+  "raw": "translateX(0%)",
+  "kind": "s",
+  "lines": [
+   6029,
+   6040
+  ]
+ },
+ {
+  "i": 694,
+  "raw": "translateX(-100%)",
+  "kind": "s",
+  "lines": [
+   6031,
+   6043
+  ]
+ },
+ {
+  "i": 695,
+  "raw": "transform 250ms ease-out",
+  "kind": "s",
+  "lines": [
+   6036
+  ]
+ },
+ {
+  "i": 696,
+  "raw": "width=1000",
+  "kind": "s",
+  "lines": [
+   6050
+  ]
+ },
+ {
+  "i": 697,
+  "raw": "Delete",
+  "kind": "s",
+  "lines": [
+   6053
+  ]
+ },
+ {
+  "i": 698,
+  "raw": "Settings",
+  "kind": "s",
+  "lines": [
+   6054
+  ]
+ },
+ {
+  "i": 699,
+  "raw": "It appears that you're using a mobile device. The layout has automatically been changed. You can revert this in this configuration menu.",
+  "kind": "s",
+  "lines": [
+   6062
+  ]
+ },
+ {
+  "i": 700,
+  "raw": "currentPrependText",
+  "kind": "s",
+  "lines": [
+   6101,
+   6101,
+   6487
+  ]
+ },
+ {
+  "i": 701,
+  "raw": "inventoryNonStackable",
+  "kind": "s",
+  "lines": [
+   6112,
+   6343
+  ]
+ },
+ {
+  "i": 702,
+  "raw": "storageNonStackable",
+  "kind": "s",
+  "lines": [
+   6114,
+   6348
+  ]
+ },
+ {
+  "i": 703,
+  "raw": "inventoryNonStackableIncrement",
+  "kind": "s",
+  "lines": [
+   6116,
+   6116,
+   6338
+  ]
+ },
+ {
+  "i": 704,
+  "raw": "Arkivia Save",
+  "kind": "s",
+  "lines": [
+   6188
+  ]
+ },
+ {
+  "i": 705,
+  "raw": ".sav",
+  "kind": "s",
+  "lines": [
+   6188,
+   6195
+  ]
+ },
+ {
+  "i": 706,
+  "raw": " (Update)",
+  "kind": "t",
+  "lines": [
+   6236
+  ]
+ },
+ {
+  "i": 707,
+  "raw": "dojoQuestIndex",
+  "kind": "s",
+  "lines": [
+   6258,
+   6259
+  ]
+ },
+ {
+  "i": 708,
+  "raw": "\\n\\n{Continue|theArenaEntrance}",
+  "kind": "t",
+  "lines": [
+   6295
+  ]
+ },
+ {
+  "i": 709,
+  "raw": "noSleepTime",
+  "kind": "s",
+  "lines": [
+   6303
+  ]
+ },
+ {
+  "i": 710,
+  "raw": "weatherStartTime",
+  "kind": "s",
+  "lines": [
+   6477,
+   6478
+  ]
+ },
+ {
+  "i": 711,
+  "raw": "Loaded in ",
+  "kind": "t",
+  "lines": [
+   6495
+  ]
+ },
+ {
+  "i": 712,
+  "raw": "The game has been updated from v",
+  "kind": "t",
+  "lines": [
+   6497
+  ]
+ },
+ {
+  "i": 713,
+  "raw": " to v",
+  "kind": "t",
+  "lines": [
+   6497
+  ]
+ },
+ {
+  "i": 714,
+  "raw": ". Restore a backup save in settings if any issues occur.",
+  "kind": "t",
+  "lines": [
+   6497
+  ]
+ },
+ {
+  "i": 715,
+  "raw": "The game is still in the testing stage so please export your save frequently",
+  "kind": "s",
+  "lines": [
+   6498
+  ]
+ },
+ {
+  "i": 716,
+  "raw": "Loading failed: ",
+  "kind": "t",
+  "lines": [
+   6502
+  ]
+ },
+ {
+  "i": 717,
+  "raw": "THIS WILL DELETE YOUR SAVE. TYPE CONFIRM TO CONFIRM",
+  "kind": "s",
+  "lines": [
+   6508
+  ]
+ },
+ {
+  "i": 718,
+  "raw": "confirm to confirm",
+  "kind": "s",
+  "lines": [
+   6515
+  ]
+ },
+ {
+  "i": 719,
+  "raw": "I meant \"confirm\" not \"confirm to confirm\"",
+  "kind": "t",
+  "lines": [
+   6516
+  ]
+ },
+ {
+  "i": 720,
+  "raw": "Shift",
+  "kind": "s",
+  "lines": [
+   6574,
+   6580
+  ]
+ },
+ {
+  "i": 721,
+  "raw": "debug-settings-tickDelay",
+  "kind": "s",
+  "lines": [
+   6581,
+   6677
+  ]
+ },
+ {
+  "i": 722,
+  "raw": ".suggestion",
+  "kind": "s",
+  "lines": [
+   6653
+  ]
+ },
+ {
+  "i": 723,
+  "raw": "ArrowDown",
+  "kind": "s",
+  "lines": [
+   6655
+  ]
+ },
+ {
+  "i": 724,
+  "raw": "ArrowUp",
+  "kind": "s",
+  "lines": [
+   6660
+  ]
+ }
+]

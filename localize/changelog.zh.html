@@ -1,0 +1,383 @@
+<head>
+    <style>
+        body {
+            background-color: #333333;
+            color: #ffffff;
+            white-space: pre-line;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        h1, h2 {
+            margin: 0;
+            display: inline;
+        }
+
+        .spoiler {
+            color: #000000;
+            background-color: #000000;
+            cursor: pointer;
+        }
+
+        .spoiler:active {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body><h1>更新日志（Changelog）</h1>
+<span style="color: #88bbff; font-size: 14px;">以下为原作者更新日志原文，未作翻译；简体中文汉化版基于 v0.27.2。</span>
+<span style="color: #cccccc; font-size: 14px;">（按住被遮挡的文字即可显示）</span>
+<h2>v0.27.2</h2>
+- Fixed softlock when resigning from The Arena on the first round
+
+<h2>v0.27.1</h2>
+- Attempted to fix rendering issues on iOS
+
+<h2>v0.27</h2>
+- Fixed item quantity wrapping
+- Fixed saving failing when having thousands of unstackable items
+- Improved save loading speed when having thousands of unstackable items
+- Fixed being unable to store accessories
+- Fixed manual save button being a div
+- Fixed skill xp not showing decimals
+- Indicated that exercise pills are stackable
+- Added ability to customise save names
+- Fixed favicon requests
+- Added option to walk backwards
+- Added option to surrender in the arena
+- Changed effect end time to display relative
+- Changed no sleeping debuff to start at 20 hours
+- Fixed untouchable achievement not counting zero damage as valid
+- Changed max inventory weight to scale depending on strength
+- Made energy loss increase when going above the inventory limit
+- Increased contrast on various bars
+- Allowed for customisation of bar colors
+- Added a close menu option
+- Made possible actions display as grayed out if the right tools exist in your inventory
+- Rearranged travel destinations to have actions that lead closer to home at the bottom
+- Added an item to replenish energy
+- Removed forced death in the arena
+- Fixed stats erroring if no items have been discovered
+- Fixed error when entering nothing in save deletion
+- Added option to import and export settings
+- Capped inventory at 3x the max weight with a few exceptions
+- Fixed inventory weight displaying as negative zero due to floating point errors
+- Added the ability to move every unstackable item of a specific type when selecting bulk all
+- Added a log for updates
+- Moved the skip travel setting from gameplay to cheats
+- Fixed going back and forth between the medbay in the arena incrementing round count
+
+<h2>v0.26.1</h2>
+- Added a setting to skip walking time
+- Fixed shops not selling anything
+- Added tooltips to the date format setting
+- Added better tooltips to the straw pendant
+- Fixed missing hunting skill gains
+- Fixed typo in the arena stat requirements
+- Added manual saving
+
+<h2>v0.26</h2>
+- Prevented deletion of important items
+- Fixed having zero of an item returning inf completion
+- Fixed typos
+- Fixed main area scrolling
+<span class="spoiler">- Expanded Els' questline</span>
+- Added more training areas
+- Optimised and refactored code a bit
+- Removed commented out code
+- Made speed decide who goes first
+- Added 6 achievements
+- Changed multiplicative modifier displays to use multiplication instead of percentage
+- Added 1 accessory
+- Added 2 new tools
+- Made poison effect remove under 0.5 damage per tick
+- Added social links and information
+
+<h2>v0.25</h2>
+- Changed changelogs to use past tense
+- Buffed training skill
+- Changed exercise pill to be multiplicative
+- Addded bulk inventory actions
+- Made item deletion mode to be more obvious
+- Fixed title display when one shotting enemies
+- Added some checks to help prevent save corruption
+<span class="spoiler">- Expanded Els' questline</span>
+- Fixed quest giver bugs
+- Added stats in settings
+- Further optimised save size
+- Added backup saves
+- Fixed modified settings colors not persisting
+- Added walker title
+- Added sleeping skill
+
+<h2>v0.24</h2>
+- Update arrival time while travelling
+- Add crafting speed reduction on low energy
+- Change energy loss system
+- Improve coding practices
+- Add missing stat tier (F)
+- Add animation for tasks in progress
+- Improve mobile layout clarity
+- Add mining
+- Clamp strength in damage calculation
+- Add felling
+- Add action options for specific scenes
+- Fix weather start time not saving on clear weather
+- Add update indicator
+<span class="spoiler">- Expand Els' questline</span>
+- Change changelog to html
+- Fix save importing on firefox
+
+<h2>v0.23</h2>
+- Remove shields (armor is good enough already)
+- Add tool slot
+- Change default time format from yyyy/mm/dd to yyyy-mm-dd
+- Add mobile layout
+- Add experimental themes
+- Add scrolling in settings menu
+- Add highlights for changed options in settings menu
+- Add display for enemy stat total
+
+<h2>v0.22</h2>
+- Floor some stats instead of rounding
+- Add armor
+- Change save location
+- Remove required text for non consumed items in crafting
+- Fix error when cancelling crafting before starting
+- Fix weather termination
+- Change damage increase skills to be additive
+- Add option to automatically repeat crafting
+- Fix item stacks log not resetting when training log appears
+- Reduce energy faster when fighting
+- Change hospital health regen to scale with max health
+- Display time name in clock
+- Add special enemies that spawn at night
+- Add new respawn location
+- Add option to customise time format
+
+<h2>v0.21</h2>
+- Fix quest item requirements being lowercase
+- Fix resetting of training area text
+- Add missing icons to scenes
+- Made clicking version text open changelog
+- Add stat modifier breakdown
+- Add training modifier breakdown
+- Fix year showing 1900 on first tick
+- Add settings menu
+- Remove old storage menu
+- Add inventory ordering
+- Fix storage not displaying unstackable items
+- Add save load time log
+- Slightly reduce foggy weather weighting and increase overcast chance
+
+<h2>v0.20</h2>
+- Make positive stat modifiers use a plus symbol
+- Display stats in title when tab is unfocused
+- Change stat/m to stat/s to avoid confusion
+- Update stat bars to use number formatter for text
+- Change continue in scene chains to next for consistency
+- Change game name
+<span class="spoiler">- Add new building in forest</span>
+- Fix missing outdoors flags
+- Change quest completion icon
+- Added regions to scenes
+- Made leaving quest givers more consistent
+- Fixed quest giving wrong rewards
+- Allow for storing data in effects
+- Add more enemies
+- Refactor effects system
+- Add new searching area
+- Add new resources
+- Add new effect
+- Clear effects on death
+- Fix number formatter for negative numbers
+- Add new areas
+- Add support for overriding walking text
+
+<h2>v0.19</h2>
+- Fix number formatting
+- Fix enemy stat display
+- Add damage effect to healthbars
+- Remove accidental debug statement
+- Fix errors when enemyeffects is undefined
+
+<h2>v0.18</h2>
+- Made item movement logs stack
+- Scale down font size when overflowing in equipment bar
+- Add alchemy
+- Add crafting type to crafting menu
+- Made tooltips no longer show a horizontal bar when text doesn't exist
+- Move storage menu to text area
+
+<h2>v0.17</h2>
+- Add accessories
+- Implement discarding of items
+- Add more weapons
+- Fix save loading bugs
+- Improve save loading if checks
+- Implement enemy effects
+- Add more golems
+
+<h2>v0.16</h2>
+- Fix typo in the arena
+- Fix accidentally referring to the town as a city
+- Fix saveenabled check in autosave
+- Fix NaN crafting xp
+- Implement save auto fixer
+- Rename table to crafting table for clarity
+- Shorten training area functions
+- Fix sidebar menu scrolling
+- Implement leaving town
+- Add 3 new enemies
+- Fix scene functions not running on movement
+- Display stat gain in log
+
+<h2>v0.15</h2>
+- Improve tick handler
+- Fix ignoring save when no actions have been made
+- Add debug menu
+- Add rank change log
+- Organise save load function
+- Add weather
+- Maybe a somewhat better code structure
+- Add scene properties
+- Fix energy loss handling
+- Optimise updateBattlestats function
+
+<h2>v0.14</h2>
+- Optimise save size
+
+<h2>v0.13</h2>
+- Add The Arena
+- Add time helper functions
+- Fix money not updating on save load
+- Move time formatter to changeTime function
+- Include version in saves
+
+<h2>v0.12</h2>
+- Implement title system
+- Expand dojo questline
+- Clean up dojo questline code
+- Fix effects bar when multiple effects are added
+- Allow for scene functions to use arguments
+- Move first training dummy kill logic
+- Fix missing periods in text
+- Reduce xp gain from mice
+
+<h2>v0.11</h2>
+- Fix image regex
+- Add images to links
+
+<h2>v0.10</h2>
+- Add item durability bars
+- Change equipment layout
+- Fix crafting with stackable items check
+- Add weapon mastery skills
+- Add knives to merchant
+- Add leaving to weapon shop
+
+<h2>v0.9</h2>
+- Improve quests view
+- Show completed quests
+- Fix ends display for infinite effects
+- Add two new weapons
+- Add weapon store
+- Add new crafting recipe
+- Move save load scene logic to end
+- Update crafting system for nonstackable items
+- Fix delete data button
+- Fix incorrect font for links
+- Lowercase time hex color
+- Fix error when clicking outside crafting box
+- Allow cancelling of crafting
+
+<h2>v0.8</h2>
+- Implement saving
+- Add empty scene
+- Move version to bottom bar
+
+<h2>v0.7</h2>
+- Implement equipment
+- Improve scrollbar design
+- Implement non stackable items
+- Implement item types
+- Add colors to item types
+- Round xp gain
+- Change tooltip formatting on effects
+- Add town north
+- Add park
+- Add exploring skill
+- Fix skill level up typo
+- Improve tooltip updating
+
+<h2>v0.6</h2>
+- Implement rank changes
+- Made exercise pill usable
+- Move stat gain multi calculation to changebattlestat function
+- Support html in tooltips
+- Add exercise pill as reward for dojo quests
+- Add fighting teams
+- Add team areas
+- Add new gym
+- Display total stats
+- Move setinterval to tick function
+
+<h2>v0.5</h2>
+- Change time system
+- Add merchant
+- Implement buying items
+- Fix borders
+- Vertically align item text
+- Improve tooltip system
+- Implement crafting
+- Fix walking time calculation
+- Implement selling items
+- Increase straw drop rate
+- Add crafting skill
+- Display money in inventory
+
+<h2>v0.4</h2>
+- Begin dojo questline
+- Allow for enemies to fight back
+- Implement dying
+- Fix namings for stat calc formulas
+- Increase energy loss while training
+- Implement quest system
+- Optimise battlestat changes
+- Create stats variable
+- Add mouse enemy
+- Rename increaseSkill to changeSkill
+- Add alley and hospital area
+
+<h2>v0.3</h2>
+- Implement energy system
+- Replace some accidental single quotes with double quotes
+- Add status effect system
+- Add low energy debuffs
+- Show stat debuff
+- Change player info to use absolute width
+
+<h2>v0.2</h2>
+- Implement storage system
+- Implement weight system
+- Fix number formatter
+- Use number formatter on battle stats
+- Fix increase xp
+- Max health scales with level
+- Fix time rounding
+
+<h2>v0.1.1</h2>
+- Fix code inconsistencies
+- Added training skill
+- Implement scene functions
+- Implement fighting skill
+- Fix death check
+- Implement xp gain
+- Add level up logs
+- Allow for leaving dojo training
+- Implement walking skill
+
+<h2>v0.1</h2>
+- Base game mechanics and systems
+</body>

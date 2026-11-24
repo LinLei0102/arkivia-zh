@@ -1,0 +1,793 @@
+[
+ {
+  "raw": "Arkivia v",
+  "kind": "t",
+  "line": 4,
+  "flags": "",
+  "idx": 1000
+ },
+ {
+  "raw": ":",
+  "kind": "t",
+  "line": 1066,
+  "flags": "",
+  "idx": 1001
+ },
+ {
+  "raw": "G-",
+  "kind": "s",
+  "line": 1118,
+  "flags": "",
+  "idx": 1002
+ },
+ {
+  "raw": "G",
+  "kind": "s",
+  "line": 1119,
+  "flags": "",
+  "idx": 1003
+ },
+ {
+  "raw": "G+",
+  "kind": "s",
+  "line": 1120,
+  "flags": "",
+  "idx": 1004
+ },
+ {
+  "raw": "F-",
+  "kind": "s",
+  "line": 1121,
+  "flags": "",
+  "idx": 1005
+ },
+ {
+  "raw": "F",
+  "kind": "s",
+  "line": 1122,
+  "flags": "",
+  "idx": 1006
+ },
+ {
+  "raw": "F+",
+  "kind": "s",
+  "line": 1123,
+  "flags": "",
+  "idx": 1007
+ },
+ {
+  "raw": "E-",
+  "kind": "s",
+  "line": 1124,
+  "flags": "",
+  "idx": 1008
+ },
+ {
+  "raw": "E",
+  "kind": "s",
+  "line": 1125,
+  "flags": "",
+  "idx": 1009
+ },
+ {
+  "raw": "E+",
+  "kind": "s",
+  "line": 1126,
+  "flags": "",
+  "idx": 1010
+ },
+ {
+  "raw": "D-",
+  "kind": "s",
+  "line": 1127,
+  "flags": "",
+  "idx": 1011
+ },
+ {
+  "raw": "D",
+  "kind": "s",
+  "line": 1128,
+  "flags": "",
+  "idx": 1012
+ },
+ {
+  "raw": "D+",
+  "kind": "s",
+  "line": 1129,
+  "flags": "",
+  "idx": 1013
+ },
+ {
+  "raw": "C-",
+  "kind": "s",
+  "line": 1130,
+  "flags": "",
+  "idx": 1014
+ },
+ {
+  "raw": "C",
+  "kind": "s",
+  "line": 1131,
+  "flags": "",
+  "idx": 1015
+ },
+ {
+  "raw": "C+",
+  "kind": "s",
+  "line": 1132,
+  "flags": "",
+  "idx": 1016
+ },
+ {
+  "raw": "B-",
+  "kind": "s",
+  "line": 1133,
+  "flags": "",
+  "idx": 1017
+ },
+ {
+  "raw": "B",
+  "kind": "s",
+  "line": 1134,
+  "flags": "",
+  "idx": 1018
+ },
+ {
+  "raw": "B+",
+  "kind": "s",
+  "line": 1135,
+  "flags": "",
+  "idx": 1019
+ },
+ {
+  "raw": " / ",
+  "kind": "t",
+  "line": 1299,
+  "flags": "",
+  "idx": 1020
+ },
+ {
+  "raw": "%",
+  "kind": "t",
+  "line": 1300,
+  "flags": "",
+  "idx": 1021
+ },
+ {
+  "raw": "/",
+  "kind": "t",
+  "line": 1390,
+  "flags": "",
+  "idx": 1022
+ },
+ {
+  "raw": "/100",
+  "kind": "t",
+  "line": 1399,
+  "flags": "",
+  "idx": 1023
+ },
+ {
+  "raw": "+",
+  "kind": "s",
+  "line": 1427,
+  "flags": "KEY",
+  "idx": 1024
+ },
+ {
+  "raw": " (",
+  "kind": "t",
+  "line": 1427,
+  "flags": "",
+  "idx": 1025
+ },
+ {
+  "raw": "%)",
+  "kind": "t",
+  "line": 1427,
+  "flags": "",
+  "idx": 1026
+ },
+ {
+  "raw": "id=",
+  "kind": "t",
+  "line": 1447,
+  "flags": "",
+  "idx": 1027
+ },
+ {
+  "raw": "<span ",
+  "kind": "t",
+  "line": 1447,
+  "flags": "",
+  "idx": 1028
+ },
+ {
+  "raw": "style=\"color:",
+  "kind": "t",
+  "line": 1447,
+  "flags": "",
+  "idx": 1029
+ },
+ {
+  "raw": "\">",
+  "kind": "t",
+  "line": 1447,
+  "flags": "",
+  "idx": 1030
+ },
+ {
+  "raw": "</span>",
+  "kind": "t",
+  "line": 1447,
+  "flags": "",
+  "idx": 1031
+ },
+ {
+  "raw": "<span class=main-processing></span>",
+  "kind": "s",
+  "line": 1451,
+  "flags": "",
+  "idx": 1032
+ },
+ {
+  "raw": "#",
+  "kind": "s",
+  "line": 1455,
+  "flags": "",
+  "idx": 1033
+ },
+ {
+  "raw": "<",
+  "kind": "s",
+  "line": 1495,
+  "flags": "",
+  "idx": 1034
+ },
+ {
+  "raw": "M",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1035
+ },
+ {
+  "raw": "T",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1036
+ },
+ {
+  "raw": "Qa",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1037
+ },
+ {
+  "raw": "Qt",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1038
+ },
+ {
+  "raw": "Sx",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1039
+ },
+ {
+  "raw": "Sp",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1040
+ },
+ {
+  "raw": "Oc",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1041
+ },
+ {
+  "raw": "No",
+  "kind": "s",
+  "line": 1733,
+  "flags": "",
+  "idx": 1042
+ },
+ {
+  "raw": "g / ",
+  "kind": "t",
+  "line": 1972,
+  "flags": "",
+  "idx": 1043
+ },
+ {
+  "raw": "New Item:",
+  "kind": "s",
+  "line": 1994,
+  "flags": "",
+  "idx": 1044
+ },
+ {
+  "raw": "% (",
+  "kind": "t",
+  "line": 2313,
+  "flags": "",
+  "idx": 1045
+ },
+ {
+  "raw": "%)\\n",
+  "kind": "t",
+  "line": 2313,
+  "flags": "",
+  "idx": 1046
+ },
+ {
+  "raw": "???",
+  "kind": "s",
+  "line": 2369,
+  "flags": "",
+  "idx": 1047
+ },
+ {
+  "raw": "\\n",
+  "kind": "s",
+  "line": 2567,
+  "flags": "",
+  "idx": 1048
+ },
+ {
+  "raw": "You received $",
+  "kind": "t",
+  "line": 2586,
+  "flags": "",
+  "idx": 1049
+ },
+ {
+  "raw": " for participating",
+  "kind": "t",
+  "line": 2586,
+  "flags": "",
+  "idx": 1050
+ },
+ {
+  "raw": "\\n\\n",
+  "kind": "t",
+  "line": 2586,
+  "flags": "",
+  "idx": 1051
+ },
+ {
+  "raw": "Strength",
+  "kind": "s",
+  "line": 2745,
+  "flags": "",
+  "idx": 1052
+ },
+ {
+  "raw": "Defense",
+  "kind": "s",
+  "line": 2745,
+  "flags": "",
+  "idx": 1053
+ },
+ {
+  "raw": "Speed",
+  "kind": "s",
+  "line": 2745,
+  "flags": "",
+  "idx": 1054
+ },
+ {
+  "raw": "Dexterity",
+  "kind": "s",
+  "line": 2745,
+  "flags": "",
+  "idx": 1055
+ },
+ {
+  "raw": " ",
+  "kind": "s",
+  "line": 2750,
+  "flags": "",
+  "idx": 1056
+ },
+ {
+  "raw": " (+",
+  "kind": "t",
+  "line": 2849,
+  "flags": "",
+  "idx": 1057
+ },
+ {
+  "raw": "/s) ",
+  "kind": "t",
+  "line": 2849,
+  "flags": "",
+  "idx": 1058
+ },
+ {
+  "raw": "Arkivia | ",
+  "kind": "t",
+  "line": 2851,
+  "flags": "",
+  "idx": 1059
+ },
+ {
+  "raw": " +",
+  "kind": "t",
+  "line": 2851,
+  "flags": "",
+  "idx": 1060
+ },
+ {
+  "raw": "/s)",
+  "kind": "t",
+  "line": 2851,
+  "flags": "",
+  "idx": 1061
+ },
+ {
+  "raw": " -> ",
+  "kind": "t",
+  "line": 2932,
+  "flags": "",
+  "idx": 1062
+ },
+ {
+  "raw": "$",
+  "kind": "t",
+  "line": 2978,
+  "flags": "",
+  "idx": 1063
+ },
+ {
+  "raw": "- x",
+  "kind": "t",
+  "line": 3053,
+  "flags": "",
+  "idx": 1064
+ },
+ {
+  "raw": "A",
+  "kind": "s",
+  "line": 3090,
+  "flags": "",
+  "idx": 1065
+ },
+ {
+  "raw": ", ",
+  "kind": "t",
+  "line": 3123,
+  "flags": "",
+  "idx": 1066
+ },
+ {
+  "raw": "[id^=\\\"crafting-item-\\\"]",
+  "kind": "s",
+  "line": 3139,
+  "flags": "",
+  "idx": 1067
+ },
+ {
+  "raw": "(Poison)",
+  "kind": "s",
+  "line": 3438,
+  "flags": "",
+  "idx": 1068
+ },
+ {
+  "raw": "Mastery",
+  "kind": "t",
+  "line": 3478,
+  "flags": "",
+  "idx": 1069
+ },
+ {
+  "raw": ".bar-fill",
+  "kind": "s",
+  "line": 3496,
+  "flags": "",
+  "idx": 1070
+ },
+ {
+  "raw": "%) ",
+  "kind": "t",
+  "line": 3725,
+  "flags": "",
+  "idx": 1071
+ },
+ {
+  "raw": "Arkivia",
+  "kind": "s",
+  "line": 3761,
+  "flags": "",
+  "idx": 1072
+ },
+ {
+  "raw": "<hr>",
+  "kind": "s",
+  "line": 3826,
+  "flags": "",
+  "idx": 1073
+ },
+ {
+  "raw": "[data-tooltip-title]",
+  "kind": "s",
+  "line": 3879,
+  "flags": "",
+  "idx": 1074
+ },
+ {
+  "raw": ".equipment-item-text",
+  "kind": "s",
+  "line": 3956,
+  "flags": "",
+  "idx": 1075
+ },
+ {
+  "raw": ".item-equipped",
+  "kind": "s",
+  "line": 3959,
+  "flags": "",
+  "idx": 1076
+ },
+ {
+  "raw": "[id^=\\\"item-\\\"]",
+  "kind": "s",
+  "line": 4042,
+  "flags": "",
+  "idx": 1077
+ },
+ {
+  "raw": "S",
+  "kind": "s",
+  "line": 4080,
+  "flags": "",
+  "idx": 1078
+ },
+ {
+  "raw": "_dex}",
+  "kind": "t",
+  "line": 4138,
+  "flags": "",
+  "idx": 1079
+ },
+ {
+  "raw": "action-button disabled",
+  "kind": "s",
+  "line": 4321,
+  "flags": "",
+  "idx": 1080
+ },
+ {
+  "raw": "\\n\\n{![sword.png]Participate|theArenaSignup}",
+  "kind": "s",
+  "line": 4720,
+  "flags": "KEY",
+  "idx": 1081
+ },
+ {
+  "raw": "${dayName} ${hours}:${minutes}",
+  "kind": "s",
+  "line": 4897,
+  "flags": "",
+  "idx": 1082
+ },
+ {
+  "raw": "\\n\\nYou have an advanced membership.\\n\\n",
+  "kind": "t",
+  "line": 4997,
+  "flags": "",
+  "idx": 1083
+ },
+ {
+  "raw": "\\n\\nYou have a basic membership.\\n\\n",
+  "kind": "t",
+  "line": 4997,
+  "flags": "",
+  "idx": 1084
+ },
+ {
+  "raw": ".item-selected",
+  "kind": "s",
+  "line": 5091,
+  "flags": "",
+  "idx": 1085
+ },
+ {
+  "raw": "$100",
+  "kind": "s",
+  "line": 5138,
+  "flags": "",
+  "idx": 1086
+ },
+ {
+  "raw": "$400",
+  "kind": "s",
+  "line": 5146,
+  "flags": "",
+  "idx": 1087
+ },
+ {
+  "raw": "$200",
+  "kind": "s",
+  "line": 5158,
+  "flags": "",
+  "idx": 1088
+ },
+ {
+  "raw": "1.5em",
+  "kind": "s",
+  "line": 5258,
+  "flags": "",
+  "idx": 1089
+ },
+ {
+  "raw": "(",
+  "kind": "t",
+  "line": 5279,
+  "flags": "",
+  "idx": 1090
+ },
+ {
+  "raw": ") ",
+  "kind": "t",
+  "line": 5279,
+  "flags": "",
+  "idx": 1091
+ },
+ {
+  "raw": ",",
+  "kind": "s",
+  "line": 5308,
+  "flags": "",
+  "idx": 1092
+ },
+ {
+  "raw": "${dayName} ${timeName} ${year}-${month}-${day} ${hours}:${minutes}",
+  "kind": "s",
+  "line": 5436,
+  "flags": "",
+  "idx": 1093
+ },
+ {
+  "raw": "Arkivia.sav",
+  "kind": "s",
+  "line": 5603,
+  "flags": "",
+  "idx": 1094
+ },
+ {
+  "raw": "Language",
+  "kind": "s",
+  "line": 5608,
+  "flags": "",
+  "idx": 1095
+ },
+ {
+  "raw": " - ",
+  "kind": "t",
+  "line": 5692,
+  "flags": "",
+  "idx": 1096
+ },
+ {
+  "raw": "Arkivia Settings",
+  "kind": "s",
+  "line": 5722,
+  "flags": "",
+  "idx": 1097
+ },
+ {
+  "raw": ".json",
+  "kind": "s",
+  "line": 5722,
+  "flags": "",
+  "idx": 1098
+ },
+ {
+  "raw": " - v",
+  "kind": "t",
+  "line": 5758,
+  "flags": "",
+  "idx": 1099
+ },
+ {
+  "raw": "ArkiviaBackup.sav",
+  "kind": "s",
+  "line": 5776,
+  "flags": "",
+  "idx": 1100
+ },
+ {
+  "raw": "Enter",
+  "kind": "s",
+  "line": 5925,
+  "flags": "",
+  "idx": 1101
+ },
+ {
+  "raw": "width=device-width, initial-scale=1",
+  "kind": "s",
+  "line": 5999,
+  "flags": "",
+  "idx": 1102
+ },
+ {
+  "raw": "transform 250ms ease-out",
+  "kind": "s",
+  "line": 6044,
+  "flags": "",
+  "idx": 1103
+ },
+ {
+  "raw": "width=1000",
+  "kind": "s",
+  "line": 6058,
+  "flags": "",
+  "idx": 1104
+ },
+ {
+  "raw": "Arkivia Save",
+  "kind": "s",
+  "line": 6196,
+  "flags": "",
+  "idx": 1105
+ },
+ {
+  "raw": ".sav",
+  "kind": "s",
+  "line": 6196,
+  "flags": "",
+  "idx": 1106
+ },
+ {
+  "raw": "You have been teleported out of the arena due to a bug in the previous versions that caused softlocks",
+  "kind": "s",
+  "line": 6303,
+  "flags": "",
+  "idx": 1107
+ },
+ {
+  "raw": "confirm to confirm",
+  "kind": "s",
+  "line": 6523,
+  "flags": "",
+  "idx": 1108
+ },
+ {
+  "raw": "Shift",
+  "kind": "s",
+  "line": 6582,
+  "flags": "",
+  "idx": 1109
+ },
+ {
+  "raw": ".suggestion",
+  "kind": "s",
+  "line": 6661,
+  "flags": "",
+  "idx": 1110
+ },
+ {
+  "raw": "ArrowDown",
+  "kind": "s",
+  "line": 6663,
+  "flags": "",
+  "idx": 1111
+ },
+ {
+  "raw": "ArrowUp",
+  "kind": "s",
+  "line": 6668,
+  "flags": "",
+  "idx": 1112
+ }
+]

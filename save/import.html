@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Arkivia 残局存档导入（v0.27.2 简体中文）</title>
+<style>
+  body { background: #222244; color: #eee; font-family: system-ui, "Microsoft YaHei", sans-serif; padding: 24px 32px; line-height: 1.7; }
+  h1 { font-size: 20px; color: #aaccff; }
+  .box { background: #2c2c4a; border: 1px solid #44447a; border-radius: 6px; padding: 16px 20px; max-width: 760px; }
+  button { background: #3a3a66; color: #fff; border: 1px solid #6666aa; border-radius: 4px; padding: 8px 16px; font-size: 15px; cursor: pointer; margin-right: 10px; }
+  button:hover { background: #4a4a80; }
+  code { background: #1a1a33; padding: 1px 5px; border-radius: 3px; }
+  #status { margin-top: 14px; color: #ffdd88; min-height: 24px; }
+  a { color: #88bbff; }
+  .warn { color: #ffaa66; }
+</style>
+</head>
+<body>
+<h1>Arkivia v0.27.2 简体中文 · 残局存档导入</h1>
+<div class="box">
+  <p>这份存档已解锁后期内容：等级 40、全技能、全物品、全成就、主要任务线完成，进入游戏后可以直接查看森林、竞技场、森林健身房、猎人公会等后期场景的中文翻译。</p>
+  <p class="warn">导入会覆盖当前存档位 <code>arkivia-save1</code>。页面会先把你的旧存档复制到 <code>arkivia-save1-backup-l10n</code>，仍建议你先在游戏里点「导出」备份一次。</p>
+  <p>
+    <button id="do-import">写入存档并打开游戏</button>
+    <button id="do-import-open">写入存档并直接进入</button>
+  </p>
+  <div id="status"></div>
+</div>
+<script>
+var SAVE_B64 = "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";
+var GAME_URL = "../dist/index.html";
+
+function writeSave() {
+  try {
+    var old = localStorage.getItem("arkivia-save1");
+    if (old) { localStorage.setItem("arkivia-save1-backup-l10n", old); }
+    localStorage.setItem("arkivia-save1", SAVE_B64);
+    localStorage.setItem("arkivia-lang", "zh");
+    return true;
+  } catch (e) {
+    document.getElementById("status").textContent = "写入失败：" + e.message + "（若浏览器禁用了本地存储，请改用游戏内的「导入」按钮加载 endgame-0.27.2.sav）";
+    return false;
+  }
+}
+
+document.getElementById("do-import").addEventListener("click", function () {
+  if (writeSave()) {
+    document.getElementById("status").textContent = "已写入存档。请打开 dist/index.html 开始游戏（或点第二个按钮）。";
+  }
+});
+
+document.getElementById("do-import-open").addEventListener("click", function () {
+  if (writeSave()) { window.location.href = GAME_URL; }
+});
+
+document.getElementById("status").textContent = "存档体积：" + SAVE_B64.length + " 字符（base64）。";
+</script>
+</body>
+</html>

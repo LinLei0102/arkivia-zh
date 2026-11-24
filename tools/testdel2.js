@@ -1,0 +1,21 @@
+const { chromium } = require('playwright-core');
+const { pathToFileURL } = require('url');
+const path = require('path');
+const EXE = 'C:/Users/Administrator/AppData/Local/ms-playwright/chromium-1255/chrome-win64/chrome.exe';
+(async () => {
+  const browser = await chromium.launch({ executablePath: EXE, headless: true });
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  const url = pathToFileURL(path.join(__dirname, '..', 'dist', 'index.html')).href;
+  await page.goto(url);
+  await page.evaluate(() => { localStorage.setItem('arkivia-lang', 'en'); });
+  await page.goto(url);
+  await page.waitForTimeout(1200);
+  const en = await page.evaluate(() => ({ lang: window.ARK_LANG, discard: document.getElementById('inventory-discard').textContent, title: document.getElementById('title').textContent }));
+  console.log('EN', JSON.stringify(en));
+  await page.screenshot({ path: path.join(__dirname, '..', 'docs', 'shots', 'discard-en.png'), clip: { x: 0, y: 175, width: 340, height: 145 } });
+  await page.evaluate(() => { localStorage.setItem('arkivia-lang', 'zh'); });
+  await page.goto(url);
+  await page.waitForTimeout(1200);
+  console.log('ZH', JSON.stringify(await page.evaluate(() => ({ lang: window.ARK_LANG, discard: document.getElementById('inventory-discard').textContent }))));
+  await browser.close();
+})();

@@ -2,3 +2,11 @@ testing/
 extension/
 todo.txt
 packer
+# 汉化工程
+node_modules/
+tools/node_modules/
+tools/package-lock.json
+tools/shot-*.png
+tools/scan-result.json
+localize/*.log
+*.tmp
