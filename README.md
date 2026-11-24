@@ -78,7 +78,7 @@ git push origin gp:gh-pages --force
 git branch -D gp
 ```
 
-仓库 Settings → Pages 的发布源为 `gh-pages` 分支根目录。
+仓库 Settings → Pages 的发布源为 `gh-pages` 分支根目录（`build_type: legacy`）。若推送后页面没更新，可在 Pages 设置里点一次 “Rerun” 或用 API 触发：`POST /repos/{owner}/{repo}/pages/builds`。
 
 产物可复现：连续两次构建 `game.zh.js` 的 MD5 一致（`712f78bbe008786681edf2754314a214`）。
 
