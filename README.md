@@ -6,6 +6,8 @@ Inspired by proto23: https://github.com/23html/23html.github.io
 
 ## 简体中文汉化（Simplified Chinese localization）
 
+**在线游玩 / Play online：<https://linlei0102.github.io/arkivia-zh/>**
+
 本仓库在原作者 Arkivia 的基础上提供**完整简体中文汉化版**，保留英文原版并可随时切换。
 
 - 上游：<https://github.com/LinLei0102/arkivia>
@@ -61,7 +63,12 @@ cp localize/game.base.js dist/game.js
 cp localize/game.zh.js  dist/game.zh.js
 cp localize/index.zh.html dist/index.html
 cp localize/lang.js dist/lang.js
+cp localize/changelog.zh.html dist/changelog.html
+# 线上导入页（相对路径指向同目录 index.html）
+sed 's#../dist/index.html#index.html#' save/import.html > dist/save.html
 ```
+
+线上地址：<https://linlei0102.github.io/arkivia-zh/> ，残局存档导入页：<https://linlei0102.github.io/arkivia-zh/save.html> 。
 
 产物可复现：连续两次构建 `game.zh.js` 的 MD5 一致（`712f78bbe008786681edf2754314a214`）。
 
@@ -94,5 +101,6 @@ node savegen.js                 # 重新生成残局存档
 
 ### 致谢与许可
 
+- 线上托管：GitHub Pages（`main` 分支 `dist/` 目录，由 `.github/workflows/pages.yml` 自动部署）
 - 游戏本体、素材与代码版权归原作者 **Pointless**（<https://github.com/LinLei0102/arkivia>），本仓库仅提供汉化补丁与汉化产物，请遵循上游许可。
 - 汉化词典、构建脚本与巡检脚本可自由取用；转载汉化版请保留上游署名与仓库链接。
