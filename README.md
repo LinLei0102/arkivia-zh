@@ -70,6 +70,16 @@ sed 's#../dist/index.html#index.html#' save/import.html > dist/save.html
 
 线上地址：<https://linlei0102.github.io/arkivia-zh/> ，残局存档导入页：<https://linlei0102.github.io/arkivia-zh/save.html> 。
 
+### 发布到 GitHub Pages
+
+```bash
+git subtree split --prefix=dist -b gp      # 用 dist 目录生成发布分支
+git push origin gp:gh-pages --force
+git branch -D gp
+```
+
+仓库 Settings → Pages 的发布源为 `gh-pages` 分支根目录。
+
 产物可复现：连续两次构建 `game.zh.js` 的 MD5 一致（`712f78bbe008786681edf2754314a214`）。
 
 ### 巡检与验收
@@ -101,6 +111,6 @@ node savegen.js                 # 重新生成残局存档
 
 ### 致谢与许可
 
-- 线上托管：GitHub Pages（`main` 分支 `dist/` 目录，由 `.github/workflows/pages.yml` 自动部署）
+- 线上托管：GitHub Pages（`gh-pages` 分支 = `dist/` 目录快照；更新后重新执行一次发布命令即可）
 - 游戏本体、素材与代码版权归原作者 **Pointless**（<https://github.com/LinLei0102/arkivia>），本仓库仅提供汉化补丁与汉化产物，请遵循上游许可。
 - 汉化词典、构建脚本与巡检脚本可自由取用；转载汉化版请保留上游署名与仓库链接。
